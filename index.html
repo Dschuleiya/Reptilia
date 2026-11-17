@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#07130e">
 <title>Reptilia – Zuchtstation</title>
 <style>
@@ -14,7 +14,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
 #app{display:flex;flex-direction:column;height:100%;max-width:760px;margin:0 auto;position:relative}
 header{padding:calc(10px + var(--safe-t)) 14px 10px;display:flex;align-items:center;gap:10px;background:linear-gradient(180deg,rgba(7,19,14,.95),rgba(7,19,14,.75));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);z-index:5}
 .logo{font-weight:900;letter-spacing:.12em;font-size:17px;background:linear-gradient(90deg,#9ef0c4,#f6d26b);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
-.logo small{display:block;font-size:9px;letter-spacing:.3em;color:var(--mut);-webkit-text-fill-color:var(--mut);margin-top:3px}
+.logo small{display:block;font-size:11px;letter-spacing:.3em;color:var(--mut);-webkit-text-fill-color:var(--mut);margin-top:3px}
 .lvl{flex:1;min-width:0;display:flex;align-items:center;gap:8px}
 .lvlb{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:14px;background:conic-gradient(var(--acc2) calc(var(--x)*1%),rgba(255,255,255,.12) 0);position:relative;flex:none}
 .lvlb::before{content:"";position:absolute;inset:3px;border-radius:50%;background:#0d1f17}
@@ -62,7 +62,7 @@ h2 .sp{flex:1}
 .card::after{content:"";position:absolute;inset:0;border-radius:18px;pointer-events:none;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--rc) 55%,transparent)}
 .cimg{aspect-ratio:4/3;background:radial-gradient(circle at 50% 60%,color-mix(in srgb,var(--rc) 22%,transparent),transparent 70%),linear-gradient(180deg,#1a2e22,#0f1d16);display:grid;place-items:center;position:relative}
 .cimg img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 6px color-mix(in srgb,var(--rc) 40%,transparent))}
-.rtag{position:absolute;top:7px;left:7px;font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;padding:3px 7px;border-radius:7px;background:rgba(0,0,0,.45);color:var(--rc);border:1px solid color-mix(in srgb,var(--rc) 50%,transparent)}
+.rtag{position:absolute;top:7px;left:7px;font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;padding:3px 7px;border-radius:7px;background:rgba(0,0,0,.45);color:var(--rc);border:1px solid color-mix(in srgb,var(--rc) 50%,transparent)}
 .ftag{position:absolute;top:6px;right:8px;font-size:15px;color:#ffd36e}
 .cinfo{padding:8px 10px 10px}
 .cname{font-weight:800;font-size:14px;display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden}
@@ -79,7 +79,7 @@ h2 .sp{flex:1}
 .goal{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:16px;background:linear-gradient(90deg,rgba(246,185,59,.16),rgba(246,185,59,.04));border:1px solid rgba(246,185,59,.3);margin-bottom:12px}
 .goal .gi{font-size:22px}
 .goal .gt{flex:1;font-size:13px;line-height:1.3}
-.goal .gt small{display:block;color:#ffd77a;font-weight:800;font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+.goal .gt small{display:block;color:#ffd77a;font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
 .goal .gr{font-size:12px;font-weight:800;color:#ffd77a;white-space:nowrap}
 /* pairing */
 .pair{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin-top:10px}
@@ -95,9 +95,9 @@ h2 .sp{flex:1}
 .prow{display:flex;align-items:center;gap:8px;padding:5px 8px 5px 5px;border-radius:12px;background:rgba(0,0,0,.18)}
 .prow img{width:52px;height:39px;object-fit:contain;flex:none}
 .prow .pn{flex:1;min-width:0;font-size:12.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.prow .pn small{display:block;font-weight:600;font-size:10.5px}
+.prow .pn small{display:block;font-weight:600;font-size:11px}
 .prow .pp{font-weight:900;font-size:13px;font-variant-numeric:tabular-nums}
-.newt{font-size:9px;font-weight:900;padding:2px 6px;border-radius:6px;background:#ff6fb5;color:#fff;letter-spacing:.06em;margin-left:4px;vertical-align:1px}
+.newt{font-size:11px;font-weight:900;padding:2px 6px;border-radius:6px;background:#ff6fb5;color:#fff;letter-spacing:.06em;margin-left:4px;vertical-align:1px}
 .hint{font-size:12px;color:var(--mut);line-height:1.45}
 .newchance{display:flex;justify-content:space-between;align-items:center;font-size:12px;margin-top:10px;padding:8px 10px;border-radius:12px;background:rgba(255,111,181,.1);border:1px solid rgba(255,111,181,.3);color:#ffc2e0;font-weight:700}
 .tog{display:flex;align-items:center;gap:10px;padding:10px;border-radius:12px;background:rgba(160,120,255,.1);border:1px solid rgba(160,120,255,.3);margin-top:10px;font-size:13px}
@@ -138,7 +138,7 @@ h2 .sp{flex:1}
 @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.025) translateY(-1px)}}
 .gchips{display:flex;flex-wrap:wrap;gap:6px}
 .gchip{padding:6px 10px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid var(--line);font-size:12.5px;font-weight:700}
-.gchip small{display:block;font-size:9.5px;color:var(--mut);font-weight:700;letter-spacing:.04em}
+.gchip small{display:block;font-size:11px;color:var(--mut);font-weight:700;letter-spacing:.04em}
 .gchip.vis{background:rgba(61,220,151,.13);border-color:rgba(61,220,151,.4)}
 .gchip.mut{background:rgba(255,111,181,.15);border-color:rgba(255,111,181,.5)}
 .gchip.het{background:rgba(108,192,255,.12);border-color:rgba(108,192,255,.4);color:#bfe3ff}
@@ -183,10 +183,10 @@ h2 .sp{flex:1}
 .acell{border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);overflow:hidden;position:relative}
 .acell .aimg{aspect-ratio:4/3;display:grid;place-items:center;background:radial-gradient(circle at 50% 55%,color-mix(in srgb,var(--rc) 22%,transparent),transparent 70%)}
 .acell img{width:100%;height:100%;object-fit:contain}
-.acell .an{font-size:10.5px;font-weight:700;padding:4px 6px 6px;line-height:1.2;min-height:30px;color:#dbe8df}
+.acell .an{font-size:11px;font-weight:700;padding:4px 6px 6px;line-height:1.2;min-height:30px;color:#dbe8df}
 .acell.lock .aimg{color:rgba(255,255,255,.18);font-size:28px;font-weight:900;background:repeating-linear-gradient(45deg,rgba(255,255,255,.02) 0 8px,transparent 8px 16px)}
 .acell.lock .an{color:rgba(255,255,255,.3)}
-.acell .num{position:absolute;top:4px;left:6px;font-size:9px;color:rgba(255,255,255,.35);font-weight:800}
+.acell .num{position:absolute;top:4px;left:6px;font-size:11px;color:rgba(255,255,255,.35);font-weight:800}
 .named{display:flex;flex-wrap:wrap;gap:6px}
 .nm{padding:6px 10px;border-radius:10px;font-size:12px;font-weight:800;background:rgba(255,255,255,.05);border:1px solid var(--line);color:rgba(255,255,255,.35)}
 .nm.on{background:linear-gradient(90deg,rgba(246,185,59,.25),rgba(255,111,181,.18));border-color:rgba(246,185,59,.5);color:#ffe3a3}
@@ -225,17 +225,17 @@ h2 .sp{flex:1}
 .medals div .rw{color:#ffd77a;font-weight:800;margin-top:2px}
 .medals div.on{border-color:rgba(246,185,59,.7);background:rgba(246,185,59,.15)}
 .msrow{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin:6px 0 8px}
-.msrow div{text-align:center;font-size:10px;color:var(--mut);background:rgba(0,0,0,.2);border-radius:8px;padding:5px 2px}
+.msrow div{text-align:center;font-size:11px;color:var(--mut);background:rgba(0,0,0,.2);border-radius:8px;padding:5px 2px}
 .msrow div b{display:block;color:var(--txt);font-size:11px}
 .msrow div.on{background:rgba(61,220,151,.18);color:var(--acc2)}
 button.acell.lock{cursor:pointer}
 /* v3 */
-.qtag{position:absolute;bottom:6px;right:7px;font-size:10px;font-weight:900;padding:2px 6px;border-radius:7px;background:rgba(0,0,0,.5);color:#ffd36e}
+.qtag{position:absolute;bottom:6px;right:7px;font-size:11px;font-weight:900;padding:2px 6px;border-radius:7px;background:rgba(0,0,0,.5);color:#ffd36e}
 .stars{color:#ffd36e;letter-spacing:1px}.stars i{font-style:normal;color:rgba(255,255,255,.18)}
 .qline{margin:-2px 0 10px;font-size:14px}
 .qexp{margin-top:8px;font-size:12.5px;padding:8px 10px;border-radius:12px;background:rgba(246,185,59,.08);border:1px solid rgba(246,185,59,.25)}
 .eggc.cand{border-color:rgba(255,200,120,.45)}
-.ecl{font-size:10px;font-weight:800;max-width:100%;padding:0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ecl{font-size:11px;font-weight:800;max-width:100%;padding:0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bigimg.candle{background:radial-gradient(circle at 50% 50%,rgba(255,200,120,.45),rgba(60,30,10,.9) 70%)}
 .bigimg.candle img{filter:sepia(.35) brightness(1.05) drop-shadow(0 0 14px rgba(255,190,90,.6))}
 .pedd{margin:10px 0 4px;border-radius:14px;background:rgba(0,0,0,.18);border:1px solid var(--line);padding:0 10px}
@@ -243,12 +243,12 @@ button.acell.lock{cursor:pointer}
 .pedd summary::-webkit-details-marker{display:none}
 .pedd summary::after{content:"▾";float:right;color:var(--mut)}
 .pedd[open] summary::after{content:"▴"}
-.plab{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin:8px 0 5px}
+.plab{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin:8px 0 5px}
 .prow4{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
 .prow2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .pbox{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:10px;padding:6px;min-width:0;font-size:11px}
 .pbox b,.pbox span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pbox span{color:var(--mut);font-size:10.5px}.pbox .stq{color:#ffd36e}
+.pbox span{color:var(--mut);font-size:11px}.pbox .stq{color:#ffd36e}
 .pbox.emp{color:rgba(255,255,255,.3);text-align:center;display:grid;place-items:center}
 .orow{font-size:12.5px;padding:5px 0;border-bottom:1px solid var(--line)}
 .orow:last-child{border:0;margin-bottom:10px}
@@ -283,12 +283,12 @@ button.acell.lock{cursor:pointer}
 .pun{border-collapse:separate;border-spacing:4px;margin:4px auto 8px}
 .pun th{font-size:15px;color:#ffd77a;padding:4px 8px}
 .pun td{width:92px;height:56px;text-align:center;border-radius:10px;font-weight:900;font-size:16px}
-.pun td small{display:block;font-size:10.5px;font-weight:700;margin-top:2px}
+.pun td small{display:block;font-size:11px;font-weight:700;margin-top:2px}
 .pun .pv{background:rgba(61,220,151,.25);color:#bff5dc}.pun .ph{background:rgba(108,192,255,.2);color:#cfe9ff}.pun .pn{background:rgba(255,255,255,.07);color:#cfd8d3}.pun .ps{background:rgba(246,185,59,.3);color:#ffe3a3}
 .gtab{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:12px}
 .gtab td{padding:6px 4px;border-bottom:1px solid var(--line);vertical-align:top;color:#d5e3da}
 .gtab td:nth-child(2){color:var(--mut);white-space:nowrap}
-nav button{font-size:10.5px}
+nav button{font-size:11px}
 /* v4 */
 .rv-q{font-size:20px;margin:2px 0 4px}.rv-q b{color:#ffd36e;font-size:16px}
 .stray{padding:12px;border-radius:18px;margin-bottom:12px;background:linear-gradient(135deg,rgba(255,170,90,.18),rgba(255,111,181,.1));border:1px solid rgba(255,170,90,.45);animation:tin .4s}
@@ -309,7 +309,7 @@ nav button{font-size:10.5px}
 .goalrow.hit{border-color:rgba(61,220,151,.55);background:linear-gradient(90deg,rgba(61,220,151,.12),rgba(255,255,255,.03))}
 .ribbon.goal{background:linear-gradient(90deg,#3ddc97,#f6b93b);color:#06261a}
 .li .lt span.bq{font-size:12px}.li .lt .bq .stars{display:inline;color:#ffd36e;font-size:12px}.li .lt .bq b{color:#ffd36e;display:inline;font-size:12px}
-.abq{display:block;color:#ffd36e;font-size:10px;font-weight:800;margin-top:2px}
+.abq{display:block;color:#ffd36e;font-size:11px;font-weight:800;margin-top:2px}
 .prow3{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
 button.pbox{text-align:left;font:inherit;color:inherit;cursor:pointer}
 .pbox.gone{opacity:.45}
@@ -382,7 +382,7 @@ button.pbox{text-align:left;font:inherit;color:inherit;cursor:pointer}
 .stat span{color:var(--mut)}
 .daily{text-align:center}
 .daily .days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin:14px 0}
-.daily .days div{border-radius:10px;padding:8px 0;background:rgba(255,255,255,.05);border:1px solid var(--line);font-size:10px;color:var(--mut);font-weight:700}
+.daily .days div{border-radius:10px;padding:8px 0;background:rgba(255,255,255,.05);border:1px solid var(--line);font-size:11px;color:var(--mut);font-weight:700}
 .daily .days div.on{background:rgba(246,185,59,.2);border-color:rgba(246,185,59,.6);color:#ffd77a}
 .daily .days div b{display:block;font-size:16px;margin-top:2px}
 
@@ -393,7 +393,7 @@ button.pbox{text-align:left;font:inherit;color:inherit;cursor:pointer}
 #coach .tav,.tm-head .tav{font-size:28px;flex:none;width:44px;height:44px;border-radius:50%;background:#2c4d3b;display:grid;place-items:center;box-shadow:inset 0 0 0 2px rgba(246,185,59,.5)}
 .cb-t{flex:1;padding-top:2px}
 .cb-b{margin-top:8px;text-align:right}
-.cb-x{position:absolute;right:12px;top:-11px;font:600 10.5px system-ui;background:#0d1a14;border:1px solid var(--line);color:var(--mut);border-radius:99px;padding:3px 9px;cursor:pointer}
+.cb-x{position:absolute;right:12px;top:-11px;font:600 11px system-ui;background:#0d1a14;border:1px solid var(--line);color:var(--mut);border-radius:99px;padding:3px 9px;cursor:pointer}
 .tut-hl{outline:3px solid #ffc23d!important;outline-offset:3px;animation:tutpulse 1.3s infinite!important;position:relative;z-index:3}
 @keyframes tutpulse{0%,100%{box-shadow:0 0 0 0 rgba(255,194,61,.75)}60%{box-shadow:0 0 0 12px rgba(255,194,61,0)}}
 #coachm{position:fixed;inset:0;z-index:70;display:none;background:rgba(3,10,7,.74);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);overflow-y:auto;padding:calc(18px + var(--safe-t)) 14px calc(18px + var(--safe-b))}
@@ -455,13 +455,13 @@ body.replay::before{content:'📼 Erinnerung';position:fixed;top:calc(8px + var(
 
 .clog{margin-top:12px;padding:10px 12px;border-radius:14px;background:var(--panel);border:1px solid var(--line)}.clog.cur{border-color:rgba(246,185,59,.6)}.clog ul{margin:6px 0 0;padding-left:18px;font-size:13.5px;line-height:1.45}
 
-.mbadge{position:absolute;top:-5px;right:-5px;min-width:18px;height:18px;padding:0 4px;border-radius:99px;background:#ff5d5d;color:#fff;font:800 10.5px system-ui;display:none;place-items:center;border:2px solid #0b1a13}
+.mbadge{position:absolute;top:-5px;right:-5px;min-width:18px;height:18px;padding:0 4px;border-radius:99px;background:#ff5d5d;color:#fff;font:800 11px system-ui;display:none;place-items:center;border:2px solid #0b1a13}
 .mrow{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:14px;background:var(--panel);border:1px solid var(--line);cursor:pointer}
 .mrow.new{border-color:rgba(246,185,59,.6);background:rgba(246,185,59,.07)}.mrow .mic{font-size:22px;flex:none;width:30px;text-align:center}
 .mrow b{display:block;font-size:14px}.mrow span{display:block;font-size:12.5px;color:var(--mut);line-height:1.35;margin-top:2px}.mrow small{display:block;font-size:11px;color:var(--mut);margin-top:4px;opacity:.8}
 .rv-named{background:rgba(246,185,59,.12);border-color:rgba(246,185,59,.5)}.rv-new ul{margin:4px 0 6px;padding-left:18px}.rv-new li{margin:2px 0}
 header .ibtn{width:34px;height:34px;font-size:16px}header{gap:7px}
-@media(max-width:430px){header .logo{font-size:14px;letter-spacing:.06em}header .logo small{font-size:7.5px;letter-spacing:.12em}header{padding-left:10px;padding-right:10px}}
+@media(max-width:430px){header .logo{font-size:14px;letter-spacing:.06em}header .logo small{font-size:11px;letter-spacing:.12em}header{padding-left:10px;padding-right:10px}}
 @media(max-width:430px){.lvl>:not(.lvlb){display:none}.lvl{flex:0 0 auto}.coins{margin-left:auto}}
 .mdesc{margin:4px 0 6px;padding-left:18px;font-size:14px;line-height:1.45}p.mdesc{padding-left:0}.mdesc li{margin:3px 0}
 #reveal{overflow-x:hidden;overflow-y:auto;justify-content:flex-start;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}#reveal>*{flex:none}#reveal::before,#reveal::after{content:'';flex:1 1 0;min-height:0}
@@ -489,6 +489,13 @@ main{padding-bottom:90px}
 #passive .pv-card{max-width:420px;width:100%;text-align:center;background:linear-gradient(180deg,#203d2e,#13261c);border:1.5px solid rgba(246,185,59,.5);border-radius:22px;padding:18px;display:flex;flex-direction:column;gap:10px;font-size:14.5px;line-height:1.45}
 #savewarn{position:fixed;left:8px;right:8px;top:calc(62px + var(--safe-t));z-index:85;max-width:560px;margin:0 auto;padding:10px 12px;border-radius:14px;background:rgba(70,14,14,.97);border:1.5px solid rgba(255,107,107,.75);font-size:13px;line-height:1.4;display:flex;gap:10px;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,.5)}
 #savewarn span{flex:1}
+/* 7.8 Fenster-Kopf, Tippflächen */
+.shhead{position:sticky;top:-8px;z-index:6;display:flex;align-items:center;justify-content:space-between;gap:8px;margin:-8px -16px 6px;padding:8px 12px 6px;background:#14281e;border-radius:24px 24px 0 0}
+.shhead .grab{flex:0 0 42px;margin:0}
+#sheet .shhead .x{position:static}
+.chip,.chip.sm,.btn.sm,.ibtn,.cb-x,button[data-act]{min-height:44px}
+.ibtn,header .ibtn{min-width:44px;min-height:44px}
+.btn.more{opacity:.92}
 </style>
 </head>
 <body>
@@ -508,7 +515,7 @@ main{padding-bottom:90px}
     <button data-act="tab" data-t="atlas"><i>📖</i>Atlas</button>
   </nav>
 </div>
-<div id="sheetwrap"><div id="sheetbg" data-act="closesheet"></div><div id="sheet"></div></div>
+<div id="sheetwrap"><div id="sheetbg" data-act="closesheet" aria-hidden="true"></div><div id="sheet" role="dialog" aria-modal="true" aria-label="Fenster"></div></div>
 <div id="reveal"></div>
 <button id="alfab" data-act="call" aria-label="Alfred anrufen">👴<i>📞</i></button>
 <div id="coachm"></div>
@@ -798,12 +805,13 @@ function load(noBak){NOSAVE=false;NOSAVE_SV=0;let raw=null;try{raw=localStorage.
   /* ---- Neue Migrationen (ab Schema 2) ---- */
   S.sv=sv0;if(!NOSAVE){for(const m of MIGRATIONS)if(S.sv<m.to){m.run(S);S.sv=m.to}}
   saveBanner()}
+let DIRTY=false;const markDirty=()=>{DIRTY=true};
 function lockOk(){try{const v=localStorage.getItem(LOCK_KEY);if(v==null){localStorage.setItem(LOCK_KEY,SID);return true}return v===SID}catch(e){return true}}
 function save(){if(RESCUE||NOSAVE||PASSIVE||!S)return false;if(!lockOk()){goPassive();return false}
   let js;try{js=JSON.stringify(S);localStorage.setItem(SAVE_KEY,js)}catch(e){let ok=false;
     if(js&&e&&(e.name==='QuotaExceededError'||e.code===22||e.code===1014))for(const k of[BROKEN_KEY,BAK_KEY]){try{if(localStorage.getItem(k)==null)continue;localStorage.removeItem(k);if(k===BAK_KEY)localStorage.removeItem(BAKM_KEY);localStorage.setItem(SAVE_KEY,js);ok=true;logErr(new Error('Speicher voll – '+k+' entfernt, Spielstand gespeichert'),'save');break}catch(x){}}
     if(!ok){if(!SAVEFAIL)logErr(e,'save');SAVEFAIL=true;saveBanner();return false}}
-  if(SAVEFAIL){SAVEFAIL=false;saveBanner()}return true}
+  DIRTY=false;if(SAVEFAIL){SAVEFAIL=false;saveBanner()}return true}
 function saveBanner(){let b=document.getElementById('savewarn');const kind=NOSAVE?'new':SAVEFAIL?'fail':'';if(!kind||RESCUE){if(b)b.remove();return}
   if(!b){b=document.createElement('div');b.id='savewarn';document.body.appendChild(b)}
   const html=kind==='new'?`<span>⚠️ <b>Spielstand aus einer neueren Version</b> (Schema ${NOSAVE_SV}). Diese Version speichert nichts, damit er heil bleibt. Bitte die Seite neu laden, um das Update zu holen.</span>`
@@ -814,7 +822,7 @@ function claimLock(){try{localStorage.setItem(LOCK_KEY,SID)}catch(e){}}
 function goPassive(){if(PASSIVE||RESCUE)return;PASSIVE=true;let o=document.getElementById('passive');if(!o){o=document.createElement('div');o.id='passive';document.body.appendChild(o)}
   o.innerHTML=`<div class="pv-card"><div style="font-size:40px">📱</div><b style="font-size:17px">Reptilia läuft gerade woanders</b><div>Das Spiel ist in einem anderen Tab oder Fenster geöffnet. Damit kein Fortschritt verloren geht, ist dieser Tab pausiert und speichert nichts.</div><button class="btn pri wide" data-act="takeover">▶️ Hier weiterspielen</button><div class="hint">Dann übernimmt dieser Tab den neuesten Spielstand, und der andere pausiert.</div></div>`;o.className='show'}
 function takeOver(){claimLock();PASSIVE=false;const o=document.getElementById('passive');if(o)o.className='';
-  try{for(const k in IMG)delete IMG[k];RQ=[];BATCH=null;LASTBATCH=[];closeReveal();closeSheet();load(true);checkUnlock();fillOrders();if(!S.shop.offers.length)refreshShop();if(!trendActive())newTrend();document.body.classList.toggle('bigfont',!!S.bigfont);lastSig=sig();render();tutPaint();toast('▶️ Weiter geht’s – neuester Spielstand geladen.')}
+  try{imgClear();RQ=[];BATCH=null;LASTBATCH=[];closeReveal();closeSheet();load(true);checkUnlock();fillOrders();if(!S.shop.offers.length)refreshShop();if(!trendActive())newTrend();document.body.classList.toggle('bigfont',!!S.bigfont);lastSig=sig();render();tutPaint();toast('▶️ Weiter geht’s – neuester Spielstand geladen.')}
   catch(e){logErr(e,'Tab übernehmen');rescueScreen(e)}}
 function starter(){
   const r=newAnimal('gecko',{sex:'m',g:{eclipse:1},p:{eclipse:.5},adult:true,name:'Rudi',wild:true,q:2.4});r.from='mentor';r.fav=true;S.animals.push(r);registerAtlas(r,true);
@@ -1081,9 +1089,23 @@ function vivid(P,q){if(!q||Math.abs(q-3)<.05)return P;const k=(q-3)*.3,o={};for(
 const drawSnake=(ctx,W,H,s,rng)=>drawSerpent(ctx,W,H,vivid(snakePal(s),s.q),rng,{R:.085,freq:2.3});
 const drawCorn=(ctx,W,H,s,rng)=>drawSerpent(ctx,W,H,vivid(cornPal(s),s.q),rng,{R:.068,freq:2.9,bs:.62,gap:.068});
 const DRAW={gecko:drawGecko,snake:drawSnake,turtle:drawTurtle,corn:drawCorn};
-const IMG={};
+/* 7.8: Bild-Cache mit Obergrenze. Wert = kurze blob:-Adresse (statt langem PNG-Text). Älteste fliegen raus und werden verzögert freigegeben. */
+const IMG=new Map(),IMG_MAX=300;let IMGREV=[];
+function pngBlobUrl(d){const i=d.indexOf(','),bin=atob(d.slice(i+1)),u=new Uint8Array(bin.length);for(let k=0;k<bin.length;k++)u[k]=bin.charCodeAt(k);return URL.createObjectURL(new Blob([u],{type:'image/png'}))}
+function imgRevoke(force){const t=Date.now()-15000;while(IMGREV.length&&(force||IMGREV[0][0]<t)){const u=IMGREV.shift()[1];URLARGS.delete(u);try{URL.revokeObjectURL(u)}catch(e){}}}
+/* 7.8.1: Manche Umgebungen (z. B. App-Vorschauen mit strengen Regeln) sperren blob:-Bilder. Erst nach erfolgreicher Probe blob: nutzen, sonst data: wie früher. */
+let BLOBOK=null;const URLARGS=new Map();
+function blobFail(){if(BLOBOK===false)return;BLOBOK=false;const imgs=[...document.querySelectorAll('img')].filter(i=>String(i.src).startsWith('blob:'));const args=imgs.map(i=>URLARGS.get(i.src));IMG.clear();imgs.forEach((im,i)=>{const a=args[i];if(a)im.src=imgFor(...a)});URLARGS.clear()}
+try{const u=pngBlobUrl('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='),im=new Image();im.onload=()=>{if(BLOBOK===null)BLOBOK=true;try{URL.revokeObjectURL(u)}catch(e){}};im.onerror=()=>blobFail();im.src=u}catch(e){BLOBOK=false}
+document.addEventListener('error',e=>{const t=e.target;if(t&&t.tagName==='IMG'&&String(t.src).startsWith('blob:')&&URLARGS.has(t.src)&&[...IMG.values()].includes(t.src))blobFail()},true);
+function imgClear(){IMG.forEach(u=>{if(u&&u.startsWith('blob:'))IMGREV.push([Date.now(),u])});IMG.clear()}
 function renderCanvas(sp,g,seed,W,H,juv,q){const c=document.createElement('canvas'),dpr=Math.min(2,window.devicePixelRatio||1)*1.15;c.width=Math.round(W*dpr);c.height=Math.round(H*dpr);const ctx=c.getContext('2d');ctx.scale(dpr,dpr);if(juv){ctx.translate(W/2,H/2);ctx.scale(.74,.74);ctx.translate(-W/2,-H/2)}const sm=sMap(sp,g);sm.q=q||3;DRAW[sp](ctx,W,H,sm,mulberry(seed));return c}
-function imgFor(sp,g,seed,W,H,juv,q){const qq=q?Math.round(q*2)/2:3,k=sp+JSON.stringify(g)+seed+'|'+W+'|'+(juv?1:0)+'|'+qq;if(!IMG[k]){try{IMG[k]=renderCanvas(sp,g,seed,W,H,juv,qq).toDataURL('image/png')}catch(e){IMG[k]=''}}return IMG[k]}
+function imgFor(sp,g,seed,W,H,juv,q){if((W||200)>240){W=320;H=240}else{W=200;H=150}/* nur zwei Größen: Karte 200×150, groß 320×240 */
+  const qq=q?Math.round(q*2)/2:3,k=sp+JSON.stringify(g)+seed+'|'+W+'|'+(juv?1:0)+'|'+qq;let u=IMG.get(k);
+  if(u!=null){IMG.delete(k);IMG.set(k,u);return u}
+  try{const d=renderCanvas(sp,g,seed,W,H,juv,qq).toDataURL('image/png');try{u=BLOBOK?pngBlobUrl(d):d;if(BLOBOK)URLARGS.set(u,[sp,g,seed,W,H,juv,qq])}catch(e){u=d}}catch(e){u=''}
+  IMG.set(k,u);while(IMG.size>IMG_MAX){const[k0,u0]=IMG.entries().next().value;IMG.delete(k0);if(u0&&u0.startsWith('blob:'))IMGREV.push([Date.now(),u0])}
+  if(IMGREV.length)imgRevoke();return u}
 const aImg=(a,W,H)=>imgFor(a.sp,a.g,a.seed,W||200,H||150,!isAdult(a),a.q);
 const keyImg=(sp,sts,W,H)=>imgFor(sp,statesToG(sp,sts),hashStr(keyOf(sp,sts))%1e9+7,W||160,H||120,false);
 
@@ -1352,7 +1374,7 @@ function checkMs(){SP_ORDER.forEach(sp=>{let i=S.atlasMs[sp]||0;const tot=COMBOS
 const goalOpen=g=>!(S.goalDone||{})[g.id]&&(!g.need||g.need());
 const nextGoal=()=>GOALS.find(goalOpen)||null;
 function checkGoal(){let changed=false,g;S.goalDone=S.goalDone||{};while((g=nextGoal())&&g.ok()){S.goalDone[g.id]=1;S.coins+=g.r;S.stats.earned+=g.r;toast(`🎯 Ziel erreicht! +${g.r} 🪙`,'gold');changed=true}return changed}
-function after(){checkUnlock();checkMs();checkAch();checkGoal();if(!S.tut&&!S.stats.fullLogged&&unlocked().some(sp=>full(sp))){S.stats.fullLogged=1;logEv('full','Erstes volles Terrarium')}save();renderTop()}
+function after(){markDirty();checkUnlock();checkMs();checkAch();checkGoal();if(!S.tut&&!S.stats.fullLogged&&unlocked().some(sp=>full(sp))){S.stats.fullLogged=1;logEv('full','Erstes volles Terrarium')}save();renderTop()}
 /* ---- 7.7 Testbericht: kurze Ereignisliste in S.log (max. 200), wird nie gesendet ---- */
 function logEv(k,x){try{if(S.tut&&S.tut.replay)return;S.log=Array.isArray(S.log)?S.log:[];S.log.push({t:Date.now(),k,x:String(x).slice(0,80),pm:Math.round((S.playMs||0)/1000),c:Math.floor(S.coins),h:S.stats.hatched||0,a:atlasCount()});while(S.log.length>200)S.log.shift()}catch(e){logErr(e,'logEv')}}
 const fmtPlay=sec=>{sec=Math.max(0,Math.round(sec||0));const h=Math.floor(sec/3600),m=Math.floor(sec%3600/60);return sec<60?'<1 min':h?h+' h '+String(m).padStart(2,'0')+' min':m+' min'};
@@ -1400,15 +1422,22 @@ function orderText(o){if(o.label)return defang(o.label);const def=SPECIES[o.sp];
 function newTrend(){const sp=pick(unlocked()),g=pick(SPECIES[sp].genes.filter(x=>!x.mut));S.trend={sp,gene:g.id,until:Date.now()+8*60000}}
 
 /* ================= Actions ================= */
-let sheetOpen=null;
-function openSheet(html,id){$('#sheet').innerHTML='<div class="grab"></div><button class="ibtn x" data-act="closesheet">✕</button>'+html;$('#sheetwrap').classList.add('show');$('#sheet').scrollTop=0;sheetOpen=id||'x';tutPaint()}
-function closeSheet(){$('#sheetwrap').classList.remove('show');sheetOpen=null;tutPaint()}
-function setTab(t){S.tab=t;closeSheet();render();$('#view').scrollTop=0}
+let sheetOpen=null,SHSTACK=[],SHCUR='',SHKEEP=false;
+const sheetHead=back=>`<div class="shhead"><button class="ibtn shb" data-act="shback" aria-label="Zurück zum vorigen Fenster" ${back?'':'style="visibility:hidden"'}>←</button><div class="grab"></div><button class="ibtn x" data-act="closesheet" aria-label="${back?'Alle Fenster schließen':'Fenster schließen'}">✕</button></div>`;
+/* Fenster-Stapel (bis 5): neues Fenster mit anderer Kennung legt das aktuelle ab; Pfeil führt zurück, Kreuz schließt alle */
+function openSheet(html,id){id=id||'x';const sh=$('#sheet');
+  if(sheetOpen&&sheetOpen!==id){const i=SHSTACK.findIndex(x=>x.id===id);if(i>=0)SHSTACK=SHSTACK.slice(0,i);else{SHSTACK.push({id:sheetOpen,html:SHCUR,top:sh.scrollTop});if(SHSTACK.length>4)SHSTACK.shift()}}
+  if(sheetOpen!==id)SHLIM=LIMSTEP;const top=sh.scrollTop;SHCUR=html;sh.innerHTML=sheetHead(SHSTACK.length>0)+html;a11y(sh);$('#sheetwrap').classList.add('show');sh.scrollTop=SHKEEP?top:0;SHKEEP=false;sheetOpen=id;tutPaint();histSync()}
+function closeSheet(){SHSTACK=[];SHCUR='';$('#sheetwrap').classList.remove('show');sheetOpen=null;tutPaint();histSync()}
+function sheetBack(){const p=SHSTACK.pop();if(!p){closeSheet();return}const sh=$('#sheet');SHCUR=p.html;sh.innerHTML=sheetHead(SHSTACK.length>0)+p.html;a11y(sh);sheetOpen=p.id;SHLIM=LIMSTEP;sh.scrollTop=p.top;tickUI();tutPaint();histSync()}
+function setTab(t){if(S.tab!==t)S.ui.tlim=LIMSTEP;S.tab=t;closeSheet();render();$('#view').scrollTop=0}
 function sellAnimal(a,el,quiet){if(a.tkeep&&S.tut){toast('👴 Alfred: Die Kleinen bitte noch behalten – Gisela wartet auf eins!','warn');return}const v=value(a);if(a.name==='Dobby')S.stats.sellDobby=1;if(v>1000)S.stats.bigSale=1;setTimeout(()=>{if(spCount(a.sp)===0){S.stats.emptied=1}},0);if(rarIdx(rarity(a.sp,states(a)))>=4)S.stats.soldLegend=1;S.animals=S.animals.filter(x=>x.id!==a.id);if(S.pair.m===a.id)S.pair.m=null;if(S.pair.f===a.id)S.pair.f=null;addCoins(v,el);S.stats.sold++;track('sell');addXP(Math.max(1,Math.round(v/25)));snd('coin');if(!quiet)toast(`💰 ${esc(a.name)} verkauft für <b>${fmt(v)} 🪙</b>`)}
 function armed(el){if(el.dataset.armed){return true}el.dataset.armed='1';el.classList.add('armed');const old=el.innerHTML;el.innerHTML='Sicher? Nochmal tippen';setTimeout(()=>{if(el.isConnected){delete el.dataset.armed;el.classList.remove('armed');el.innerHTML=old}},2500);return false}
 const ACT={
   tab:d=>{snd('tap');setTab(d.t)},
   closesheet:()=>closeSheet(),
+  shback:()=>sheetBack(),
+  more:d=>{if(d.k==='tiere'){S.ui.tlim=tlim()+LIMSTEP;render();return}SHLIM+=LIMSTEP;SHKEEP=true;if(d.k==='pick')pickMate(d.sex);else if(d.k==='batch')batchSheet();else if(d.k==='sa')sellAdvSheet()},
   filter:d=>{S.ui.filter=d.v;render()},
   sort:d=>{S.ui.sort=d.v;render()},
   detail:d=>{snd('tap');showDetail(+d.id)},
@@ -1417,7 +1446,7 @@ const ACT={
   dorename:d=>{const a=byId(+d.id),n=($('#nm').value||'').trim();if(a&&n&&n!==a.name){a.name=n.slice(0,18);a.un=1;S.stats.renamed=(S.stats.renamed||0)+1}save();showDetail(+d.id);render()},
   feed:(d,el)=>{const a=byId(+d.id),cost=Math.ceil(SPECIES[a.sp].basePrice*.12);if(isAdult(a)||!spend(cost))return;a.adultAt-=growMs(a.sp)*.35;S.stats.fed=(S.stats.fed||0)+1;snd('tap');floatAt(el,'🦗 −'+cost+' 🪙');if(isAdult(a)){S.stats.feedAdult=1;toast(`🎉 ${esc(a.name)} ist jetzt ausgewachsen!`)}after();showDetail(a.id);render()},
   dna:(d,el)=>{const a=byId(+d.id);if(!armed(el))return;if(!spend(dnaCost(a)))return;const def=SPECIES[a.sp],found=[];def.genes.forEach(g=>{if(g.type!=='rec'||st(a,g))return;const was=a.p[g.id]||0;const truth=(a.g[g.id]||0)===1?1:0;if(truth)proveHet(a,g.id);else proveNone(a,g.id);if(truth&&(g.mut?S.mutSeen[g.id]:true))found.push((was<.99?'🎉 ':'')+'het '+g.name);if(truth&&g.mut&&!S.mutSeen[g.id]){S.mutSeen[g.id]=true;found.push('☄️ verdeckte Mutation '+g.name+'!')}});domGenes(a.sp).forEach(g=>{if(!st(a,g))return;const was=hpOf(a,g),homo=(a.g[g.id]||0)>=2;a.hp=a.hp||{};a.hp[g.id]=homo?1:0;a.hev=a.hev||{};a.hev[g.id]=homo?0:-1;hpDown(a,g,0);if(homo)found.push((was<.99?'🎉 ':'')+'reinerbig '+g.name)});a.wild=false;a.tested=true;S.stats.dna++;track('dna');snd('rare');toast(`🔬 DNA-Ergebnis ${esc(a.name)}: ${found.length?'<b>'+found.join(', ')+'</b>':'keine verdeckten Gene'}`,found.length?'gold':'',4000);after();showDetail(a.id);render()},
-  sell:(d,el)=>{const a=byId(+d.id);if(!a)return;if(a.fav){toast('❤️ Favoriten können nicht verkauft werden','warn');return}if(rarIdx(rarity(a.sp,states(a)))>=2&&!armed(el))return;sellAnimal(a,el);after();closeSheet();render()},
+  sell:(d,el)=>{const a=byId(+d.id);if(!a)return;if(a.fav){toast('❤️ Favoriten können nicht verkauft werden','warn');return}if(S.pairs.some(p=>p.m===a.id||p.f===a.id)&&!el.dataset.armed){toast(`📒 ${esc(a.name)} steht in einem gespeicherten Zuchtpaar. Nochmal tippen, um trotzdem zu verkaufen.`,'warn',4500);armed(el);return}if(rarIdx(rarity(a.sp,states(a)))>=2&&!armed(el))return;sellAnimal(a,el);after();closeSheet();render()},
   topair:d=>{const a=byId(+d.id);S.pair.sp=a.sp;S.pair[a.sex]=a.id;const o=a.sex==='m'?'f':'m';const other=byId(S.pair[o]);if(other&&other.sp!==a.sp)S.pair[o]=null;snd('tap');setTab('brut')},
   pairsp:d=>{if(!isUnl(d.v)){toast(unlockText(d.v)+' nötig zum Freischalten','warn');return}S.pair={sp:d.v,m:null,f:null};snd('tap');render()},
   pickmate:d=>pickMate(d.sex),
@@ -1440,7 +1469,7 @@ const ACT={
   reshop:()=>{if(!spend(25))return;refreshShop();snd('tap');after();render()},
   deliver:d=>deliverSheet(+d.id),
   dodeliver:(d,el)=>{const o=S.orders.find(x=>x.id===+d.o),a=byId(+d.id);if(!o||!a||!orderMatch(a,o))return;if(a.fav){toast('❤️ Favoriten können nicht abgegeben werden','warn');return}const pay=payout(o,a);S.animals=S.animals.filter(x=>x.id!==a.id);if(S.pair.m===a.id)S.pair.m=null;if(S.pair.f===a.id)S.pair.f=null;S.orders=S.orders.filter(x=>x.id!==o.id);addCoins(pay,el);addXP(o.xp);S.stats.orders++;track('order');snd('rare');confetti(60);toast(`📦 Auftrag erfüllt! <b>+${fmt(pay)} 🪙</b> +${o.xp} XP`,'gold');fillOrders();closeSheet();after();render()},
-  reroll:d=>{if(!spend(15))return;S.orders=S.orders.filter(x=>x.id!==+d.id);fillOrders();snd('tap');after();render()},
+  reroll:(d,el)=>{if(!armed(el))return;if(!spend(15))return;S.orders=S.orders.filter(x=>x.id!==+d.id);fillOrders();snd('tap');after();render()},
   upg:(d,el)=>{const u=UPG[d.k],lv=S.upg[d.k];if(lv>=u.max)return;const c=upgCost(d.k);if(!spend(c))return;S.upg[d.k]++;snd('lvl');confetti(30);toast(`${u.icon} ${u.name} → Stufe ${S.upg[d.k]}`);after();render()},
   atlascell:d=>atlasDetail(d.sp,d.k),
   menu:()=>menuSheet(),
@@ -1472,7 +1501,7 @@ const ACT={
   crysput:()=>{S.crys.on=1;save();closeSheet();confetti(80);snd('rare');toast('💚 Der Kristall liegt im Inkubator und leuchtet geheimnisvoll …','gold',4200);render()},
   crys:()=>{S.crys.on=S.crys.on?0:1;snd('tap');toast(S.crys.on?'💚 Kristall liegt im Inkubator':'Kristall herausgenommen – nur normale Mutationen');save();render()},
   replaygo:(d,el)=>{if(!armed(el))return;tutReplay()},
-  tut:(d,el)=>{const v=d.v;if(!S.tut)return;
+  tut:(d,el)=>{const v=d.v;if(!S.tut)return;if(v==='unmin'){TUTMIN='';tutPaint();return}
     if(v.startsWith('next:'))tutGo(v.slice(5));
     else if(v==='skip'||v==='skipask'){if(v==='skipask'&&!armed(el))return;if(S.tut.star)tutFinish();else{S.tut.skip=1;if(S.tut.lvl==null)S.tut.lvl=1;tutGo('choose')}}
     else if(v.startsWith('pick:'))tutPick(v.slice(5));
@@ -1504,7 +1533,7 @@ const ACT={
   bsell:(d,el)=>{const a=byId(+d.id);if(a){sellAnimal(a,el,true);after();render();batchSheet()}},
   bsellplain:(d,el)=>{const list=LASTBATCH.map(byId).filter(a=>a&&!a.fav&&!a.tkeep&&rarIdx(rarity(a.sp,states(a)))===0&&!hetText(a));let sum=0;list.forEach(a=>{sum+=value(a);sellAnimal(a,null,true)});toast(`💰 ${list.length} Jungtiere verkauft · <b>+${fmt(sum)} 🪙</b>`);after();render();batchSheet()},
   savepair:()=>{const m=byId(S.pair.m),f=byId(S.pair.f);if(!m||!f)return;if(S.pairs.length>=maxPairs()){toast(`📒 Zuchtbuch voll (${maxPairs()}) – erweitere es im Ausbau`,'warn');return}if(S.pairs.some(q=>q.m===m.id&&q.f===f.id))return;S.pairs.push({id:S.nextId++,sp:m.sp,m:m.id,f:f.id});snd('tap');toast('📒 Zuchtpaar gespeichert');after();render()},
-  delpair:d=>{S.pairs=S.pairs.filter(q=>q.id!==+d.id);S.stats.pairDel=(S.stats.pairDel||0)+1;after();render()},
+  delpair:(d,el)=>{if(!armed(el))return;S.pairs=S.pairs.filter(q=>q.id!==+d.id);S.stats.pairDel=(S.stats.pairDel||0)+1;after();render()},
   loadpair:d=>{const q=S.pairs.find(x=>x.id===+d.id);if(!q)return;S.pair={sp:q.sp,m:q.m,f:q.f};render();$('#view').scrollTop=0},
   breedpair:d=>{const q=S.pairs.find(x=>x.id===+d.id);if(!q)return;const m=byId(q.m),f=byId(q.f);if(canBreed(m,f))return;const n=doBreed(m,f,0);if(n<0){if(n===-1)toast('🥚 Inkubator voll','warn');return}if(S.eggs.length>=eggSlots())S.stats.fullIncub=1;snd('love');toast(`💞 ${esc(m.name)} × ${esc(f.name)}: <b>${n} Eier</b>`);after();render()},
   breedall:()=>breedAll(),
@@ -1541,7 +1570,9 @@ const ACT={
   showpick:()=>showPickSheet(),
   showenter:d=>{S.show.entry=+d.id;S.stats.showEntries=(S.stats.showEntries||0)+1;snd('tap');closeSheet();after();render()}
 };
-document.addEventListener('click',e=>{const el=e.target.closest('[data-act]');if(!el)return;const f=ACT[el.dataset.act];if(f){e.preventDefault();f(el.dataset,el)}});
+const TLIM_RESET=new Set(['filter','sort','fsex','fstat','gf','freset','tab','fopen']),SHLIM_RESET=new Set(['mgf','msort','mready','mq','mfav','mreset','sasp','sam']);
+document.addEventListener('click',e=>{const el=e.target.closest('[data-act]');if(!el)return;const act=el.dataset.act,f=ACT[act];if(f){e.preventDefault();if(S&&S.ui&&TLIM_RESET.has(act))S.ui.tlim=LIMSTEP;if(SHLIM_RESET.has(act))SHLIM=LIMSTEP;if(S&&BOOTED)markDirty();f(el.dataset,el);if(PENDING_VIEW&&BOOTED&&!viewBusy()){PENDING_VIEW=false;render()}}});
+document.addEventListener('click',()=>{EXITARM=0;if(!HACT){HACT=true;if(HN>0)HG=2}histSync()},true);
 const dnaCost=a=>Math.round((300+SPECIES[a.sp].basePrice*5)/10)*10;
 const upgCost=k=>{const u=UPG[k],l=S.upg[k];return Math.round((u.poly?u.base*Math.pow(l+1,u.poly):u.base*Math.pow(u.mult,l))/5)*5};
 const rushCost=e=>Math.max(3,Math.ceil((e.ready-Date.now())/1000/3));
@@ -1568,7 +1599,7 @@ let RQ=[],BATCH=null,SKIPFULL={};
 function startHatch(ids){RQ=ids.slice();BATCH=ids.length>1?[]:null;SKIPFULL={};nextReveal()}
 function hardReset(){if(S.tut&&S.tut.replay){toast('📼 In der Erinnerung ist Löschen gesperrt.','warn');return}if(NOSAVE){toast('⚠️ Dieser Spielstand stammt aus einer neueren Version und wird hier nicht verändert.','warn',4000);return}
   try{writeBak(localStorage.getItem(SAVE_KEY),'vor dem Löschen')}catch(e){}
-  try{localStorage.removeItem(SAVE_KEY+'_mem')}catch(e){}try{localStorage.removeItem(SAVE_KEY)}catch(e){}for(const k in IMG)delete IMG[k];RQ=[];BATCH=null;LASTBATCH=[];closeReveal();closeSheet();
+  try{localStorage.removeItem(SAVE_KEY+'_mem')}catch(e){}try{localStorage.removeItem(SAVE_KEY)}catch(e){}imgClear();RQ=[];BATCH=null;LASTBATCH=[];closeReveal();closeSheet();
   S=defaults();starter();fillOrders();refreshShop();newTrend();genSeason();S.nextStray=Date.now()+6*60000;save();lastSig=sig();$('#view').scrollTop=0;render();toast('🗑️ Spielstand gelöscht – viel Spaß beim Neustart!');tutPaint()}
 function saveCode(){save();return 'REPTILIA1:'+btoa(unescape(encodeURIComponent(JSON.stringify(S))))}
 function parseCode(t){t=(t||'').trim();if(!t)return null;try{let j;if(t.startsWith('REPTILIA1:'))j=decodeURIComponent(escape(atob(t.slice(10).replace(/\s+/g,''))));else j=t;const d=JSON.parse(j);return d&&d.v===1&&Array.isArray(d.animals)?d:null}catch(e){return null}}
@@ -1579,7 +1610,7 @@ function importSave(d,quiet,noBak){const bad=validateSave(d);if(bad){toast('❌ 
   let oldRaw=null;try{oldRaw=localStorage.getItem(SAVE_KEY)}catch(e){}const oldS=S,oldNS=NOSAVE,oldNSV=NOSAVE_SV;
   if(!noBak&&oldRaw!=null)writeBak(oldRaw,'vor dem Laden eines Codes');
   try{localStorage.setItem(SAVE_KEY,JSON.stringify(d))}catch(e){toast('❌ Speichern auf diesem Gerät nicht möglich','bad');return false}
-  for(const k in IMG)delete IMG[k];RQ=[];BATCH=null;LASTBATCH=[];closeReveal();closeSheet();
+  imgClear();RQ=[];BATCH=null;LASTBATCH=[];closeReveal();closeSheet();
   try{load(true);checkUnlock();fillOrders();if(!S.shop.offers.length)refreshShop();if(!trendActive())newTrend();save();lastSig=sig();$('#view').scrollTop=0;render()}
   catch(e){logErr(e,'Laden eines Spielstands');try{if(oldRaw==null)localStorage.removeItem(SAVE_KEY);else localStorage.setItem(SAVE_KEY,oldRaw)}catch(x){}
     S=oldS;NOSAVE=oldNS;NOSAVE_SV=oldNSV;saveBanner();try{lastSig=sig();render();tutPaint()}catch(x){}toast('❌ Laden fehlgeschlagen – dein bisheriger Spielstand läuft weiter.','bad',5000);return false}
@@ -1602,7 +1633,7 @@ function backupSheet(){if(S.tut&&S.tut.replay){toast('📼 In der Erinnerung sin
 <input type="file" id="bkfilein" accept=".txt,.json,text/plain" style="display:none">
 <div class="list" style="margin-top:8px"><button class="btn wide" data-act="bkpick">📂 Datei wählen</button><button class="btn red wide" data-act="bkload">♻️ Spielstand laden</button></div>${bakHTML}`);
   const fi=$('#bkfilein');if(fi)fi.onchange=()=>{const f=fi.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{$('#bkin').value=String(r.result).trim();toast('📂 Datei eingelesen – jetzt „Spielstand laden“ tippen')};r.readAsText(f)}}
-function closeReveal(){const r=$('#reveal');r.className='';r.innerHTML='';r.onclick=null}
+function closeReveal(){const r=$('#reveal');r.className='';r.innerHTML='';r.onclick=null;histSync()}
 function nextReveal(){
   while(RQ.length){
     const id=RQ.shift(),egg=S.eggs.find(e=>e.id===id);if(!egg)continue;
@@ -1630,10 +1661,10 @@ function batchSheet(){const list=LASTBATCH.map(byId).filter(Boolean);if(!list.le
   const plain=list.filter(a=>!a.fav&&!a.tkeep&&rarIdx(rarity(a.sp,states(a)))===0&&!hetText(a)),sum=plain.reduce((t,a)=>t+value(a),0);
   openSheet(`<div class="sh-title">🐣 Schlupf-Bericht</div><div class="sh-sub">${list.length} weitere Jungtiere ohne Besonderheiten – entscheide in Ruhe.</div>
   ${plain.length?`<button class="btn gold wide" data-act="bsellplain">💰 ${plain.length} Gewöhnliche ohne Hets verkaufen · +${fmt(sum)} 🪙</button>`:''}
-  <div class="list" style="margin-top:10px">${list.map(a=>{const sts=states(a),r=rarity(a.sp,sts);return`<div class="li"><img src="${aImg(a,200,150)}" style="box-shadow:inset 0 0 0 1.5px ${r.c}"><div class="lt"><b>${esc(a.name)} <span class="sex ${a.sex}">${a.sex==='m'?'♂':'♀'}</span></b><span style="color:${r.c}">${morphName(a.sp,sts)}</span><span>${hetText(a)||'keine Hets'}</span><span class="bq">${starsHTML(a.q)} <b>${fq(a.q)}</b></span></div><button class="btn sm red" data-act="bsell" data-id="${a.id}">+${fmt(value(a))}</button></div>`}).join('')}</div>
+  <div class="list" style="margin-top:10px">${list.slice(0,shl('batch')).map(a=>{const sts=states(a),r=rarity(a.sp,sts);return`<div class="li"><img src="${aImg(a,200,150)}" style="box-shadow:inset 0 0 0 1.5px ${r.c}"><div class="lt"><b>${esc(a.name)} <span class="sex ${a.sex}">${a.sex==='m'?'♂':'♀'}</span></b><span style="color:${r.c}">${morphName(a.sp,sts)}</span><span>${hetText(a)||'keine Hets'}</span><span class="bq">${starsHTML(a.q)} <b>${fq(a.q)}</b></span></div><button class="btn sm red" data-act="bsell" data-id="${a.id}">+${fmt(value(a))}</button></div>`}).join('')}</div>${moreBtn(Math.min(shl('batch'),list.length),list.length,'batch')}
   <button class="btn pri wide" style="margin-top:12px" data-act="closesheet">Alle übrigen behalten</button>`,'batch')}
 function showReveal(a,rr,reg,inf,mut,mutN,gh){
-  const ov=$('#reveal');ov.style.setProperty('--rc',rr.c);ov.className='show';
+  const ov=$('#reveal');ov.style.setProperty('--rc',rr.c);ov.className='show';histSync();
   ov.innerHTML=`<div class="rv-rays"></div><div class="rv-stage"><div class="egg sp-${a.sp} shake"></div></div><div class="rv-skip">Tippen zum Überspringen</div>`;
   snd('crack');let done=false;
   const finish=()=>{if(done)return;done=true;const sts=states(a),def=SPECIES[a.sp];const rib=[];
@@ -1657,16 +1688,22 @@ function showReveal(a,rr,reg,inf,mut,mutN,gh){
 }
 
 /* ================= Views ================= */
+const ARIA={closesheet:'Fenster schließen',shback:'Zurück',delpair:'Zuchtpaar löschen',rename:'Umbenennen',fav:'Favorit umschalten',selladv:'Verkaufsberater',mail:'Postfach',menu:'Menü',call:'Alfred anrufen',reroll:'Auftrag neu würfeln',sound:'Ton an oder aus'};
+function a11y(root){if(!root)return;root.querySelectorAll('button:not([aria-label])').forEach(b=>{if(!/[A-Za-zÄÖÜäöüß0-9]/.test(b.textContent))b.setAttribute('aria-label',ARIA[b.dataset.act]||b.title||'Knopf')});root.querySelectorAll('[data-act]:not(button):not([role])').forEach(x=>{x.setAttribute('role','button');x.setAttribute('tabindex','0')})}
 function renderTop(){const need=needXP(S.lvl);$('#lvl').innerHTML=`<div class="lvlb" style="--x:${Math.round(S.xp/need*100)}"><span>${S.lvl}</span></div><div class="xpt">XP<br>${fmt(S.xp)}/${fmt(need)}</div>`;$('#coins span').textContent=fmt(S.coins);
   const ready=S.eggs.filter(e=>Date.now()>=e.ready).length,can=S.orders.filter(o=>S.animals.some(a=>orderMatch(a,o))).length;
   document.querySelectorAll('#nav button').forEach(b=>{b.classList.toggle('on',b.dataset.t===S.tab);let bd=b.querySelector('.badge');const n=b.dataset.t==='tiere'?(S.stray?1:0):b.dataset.t==='brut'?ready:b.dataset.t==='markt'?can:b.dataset.t==='saison'?claimable().length:0;if(n){if(!bd){bd=document.createElement('span');bd.className='badge';b.appendChild(bd)}bd.textContent=n}else if(bd)bd.remove()})}
 function render(){renderTop();const v=$('#view');const st0=v.scrollTop;if(S.tab==='saison'&&!feat('saison')&&!S.tut)S.tab='tiere';if(S.tab==='atlas'&&!feat('atlas')&&!S.tut)S.featAtlas=1;{const sa=$('#nav [data-t=saison]'),at=$('#nav [data-t=atlas]');if(sa)sa.style.display=feat('saison')?'':'none';if(at)at.style.display=(feat('atlas')||S.tab==='atlas')?'':'none'}
-  v.innerHTML=({tiere:vTiere,brut:vBrut,markt:vMarkt,saison:vSaison,atlas:vAtlas})[S.tab]();v.scrollTop=st0;tickUI();tutPaint()}
+  v.innerHTML=({tiere:vTiere,brut:vBrut,markt:vMarkt,saison:vSaison,atlas:vAtlas})[S.tab]();a11y(v);v.scrollTop=st0;PENDING_VIEW=false;STRAYSIG=S.stray?String(S.stray.a.id):'';tickUI();tutPaint()}
 function goalBanner(){if(S.tut)return'';const g=nextGoal();if(!g)return'';return`<div class="goal"><div class="gi">${g.ic}</div><div class="gt"><small>Nächstes Ziel</small>${g.txt}</div><div class="gr">+${g.r} 🪙</div></div>`}
 function hetList(a){const out=[];SPECIES[a.sp].genes.forEach(g=>{if(g.type==='dom'&&st(a,g)){const h=hpOf(a,g);if(h>=.995)out.push('reinerbig '+g.name);else if(h>=.05)out.push(Math.round(h*100)+'% reinerbig '+g.name);return}if(g.type!=='rec'||st(a,g))return;if(g.mut&&!S.mutSeen[g.id])return;const p=a.p[g.id]||0;if(p>=.995)out.push('het '+g.name);else if(p>=(a.wild?.2:.1))out.push(Math.round(p*100)+'% het '+g.name)});return out}
 function hetText(a){const out=hetList(a);if(a.wild){const w=a.from==='stray'?'Zugelaufen':a.from==='shelter'?'Aus dem Tierheim':a.from==='mentor'?'Von Alfred':'Wildfang';return out.length?out.join(', ')+' · sonst unbekannt':w+' · Gene unbekannt'}return out.join(', ')}
 function statusHTML(a){const now=Date.now();if(!isAdult(a))return`<div class="cstat">🌱<div class="pb"><i data-ps="${a.born}" data-pe="${a.adultAt}"></i></div><span data-until="${a.adultAt}"></span></div>`;if(a.sex==='f'&&now<a.restUntil)return`<div class="cstat">💤 Erholt sich <span data-until="${a.restUntil}"></span></div>`;return`<div class="cstat ok">✔ Zuchtbereit</div>`}
-function cardHTML(a){const sts=states(a),r=rarity(a.sp,sts);return`<div class="card" data-act="detail" data-id="${a.id}" style="--rc:${r.c}"><div class="cimg"><img src="${aImg(a,200,150)}" alt=""><span class="rtag">${r.n}</span>${a.fav?'<span class="ftag">❤️</span>':''}<span class="qtag">★ ${fq(a.q)}</span></div><div class="cinfo"><div class="cname"><b>${esc(a.name)}</b><span class="sex ${a.sex}">${a.sex==='m'?'♂':'♀'}</span></div><div class="cmorph">${morphName(a.sp,sts)}</div><div class="chet">${hetText(a)||'&nbsp;'}</div>${statusHTML(a)}</div></div>`}
+function cardHTML(a){const sts=states(a),r=rarity(a.sp,sts);return`<div class="card" data-act="detail" data-id="${a.id}" role="button" tabindex="0" aria-label="${esc(a.name)}, ${a.sex==='m'?'Männchen':'Weibchen'}, ${esc(morphName(a.sp,sts))}" style="--rc:${r.c}"><div class="cimg"><img src="${aImg(a,200,150)}" alt=""><span class="rtag">${r.n}</span>${a.fav?'<span class="ftag">❤️</span>':''}<span class="qtag">★ ${fq(a.q)}</span></div><div class="cinfo"><div class="cname"><b>${esc(a.name)}</b><span class="sex ${a.sex}">${a.sex==='m'?'♂':'♀'}</span></div><div class="cmorph">${morphName(a.sp,sts)}</div><div class="chet">${hetText(a)||'&nbsp;'}</div>${statusHTML(a)}</div></div>`}
+const LIMSTEP=40;let SHLIM=LIMSTEP;
+const shl=id=>sheetOpen===id?SHLIM:LIMSTEP;/* Portion für ein Fenster: weiter wachsen nur, wenn genau dieses Fenster schon offen ist */
+const tlim=()=>Math.max(LIMSTEP,S.ui.tlim||LIMSTEP);
+const moreBtn=(shown,total,k,extra)=>shown<total?`<button class="btn wide more" style="margin-top:12px" data-act="more" data-k="${k}"${extra||''}>⬇️ Weitere ${Math.min(LIMSTEP,total-shown)} zeigen · noch ${total-shown}</button>`:'';
 const inPair=a=>S.pair.m===a.id||S.pair.f===a.id||S.pairs.some(p=>p.m===a.id||p.f===a.id);
 const GF_CYCLE={rec:['','v','h','p','n'],dom:['','v','n'],codom:['','v','s','n']};
 function gfLabel(g,m){return m==='v'?'✓ '+g.name:m==='s'?'✓ '+g.super:m==='h'?'het '+g.name:m==='p'?'mögl. het '+g.name:m==='n'?'ohne '+g.name:g.name}
@@ -1693,9 +1730,9 @@ function vTiere(){
   return strayHTML()+goalBanner()+`<div class="chips">${chips}</div>
   <div class="row" style="margin:12px 0 8px"><button class="btn sm ${S.ui.fopen||nAct?'pri':''}" data-act="fopen">⚙ Filter${nAct?' ('+nAct+')':''}</button>${feat('selladv')?`<button class="btn sm ${unlocked().some(sp=>full(sp))?'gold':''}" data-act="selladv" title="Verkaufsberater">🧹</button>`:''}<div class="chips" style="flex:1">${sorts}</div></div>${panel}
   <h2><span class="sp">${f==='all'?'Alle Terrarien':SPECIES[f].plural}</span><span style="letter-spacing:0">${list.length!==(f==='all'?S.animals.length:spCount(f))?list.length+' Treffer · ':''}${capTxt}</span></h2>
-  ${plain.length>=2?`<button class="btn wide" style="margin-bottom:10px" data-act="sellplain">🧹 ${plain.length} Gewöhnliche ohne Hets verkaufen · +${fmt(sum)} 🪙</button>`:''}`+(list.length?(so==='morph'?morphGroupsHTML(list,f):`<div class="grid">${list.map(cardHTML).join('')}</div>`):`<div class="empty"><span class="big">🌿</span>${nAct?'Kein Tier passt zu diesen Filtern.':'Hier ist noch niemand zu Hause.<br>Kaufe Tiere im <b>Markt</b> oder lass Eier schlüpfen.'}</div>`)}
-function morphGroupsHTML(list,f){const G=[];list.forEach(a=>{const k=akey(a),l=G[G.length-1];if(l&&l.k===k)l.a.push(a);else G.push({k,a:[a]})});
-  return G.map(g=>{const a0=g.a[0],sts=states(a0),r=rarity(a0.sp,sts),bq=Math.max(...g.a.map(x=>x.q||2));return`<div class="mgh" style="--rc:${r.c}"><span class="mgn">${f==='all'?SPECIES[a0.sp].icon+' ':''}${morphName(a0.sp,sts)}</span><span class="mgc">${g.a.length}× · ★ ${fq(bq)}</span></div><div class="grid mgg">${g.a.map(cardHTML).join('')}</div>`}).join('')}
+  ${plain.length>=2?`<button class="btn wide" style="margin-bottom:10px" data-act="sellplain">🧹 ${plain.length} Gewöhnliche ohne Hets verkaufen · +${fmt(sum)} 🪙</button>`:''}`+(list.length?(so==='morph'?morphGroupsHTML(list,f,tlim()):`<div class="grid">${list.slice(0,tlim()).map(cardHTML).join('')}</div>`)+moreBtn(Math.min(tlim(),list.length),list.length,'tiere'):`<div class="empty"><span class="big">🌿</span>${nAct?'Kein Tier passt zu diesen Filtern.':'Hier ist noch niemand zu Hause.<br>Kaufe Tiere im <b>Markt</b> oder lass Eier schlüpfen.'}</div>`)}
+function morphGroupsHTML(list,f,lim){lim=lim||list.length;const G=[];list.forEach(a=>{const k=akey(a),l=G[G.length-1];if(l&&l.k===k)l.a.push(a);else G.push({k,a:[a]})});let left=lim;
+  return G.map(g=>{if(left<=0)return'';const show=g.a.slice(0,left);left-=show.length;const a0=g.a[0],sts=states(a0),r=rarity(a0.sp,sts),bq=Math.max(...g.a.map(x=>x.q||2));return`<div class="mgh" style="--rc:${r.c}"><span class="mgn">${f==='all'?SPECIES[a0.sp].icon+' ':''}${morphName(a0.sp,sts)}</span><span class="mgc">${g.a.length}× · ★ ${fq(bq)}</span></div><div class="grid mgg">${show.map(cardHTML).join('')}</div>`}).join('')}
 function slotHTML(sex){const a=byId(S.pair[sex]);if(!a)return`<button class="slot" data-act="pickmate" data-sex="${sex}"><span class="sx sex ${sex}">${sex==='m'?'♂':'♀'}</span>${sex==='m'?'Männchen':'Weibchen'} wählen</button>`;const sts=states(a),r=rarity(a.sp,sts);return`<button class="slot filled" style="--rc:${r.c}" data-act="pickmate" data-sex="${sex}"><img src="${aImg(a,200,150)}"><span class="sn"><span class="sex ${sex}">${sex==='m'?'♂':'♀'}</span> ${esc(a.name)}</span><span class="sm2">${morphName(a.sp,sts)}</span><span class="sm2">${hetText(a)||'&nbsp;'}</span></button>`}
 function pairRowHTML(p){const m=byId(p.m),f=byId(p.f),why=canBreed(m,f);const nm=a=>`<div class="pm"><img src="${aImg(a,120,90)}"><div><b><span class="sex ${a.sex}">${a.sex==='m'?'♂':'♀'}</span> ${esc(a.name)}</b><span>${morphName(a.sp,states(a))}</span></div></div>`;
   const best=predict(m,f).filter(r=>!S.atlas[keyOf(p.sp,r.s)]).reduce((t,r)=>t+r.pr,0);
@@ -1786,12 +1823,12 @@ function pickMate(sex){const sp=S.pair.sp,now=Date.now();S.ui.mf=S.ui.mf||{};con
   const total=S.animals.filter(a=>a.sp===sp&&a.sex===sex).length,nAct=Object.values(mf).filter(Boolean).length+onlyOk+q35+mfav;
   const geneC=SPECIES[sp].genes.filter(g=>!g.mut||S.mutSeen[g.id]).map(g=>{const m=mf[g.id]||'';return`<button class="chip sm gfc ${m?'on gf-'+m:''}" data-act="mgf" data-k="${g.id}" data-sex="${sex}">${g.mut?'☄️ ':''}${gfLabel(g,m)}</button>`}).join('');
   const sorts=[['q','Qualität'],['rar','Seltenheit'],['value','Wert']].map(([v,l])=>`<button class="chip sm ${so===v?'on':''}" data-act="msort" data-v="${v}" data-sex="${sex}">${l}</button>`).join('');
-  const items=list.map(a=>{const ok=isAdult(a)&&!(sex==='f'&&now<a.restUntil);const sts=states(a);return`<button class="li ${ok?'':'dis'}" ${ok?`data-act="setmate" data-id="${a.id}"`:''} style="width:100%;text-align:left"><img src="${aImg(a,200,150)}"><div class="lt"><b>${esc(a.name)} <span class="sex ${sex}">${sex==='m'?'♂':'♀'}</span></b><span style="color:${rarity(sp,sts).c}">${morphName(sp,sts)}</span><span>${!isAdult(a)?'🌱 wächst noch – <span data-until="'+a.adultAt+'"></span>':sex==='f'&&now<a.restUntil?'💤 erholt sich':hetText(a)||'keine bekannten Hets'}</span></div><div class="lq">${starsHTML(a.q)}<b>${fq(a.q)}</b></div></button>`}).join('');
+  const items=list.slice(0,shl('pick')).map(a=>{const ok=isAdult(a)&&!(sex==='f'&&now<a.restUntil);const sts=states(a);return`<button class="li ${ok?'':'dis'}" ${ok?`data-act="setmate" data-id="${a.id}"`:''} style="width:100%;text-align:left"><img src="${aImg(a,200,150)}"><div class="lt"><b>${esc(a.name)} <span class="sex ${sex}">${sex==='m'?'♂':'♀'}</span></b><span style="color:${rarity(sp,sts).c}">${morphName(sp,sts)}</span><span>${!isAdult(a)?'🌱 wächst noch – <span data-until="'+a.adultAt+'"></span>':sex==='f'&&now<a.restUntil?'💤 erholt sich':hetText(a)||'keine bekannten Hets'}</span></div><div class="lq">${starsHTML(a.q)}<b>${fq(a.q)}</b></div></button>`}).join('');
   openSheet(`<div class="sh-title">${sex==='m'?'♂ Männchen':'♀ Weibchen'} wählen</div><div class="sh-sub">${SPECIES[sp].icon} ${SPECIES[sp].plural} · ${list.length}${list.length!==total?' von '+total:''} Tiere</div>
   <div class="panel fpanel"><div class="flab">Gene <span class="hint">· mehrfach tippen: sichtbar → het → möglich het → ohne</span></div><div class="wrapc">${geneC}</div>
   <div class="flab">Weitere Filter</div><div class="wrapc"><button class="chip sm ${onlyOk?'on':''}" data-act="mready" data-sex="${sex}">Nur zuchtbereit</button><button class="chip sm ${q35?'on':''}" data-act="mq" data-sex="${sex}">★ 3,5+</button><button class="chip sm ${mfav?'on':''}" data-act="mfav" data-sex="${sex}">❤️ Favoriten</button>${nAct?`<button class="chip sm" data-act="mreset" data-sex="${sex}">✕ Zurücksetzen</button>`:''}</div>
   <div class="flab">Sortieren</div><div class="wrapc">${sorts}</div></div>
-  <div class="list">${items||`<div class="empty">${total?'Kein Tier passt zu diesen Filtern.':'Keine passenden Tiere. Kaufe welche im Markt!'}</div>`}</div>${S.pair[sex]?`<button class="btn wide" style="margin-top:12px" data-act="clearmate" data-sex="${sex}">Platz leeren</button>`:''}`,'pick');tickUI()}
+  <div class="list">${items||`<div class="empty">${total?'Kein Tier passt zu diesen Filtern.':'Keine passenden Tiere. Kaufe welche im Markt!'}</div>`}</div>${moreBtn(Math.min(shl('pick'),list.length),list.length,'pick',` data-sex="${sex}"`)}${S.pair[sex]?`<button class="btn wide" style="margin-top:12px" data-act="clearmate" data-sex="${sex}">Platz leeren</button>`:''}`,'pick');tickUI()}
 const GOAL_MAX=6;let GDRAFT=null;
 function goalMatch(a,g){return a.sp===g.sp&&(g.sex==='any'||a.sex===g.sex)&&(!g.key||akey(a)===g.key)&&(g.q==null||(a.q||2)>=g.q-1e-9)}
 function goalDesc(g){const def=SPECIES[g.sp];return`${def.icon} ${g.key?morphName(g.sp,g.key.split(':')[1].split('').map(Number)):'beliebiger '+def.name+'-Morph'} · ${g.sex==='m'?'♂':g.sex==='f'?'♀':'♂/♀ egal'} · ${g.q==null?'Qualität egal':'★ ab '+fq(g.q)}`}
@@ -2093,6 +2130,7 @@ let PLAYLAST=0;
 function tick(){
   if(PASSIVE||RESCUE)return;
   const now=Date.now();let changed=false;
+  if(IMGREV.length)imgRevoke();
   {const dt=PLAYLAST?now-PLAYLAST:0;PLAYLAST=now;if(!document.hidden&&dt>0&&dt<5000)S.playMs=(S.playMs||0)+dt}
   if(!S.shop.next||now>=S.shop.next){refreshShop();changed=true}
   if(!S.nextStray)S.nextStray=now+6*60000;
@@ -2107,8 +2145,16 @@ function tick(){
   if(S.lvl>=2){if(!S.show){newShow();changed=true}else if(now>=S.show.until){resolveShow();after();changed=true}}
   if(!trendActive()){newTrend();changed=true;if(S.intro)toast(`📈 Neuer Markttrend: <b>${geneOf(S.trend.sp,S.trend.gene).name} ${SPECIES[S.trend.sp].plural}</b> ×1,8`)}
   const s=sig();if(s!==lastSig){const prevReady=+lastSig.split(',')[0]||0,ready=S.eggs.filter(e=>now>=e.ready).length;if(lastSig&&ready>prevReady){toast(`🐣 ${ready-prevReady>1?(ready-prevReady)+' Eier sind':'Ein Ei ist'} bereit zum Schlüpfen!`);snd('tap')}lastSig=s;changed=true}
-  if(changed&&!$('#reveal').classList.contains('show')){render()}else tickUI();
+  if(changed){markDirty();if(!$('#reveal').classList.contains('show'))liveUpdate();else renderTop()}else tickUI();
 }
+/* 7.8: Im Hintergrund nur Kopf/Abzeichen und Statuszeilen aktualisieren – geöffnete Abschnitte und Rückfragen bleiben */
+let PENDING_VIEW=false,STRAYSIG='';
+const viewBusy=()=>!!document.querySelector('#view [data-armed]')||(document.activeElement&&/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName));
+function liveUpdate(){renderTop();const ss=S.stray?String(S.stray.a.id):'';const strayCh=ss!==STRAYSIG;STRAYSIG=ss;
+  if(S.tab==='tiere'){if(strayCh){if(viewBusy())PENDING_VIEW=true;else{render();return}}
+    document.querySelectorAll('#view .card[data-id]').forEach(c=>{const a=byId(+c.dataset.id),old=c.querySelector('.cstat');if(!a||!old)return;const h=statusHTML(a);if(old.outerHTML===h)return;const t=document.createElement('div');t.innerHTML=h;old.replaceWith(t.firstChild)})}
+  else if(S.tab==='brut'){if(viewBusy())PENDING_VIEW=true;else{render();return}}
+  tickUI()}
 
 /* ================= Tutorial & Alfred ================= */
 const TUT_ST={
@@ -2281,9 +2327,10 @@ function tutPaint(){const c=$('#coach'),m=$('#coachm');if(!c)return;document.bod
       while(i<RVP.length-1&&(!el||(RVP[i][0]==='.ribbons'&&!el.children.length))){i++;S.tut.rv=i;el=R.querySelector(RVP[i][0])}
       tutBubble(c,RVP[i][1],[i<RVP.length-1?'Weiter':'Verstanden','rv'],el);return}
     c.className='';tutHL(null);return}
+  if(st.modal&&TUTMIN===S.tut.s){m.className='';m._h='';tutBubble(c,'Alfred wartet auf dich – lies weiter, wenn du so weit bist.',['📖 Weiterlesen','unmin'],null);histSync();return}
   if(st.modal){const bt=st.btns?st.btns():[];const html=`<div class="tm-card ${st.wide?'wide':''}"><div class="tm-head"><div class="tav">👴</div><div><b>Alfred</b><small>übergibt dir seine Zuchtstation</small></div></div><div class="tm-body">${st.modal()}</div>${bt.length?`<div class="tm-btns">${bt.map(([l,v,cl])=>`<button class="btn ${cl||''} wide" data-act="tut" data-v="${v}">${l}</button>`).join('')}</div>`:''}</div>`;
-    if(m._h!==html){const keep=m._h&&m._k===S.tut.s;m.innerHTML=html;m._h=html;m._k=S.tut.s;if(!keep)m.scrollTop=0;else{const mo=m.querySelector('.tmore');if(mo)mo.scrollIntoView({block:'start',behavior:'smooth'})}}m.className='show';c.className='';tutHL(null);return}
-  m.className='';m._h='';
+    if(m._h!==html){const keep=m._h&&m._k===S.tut.s;m.innerHTML=html;m._h=html;m._k=S.tut.s;if(!keep)m.scrollTop=0;else{const mo=m.querySelector('.tmore');if(mo)mo.scrollIntoView({block:'start',behavior:'smooth'})}}if(m.className!=='show'){m.className='show';histSync()}c.className='';tutHL(null);return}
+  if(m.className){m.className='';histSync()}m._h='';
   const txt=typeof st.text==='function'?st.text():st.text;
   const sel=typeof st.target==='function'?st.target():st.target;let el=null;if(sel){const all=[...document.querySelectorAll(sel)];el=all.find(x=>x.offsetParent!==null||getComputedStyle(x).position==='fixed')||all[0]||null}
   if(el){const r=el.getBoundingClientRect(),vh=innerHeight,key=S.tut.s+'|'+sel;if(TUTSC!==key&&getComputedStyle(el).position!=='fixed'&&!el.closest('#nav')&&!el.closest('header')&&(r.top<70||r.bottom>vh-150)){TUTSC=key;el.scrollIntoView({block:'center',behavior:'smooth'});setTimeout(tutPaint,450)}else TUTSC=key}
@@ -2335,7 +2382,7 @@ function sellAdvSheet(){const o=S.ui.sa=S.ui.sa||{m:'dup',sp:S.ui.filter&&S.ui.f
     return`<div class="sarow ${on?'on':''} ${p?'prot':''}" ${p?'':`data-act="satog" data-id="${a.id}"`}><span class="sabox">${on?'✓':''}</span><img src="${aImg(a,96,72)}"><div class="lt"><b>${esc(a.name)} <span class="sex ${a.sex}">${a.sex==='m'?'♂':'♀'}</span></b><span class="saq">${starsHTML(a.q)} <b>${fq(a.q)}</b> <em>${isAdult(a)?'· adult':'· 🌱 Jungtier'}</em></span>${g.keep.length?'':`<span class="sam">${morphName(a.sp,states(a))}</span>`}${hetList(a).map(x=>`<span class="sah">🧬 ${x}</span>`).join('')}${a.wild?`<span class="sah">❔ ${hetList(a).length?'sonst unbekannt':(a.from==='stray'?'Zugelaufen':a.from==='shelter'?'Aus dem Tierheim':a.from==='mentor'?'Von Alfred':'Wildfang')+' · Gene unbekannt'}</span>`:''}<span class="satags">${k?'<i class="keep">✓ Empfehlung: behalten</i>':''}${a.fav?'<i>❤️ Favorit</i>':''}${a.tkeep?'<i>🔒 reserviert</i>':''}${inPair(a)?'<i>📒 im Zuchtpaar</i>':''}</span></div><b class="saval">${fmt(value(a))} 🪙</b></div>`};
   openSheet(`<div class="sh-title">🧹 Verkaufsberater</div><div class="hint">Hilft dir beim Aufräumen. Nichts passiert automatisch – du entscheidest, wer geht. Favoriten ❤️ sind geschützt.</div>
    <div class="chips" style="margin:10px 0 6px">${mC}</div><div class="chips" style="margin-bottom:8px">${spC}</div><div class="hint" style="margin-bottom:8px">${SA_DESC[o.m]} ${o.m!=='q3'?'Beim Vorschlag zählen Qualität, sichere het-Gene und Zuchtpaare.':''}</div>
-   ${G.length?G.map(g=>`<div class="sagrp"><div class="flab">${g.t}</div>${g.L.map(a=>row(a,g)).join('')}</div>`).join(''):'<div class="empty" style="padding:24px 8px">✨ Nichts aufzuräumen – hier ist alles ordentlich!</div>'}
+   ${G.length?(()=>{let left=shl('selladv');const tot=G.reduce((t,g)=>t+g.L.length,0);return G.map(g=>{if(left<=0)return'';const L=g.L.slice(0,left);left-=L.length;return`<div class="sagrp"><div class="flab">${g.t}</div>${L.map(a=>row(a,g)).join('')}</div>`}).join('')+moreBtn(Math.min(shl('selladv'),tot),tot,'sa')})():'<div class="empty" style="padding:24px 8px">✨ Nichts aufzuräumen – hier ist alles ordentlich!</div>'}
    <div class="safoot"><div class="row"><button class="btn sm" data-act="saall" data-v="0">Keine</button><button class="btn sm" data-act="saall" data-v="1">Vorschlag</button><button class="btn pri" style="flex:1" data-act="sasell" ${ids.length?'':'disabled'}>${ids.length?`${ids.length} verkaufen · +${fmt(sum)} 🪙`:'Nichts ausgewählt'}</button></div></div>`,'selladv')}
 /* ================= Kristall ================= */
 const crysOn=()=>!!(S.crys&&S.crys.have&&S.crys.on);
@@ -2355,7 +2402,7 @@ function geneToast(a){S.geneTo=S.geneTo||{};noteGenes(a,true).forEach(({g})=>{co
 const MEM_KEY=SAVE_KEY+'_mem';
 function tutReplay(){if(NOSAVE){toast('⚠️ Mit einem Spielstand aus einer neueren Version geht das hier nicht.','warn');return}save();try{writeBak(localStorage.getItem(SAVE_KEY),'vor der Erinnerung')}catch(e){}
   try{localStorage.setItem(MEM_KEY,JSON.stringify(S))}catch(e){toast('❌ Erinnerung konnte nicht gespeichert werden','bad');return}
-  const g=S.starterGene||null,lv=GL();closeSheet();S=defaults();S.tut.replay=1;S.tut.fixed=g;S.glvl=lv;starter();for(const k in IMG)delete IMG[k];S.tab='tiere';save();render();tutPaint()}
+  const g=S.starterGene||null,lv=GL();closeSheet();S=defaults();S.tut.replay=1;S.tut.fixed=g;S.glvl=lv;starter();imgClear();S.tab='tiere';save();render();tutPaint()}
 function tutRestore(){let d=null,src='mem';try{d=JSON.parse(localStorage.getItem(MEM_KEY))}catch(e){}
   if(!d||validateSave(d)){d=null;const b=bakData();if(b&&!(b.tut&&b.tut.replay)){d=b;src='bak'}}
   if(!d){S.tut=null;S.intro=true;render();tutPaint();toast('⚠️ Keine Kopie deines Spielstands gefunden – du spielst mit dem Erinnerungs-Stand weiter.','warn',6000);return}
@@ -2379,8 +2426,10 @@ const STRAT={
 const STRAT_ORDER=['keep','price','gold','qual','space','unlock','dna','mutq'];
 
 /* ================= Version & Änderungsprotokoll ================= */
-const VERSION='7.7';
+const VERSION='7.8.1';
 const CHANGELOG=[
+ ['7.8.1','17.11.2026',['Tierbilder werden wieder überall angezeigt: Wo die neue sparsame Bildspeicherung gesperrt ist, nutzt das Spiel automatisch die bisherige']],
+ ['7.8','17.11.2026',['Volle Terrarien laufen flüssig: Tiere erscheinen in Portionen zu 40 – darunter „Weitere 40 zeigen“','Tierbilder brauchen viel weniger Speicher (höchstens 300 im Zwischenspeicher)','Im Hintergrund wird nur noch das Nötige aktualisiert: Geöffnete Wiki-Abschnitte und „Sicher?“-Knöpfe bleiben, während Eier fertig werden','Gespeichert wird nur noch bei Änderungen – und sofort, wenn du die App verlässt','Zurück-Taste schließt Fenster, Schlupf-Bildschirm und Tutorial-Karte; auf der Hauptseite fragt sie erst nach','Fenster mit festem Kopf: ✕ ist immer sichtbar, ← führt zum vorigen Fenster','Größere Tippflächen (mind. 44 px), Schrift mind. 11 px, Zoomen mit zwei Fingern wieder möglich','Rückfrage bei „Auftrag neu würfeln“, beim Löschen eines Zuchtpaars und beim Verkauf eines Tiers aus einem gespeicherten Paar','Bessere Unterstützung für Bildschirmleser']],
  ['7.7','17.11.2026',['Genwissen stimmt jetzt unabhängig von der Schlupfreihenfolge: het-Prozente und „reinerbig“-Angaben werden beim Schlupf aus dem aktuellen Wissen über die Eltern berechnet','Reinerbig-Wissen wird an Jungtiere weitergegeben, wenn sich bei den Eltern etwas klärt (Nachwuchs oder DNA-Test)','Bestehende Tiere mit beiden Eltern bekommen ihr het-Wissen einmalig aufgefrischt','Neu im Menü: „Testbericht kopieren“ – kurze Zusammenfassung deines Spielverlaufs (wird nicht gesendet)','Ziel-Banner bleibt nicht mehr hängen: Ziele erscheinen erst, wenn die passende Funktion freigeschaltet ist','Tutorial: Fehlen Münzen fürs Verpaaren, legt Alfred den Rest dazu; „Neu würfeln“ ist im Tutorial ausgeblendet','Spielanleitung mit aktuellen Zahlen (Mutationschance, bis 200 Plätze); Willkommenstext korrigiert','Händler-Wildfänge: het-Wissen 16 % statt 10 % – passt jetzt zur echten Häufigkeit','Für Tester: Adresse mit ?selftest=1 startet einen Selbsttest des Spiels']],
  ['7.6','17.11.2026',['Sicherheits-Update: Dein Spielstand geht nicht mehr durch Fehler, Import, zweiten Tab oder Update verloren','Startet das Spiel wegen eines Fehlers nicht, erscheint ein Notfall-Bildschirm: Spielstand als Code kopieren, letzte Sicherung laden oder neu beginnen – nichts wird überschrieben','Automatische Kopie des Spielstands: einmal am Tag, vor Updates und vor dem Laden eines Codes – im Fenster „Spielstand sichern“ mit Datum und Knopf zum Laden','Warnung, wenn das Speichern fehlschlägt','Zweiter Tab: Der alte Tab pausiert und speichert nicht mehr, „Hier weiterspielen“ holt den neuesten Stand','Sicherungscodes werden gründlich geprüft, kaputte Codes abgelehnt – der alte Stand läuft weiter','In der Erinnerung (Tutorial nochmal) sind Sichern/Laden und Löschen gesperrt','Namen bleiben: Ein Männchen namens Luna heißt jetzt auch nach dem Neuladen noch Luna','Menü: „Fehlerbericht kopieren“ für Rückmeldungen']],
  ['7.5','15.11.2026',['Zuchtberater ⭐ Qualität: Erklärung, was „Rekord-Chance“ und „Höchster Schnitt“ unterscheidet','Zuchtberater ⭐ Qualität: Morphs, von denen du schon ein ★-5,0-Tier hast, lassen sich ausblenden','Verkaufsberater übersichtlicher: adult/Jungtier steht neben den Sternen, jede (mögliche) het-Angabe in einer eigenen Zeile']],
@@ -2603,6 +2652,21 @@ function selftestShow(box,R){const E=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&
   window.__selftest={passed:n,total:R.length,results:R}}
 /* Eingebettete Alt-Stände für den Selbsttest (aus echten Spielläufen von 7.5 und 7.6) */
 const SELFTEST_SAVES=[['7.5',"{\"v\":1,\"coins\":146,\"xp\":16,\"lvl\":2,\"animals\":[{\"id\":1,\"sp\":\"gecko\",\"sex\":\"m\",\"g\":{\"eclipse\":1},\"p\":{\"eclipse\":1},\"born\":1794889570515,\"adultAt\":1794889570514,\"restUntil\":0,\"name\":\"Rudi\",\"seed\":1400037340,\"gen\":1,\"wild\":true,\"mut\":null,\"fav\":true,\"parents\":null,\"q\":2.4,\"ped\":null,\"orig\":null,\"from\":\"mentor\",\"kids\":[{\"id\":14,\"n\":\"Nessie\",\"x\":\"f\",\"s\":\"000000\",\"q\":2.5},{\"id\":15,\"n\":\"Jim\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.3},{\"id\":21,\"n\":\"Maya\",\"x\":\"f\",\"s\":\"010000\",\"q\":1.9},{\"id\":22,\"n\":\"Rüdiger\",\"x\":\"m\",\"s\":\"010000\",\"q\":2.9},{\"id\":23,\"n\":\"Flummi\",\"x\":\"m\",\"s\":\"010000\",\"q\":2},{\"id\":31,\"n\":\"Hilde\",\"x\":\"f\",\"s\":\"010000\",\"q\":1.7},{\"id\":36,\"n\":\"Lara\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.3},{\"id\":54,\"n\":\"Leon\",\"x\":\"m\",\"s\":\"000000\",\"q\":3.3},{\"id\":58,\"n\":\"Petra\",\"x\":\"f\",\"s\":\"010000\",\"q\":3.1},{\"id\":59,\"n\":\"Mocca\",\"x\":\"f\",\"s\":\"000000\",\"q\":2.4},{\"id\":60,\"n\":\"Pia\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.5},{\"id\":63,\"n\":\"Yvonne\",\"x\":\"f\",\"s\":\"000000\",\"q\":2.5},{\"id\":64,\"n\":\"Rupert\",\"x\":\"m\",\"s\":\"000000\",\"q\":3.1},{\"id\":73,\"n\":\"Kiwi\",\"x\":\"m\",\"s\":\"010000\",\"q\":2.6},{\"id\":83,\"n\":\"Viola\",\"x\":\"f\",\"s\":\"000000\",\"q\":2.9},{\"id\":84,\"n\":\"Wilma\",\"x\":\"f\",\"s\":\"000000\",\"q\":2.3}],\"kidsN\":16,\"pk\":{\"eclipse\":1},\"gkids\":[{\"id\":54,\"n\":\"Leon\",\"x\":\"m\",\"s\":\"000000\",\"q\":3.3},{\"id\":58,\"n\":\"Petra\",\"x\":\"f\",\"s\":\"010000\",\"q\":3.1},{\"id\":59,\"n\":\"Mocca\",\"x\":\"f\",\"s\":\"000000\",\"q\":2.4},{\"id\":60,\"n\":\"Pia\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.5},{\"id\":63,\"n\":\"Yvonne\",\"x\":\"f\",\"s\":\"000000\",\"q\":2.5},{\"id\":64,\"n\":\"Rupert\",\"x\":\"m\",\"s\":\"000000\",\"q\":3.1}],\"gkidsN\":6},{\"id\":11,\"sp\":\"gecko\",\"sex\":\"f\",\"g\":{\"tremper\":2},\"p\":{},\"born\":1794889571863,\"adultAt\":1794889571862,\"restUntil\":0,\"name\":\"Amber\",\"seed\":1411857398,\"gen\":1,\"wild\":false,\"mut\":null,\"fav\":true,\"parents\":null,\"q\":2.6,\"ped\":null,\"orig\":null,\"kids\":[{\"id\":14,\"n\":\"Nessie\",\"x\":\"f\",\"s\":\"000000\",\"q\":2.5},{\"id\":15,\"n\":\"Jim\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.3}],\"kidsN\":2},{\"id\":14,\"sp\":\"gecko\",\"sex\":\"f\",\"g\":{\"tremper\":1,\"eclipse\":1},\"p\":{\"tremper\":1,\"eclipse\":0.5},\"born\":1794889573990,\"adultAt\":1794889573993,\"restUntil\":0,\"name\":\"Nessie\",\"seed\":543960110,\"gen\":2,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":[1,11],\"q\":2.5,\"ped\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4,\"pd\":null},{\"id\":11,\"n\":\"Amber\",\"x\":\"f\",\"s\":\"100000\",\"q\":2.6,\"pd\":null}],\"orig\":{\"tremper\":\"f\",\"eclipse\":\"m\"},\"pq\":{\"tremper\":[0,1],\"eclipse\":[0.5,0],\"ember\":[0,0]},\"pk\":{},\"hp\":{}},{\"id\":17,\"sp\":\"gecko\",\"sex\":\"f\",\"g\":{\"eclipse\":2},\"p\":{},\"born\":1794889580983,\"adultAt\":1794889580982,\"restUntil\":0,\"name\":\"Mona\",\"seed\":311649327,\"gen\":1,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":null,\"q\":2.5,\"ped\":null,\"orig\":null,\"kids\":[{\"id\":21,\"n\":\"Maya\",\"x\":\"f\",\"s\":\"010000\",\"q\":1.9},{\"id\":22,\"n\":\"Rüdiger\",\"x\":\"m\",\"s\":\"010000\",\"q\":2.9},{\"id\":23,\"n\":\"Flummi\",\"x\":\"m\",\"s\":\"010000\",\"q\":2},{\"id\":31,\"n\":\"Hilde\",\"x\":\"f\",\"s\":\"010000\",\"q\":1.7},{\"id\":36,\"n\":\"Lara\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.3}],\"kidsN\":5,\"gkids\":[{\"id\":54,\"n\":\"Leon\",\"x\":\"m\",\"s\":\"000000\",\"q\":3.3},{\"id\":58,\"n\":\"Petra\",\"x\":\"f\",\"s\":\"010000\",\"q\":3.1},{\"id\":59,\"n\":\"Mocca\",\"x\":\"f\",\"s\":\"000000\",\"q\":2.4},{\"id\":60,\"n\":\"Pia\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.5},{\"id\":63,\"n\":\"Yvonne\",\"x\":\"f\",\"s\":\"000000\",\"q\":2.5},{\"id\":64,\"n\":\"Rupert\",\"x\":\"m\",\"s\":\"000000\",\"q\":3.1}],\"gkidsN\":6},{\"id\":59,\"sp\":\"gecko\",\"sex\":\"f\",\"g\":{\"eclipse\":1},\"p\":{\"eclipse\":1},\"born\":1794889626276,\"adultAt\":1794889627997,\"restUntil\":0,\"name\":\"Mocca\",\"seed\":717255678,\"gen\":3,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":[1,36],\"q\":2.4,\"ped\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4,\"pd\":null},{\"id\":36,\"n\":\"Lara\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.3,\"pd\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4},{\"id\":17,\"n\":\"Mona\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.5}]}],\"orig\":{\"eclipse\":\"f\"},\"pq\":{\"tremper\":[0,0],\"eclipse\":[0.5,1],\"ember\":[0,0]},\"pk\":{},\"hp\":{}},{\"id\":64,\"sp\":\"gecko\",\"sex\":\"m\",\"g\":{\"eclipse\":1},\"p\":{\"eclipse\":1},\"born\":1794889634341,\"adultAt\":1794889639033,\"restUntil\":0,\"name\":\"Rupert\",\"seed\":729066115,\"gen\":3,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":[1,36],\"q\":3.1,\"ped\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4,\"pd\":null},{\"id\":36,\"n\":\"Lara\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.3,\"pd\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4},{\"id\":17,\"n\":\"Mona\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.5}]}],\"orig\":{\"eclipse\":\"f\"},\"pq\":{\"tremper\":[0,0],\"eclipse\":[0.5,1],\"ember\":[0,0]},\"pk\":{},\"hp\":{}},{\"id\":73,\"sp\":\"gecko\",\"sex\":\"m\",\"g\":{\"eclipse\":2},\"p\":{},\"born\":1794889721392,\"adultAt\":1794889723068,\"restUntil\":0,\"name\":\"Kiwi\",\"seed\":1008914104,\"gen\":3,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":[1,36],\"q\":2.6,\"ped\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4,\"pd\":null},{\"id\":36,\"n\":\"Lara\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.3,\"pd\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4},{\"id\":17,\"n\":\"Mona\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.5}]}],\"orig\":{\"eclipse\":\"mf\"},\"pq\":{\"tremper\":[0,0],\"ember\":[0,0]},\"pk\":{},\"hp\":{}},{\"id\":84,\"sp\":\"gecko\",\"sex\":\"f\",\"g\":{\"eclipse\":1},\"p\":{\"eclipse\":1},\"born\":1794889749007,\"adultAt\":1794889824007,\"restUntil\":0,\"name\":\"Wilma\",\"seed\":981433269,\"gen\":3,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":[1,36],\"q\":2.3,\"ped\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4,\"pd\":null},{\"id\":36,\"n\":\"Lara\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.3,\"pd\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4},{\"id\":17,\"n\":\"Mona\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.5}]}],\"orig\":{\"eclipse\":\"f\"},\"pq\":{\"tremper\":[0,0],\"eclipse\":[0.5,1],\"ember\":[0,0]},\"pk\":{},\"hp\":{}}],\"eggs\":[],\"atlas\":{\"gecko:000000\":{\"g\":{\"eclipse\":1},\"seed\":1400037340,\"t\":1794889570515,\"bq\":3.3,\"bqn\":\"Leon\"},\"gecko:100000\":{\"g\":{\"tremper\":2},\"seed\":1411857398,\"t\":1794889571863,\"bq\":2.6,\"bqn\":\"Amber\"},\"gecko:010000\":{\"g\":{\"eclipse\":2},\"seed\":311649327,\"t\":1794889580983,\"bq\":3.1,\"bqn\":\"Petra\"}},\"named\":{},\"ach\":{\"hatch1\":1794889576186,\"x_early\":1794889576187,\"ord1\":1794889580993,\"x_mischief\":1794889607469,\"earn1k\":1794889607793,\"x_family\":1794889615745},\"stats\":{\"hatched\":16,\"sold\":8,\"earned\":2436,\"orders\":3,\"mut\":0,\"dna\":0,\"bred\":6,\"maxGen\":3,\"spent\":2520,\"trophies\":0,\"gold\":0,\"early\":1,\"dayEarnD\":\"Tue Nov 17 2026\",\"dayEarn\":1271,\"dayEarnMax\":1271,\"tutDone\":1,\"wikiOpen\":1,\"secretOpen\":1,\"familyBreed\":1},\"upg\":{\"slots_gecko\":1,\"slots_snake\":0,\"slots_turtle\":0,\"slots_corn\":0,\"pairs\":0,\"incub\":1,\"speed\":0,\"grow\":0,\"clutch\":0,\"uv\":0},\"items\":{\"elixir\":1},\"shop\":{\"offers\":[{\"id\":5,\"sp\":\"gecko\",\"sex\":\"m\",\"g\":{\"eclipse\":1},\"p\":{\"eclipse\":1},\"born\":1794889570515,\"adultAt\":1794889570514,\"restUntil\":0,\"name\":\"Siegfried\",\"seed\":1770422110,\"gen\":1,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":null,\"q\":1.7,\"ped\":null,\"orig\":null,\"price\":75},{\"id\":6,\"sp\":\"gecko\",\"sex\":\"m\",\"g\":{\"tremper\":1},\"p\":{\"tremper\":0.1,\"eclipse\":0.1},\"born\":1794889570515,\"adultAt\":1794889570514,\"restUntil\":0,\"name\":\"Sméagol\",\"seed\":1963233533,\"gen\":1,\"wild\":true,\"mut\":null,\"fav\":false,\"parents\":null,\"q\":2,\"ped\":null,\"orig\":null,\"price\":60},{\"id\":7,\"sp\":\"gecko\",\"sex\":\"m\",\"g\":{\"tremper\":1},\"p\":{\"tremper\":1},\"born\":1794889570515,\"adultAt\":1794889570514,\"restUntil\":0,\"name\":\"Yuki\",\"seed\":458539618,\"gen\":1,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":null,\"q\":1.8,\"ped\":null,\"orig\":null,\"price\":75},{\"id\":8,\"sp\":\"gecko\",\"sex\":\"f\",\"g\":{\"eclipse\":1},\"p\":{\"eclipse\":1},\"born\":1794889570515,\"adultAt\":1794889570514,\"restUntil\":0,\"name\":\"Wackel\",\"seed\":1241789245,\"gen\":1,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":null,\"q\":2.1,\"ped\":null,\"orig\":null,\"price\":90},{\"id\":9,\"sp\":\"gecko\",\"sex\":\"f\",\"g\":{},\"p\":{\"tremper\":0.1,\"eclipse\":0.1},\"born\":1794889570516,\"adultAt\":1794889570515,\"restUntil\":0,\"name\":\"Matilda\",\"seed\":98428687,\"gen\":1,\"wild\":true,\"mut\":null,\"fav\":false,\"parents\":null,\"q\":1.5,\"ped\":null,\"orig\":null,\"price\":65},{\"id\":10,\"sp\":\"gecko\",\"sex\":\"f\",\"g\":{\"snow\":1,\"eclipse\":1},\"p\":{\"eclipse\":1},\"born\":1794889570516,\"adultAt\":1794889570515,\"restUntil\":0,\"name\":\"Bambus\",\"seed\":875733208,\"gen\":1,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":null,\"q\":2,\"ped\":null,\"orig\":null,\"price\":155}],\"next\":1794889870516},\"orders\":[{\"id\":75,\"sp\":\"gecko\",\"req\":{\"enigma\":1},\"sex\":null,\"adult\":true,\"reward\":235,\"xp\":35,\"cust\":[\"🦁\",\"Tierpark Lindental\"]},{\"id\":81,\"sp\":\"gecko\",\"req\":{\"tremper\":1},\"sex\":null,\"adult\":true,\"reward\":325,\"xp\":35,\"cust\":[\"🎩\",\"Sammler Graf Eckbert\"]},{\"id\":82,\"sp\":\"gecko\",\"req\":{\"eclipse\":1},\"sex\":null,\"adult\":false,\"reward\":285,\"xp\":27,\"cust\":[\"🧑‍🔬\",\"Dr. Kroll, Herpetologin\"]}],\"trend\":{\"sp\":\"gecko\",\"gene\":\"snow\",\"until\":1794890050516},\"unl\":[\"gecko\"],\"pair\":{\"sp\":\"gecko\",\"m\":null,\"f\":17},\"pairs\":[],\"goals\":[],\"kidsInit\":1,\"show\":{\"id\":79,\"sp\":\"gecko\",\"req\":{\"enigma\":1},\"title\":\"Schönster Enigma-Leopardgecko\",\"until\":1794890344501,\"tiers\":[34,210,840],\"entry\":null,\"v2\":1,\"v3\":1},\"atlasMs\":{\"gecko\":0,\"snake\":0,\"turtle\":0,\"corn\":0},\"daily\":{\"last\":\"Tue Nov 17 2026\",\"streak\":1},\"goal\":2,\"mutSeen\":{},\"nextId\":85,\"sound\":false,\"tab\":\"brut\",\"ui\":{\"filter\":\"all\",\"sort\":\"value\",\"msub\":\"upg\",\"asub\":\"wiki\",\"elixir\":false,\"gf\":{\"gecko\":{\"tremper\":\"v\",\"eclipse\":\"v\"}},\"fsex\":\"f\",\"fstat\":\"fav\",\"fopen\":false,\"amiss\":false,\"mf\":{\"gecko\":{\"eclipse\":\"v\"}},\"advsp\":\"gecko\",\"advt\":\"qual\",\"callmore\":null,\"callv\":\"home\",\"mready\":false,\"mq\":false,\"mfav\":false,\"achcat\":\"Geheim\",\"mailf\":\"evt\",\"msort\":\"value\",\"amut\":\"all\",\"wsec\":\"real\",\"sa\":{\"m\":\"dup\",\"sp\":\"gecko\",\"sel\":{\"14\":1,\"17\":1,\"59\":1,\"73\":1}},\"advfav\":true,\"advq5\":true},\"intro\":true,\"tut\":null,\"crys\":{\"have\":0,\"on\":0},\"geneSeen\":{\"gecko:eclipse\":1},\"starterGene\":\"tremper\",\"slotV\":2,\"seenVer\":\"7.5\",\"spIntro\":[],\"mail\":[{\"id\":1794889747562.3108,\"t\":1794889747562,\"ic\":\"📞\",\"title\":\"Alfred: Glückwunsch zu Level 2\",\"body\":\"Tippen, um das Gespräch nochmal anzuhören\",\"act\":\"feat:markt2\",\"r\":1},{\"id\":1794889744246.08,\"t\":1794889744246,\"ic\":\"⭐\",\"title\":\"Level 2 erreicht\",\"body\":\"+80 🪙 · 🧬 Zuchtfutter im Ausbau verfügbar\",\"act\":null,\"r\":1},{\"id\":1794889636062.429,\"t\":1794889636062,\"ic\":\"📞\",\"title\":\"Alfred: Oha, dein Terrarium ist voll\",\"body\":\"Tippen, um das Gespräch nochmal anzuhören\",\"act\":\"feat:selladv\",\"r\":1},{\"id\":1794889615745.679,\"t\":1794889615745,\"ic\":\"👨‍👦\",\"title\":\"🤫 Geheimer Erfolg: Familiengeschäft\",\"body\":\"Verpaare ein Elternteil mit seinem Kind – ⚠️ in echter Zucht schädlich! · +300 🪙\",\"act\":\"ach:x_family:Geheim\",\"r\":1},{\"id\":1794889607793.4204,\"t\":1794889607793,\"ic\":\"🪙\",\"title\":\"Erfolg: Taschengeld\",\"body\":\"1.000 🪙 verdient · +100 🪙\",\"act\":\"ach:earn1k:Allgemein\",\"r\":1},{\"id\":1794889607470.7104,\"t\":1794889607470,\"ic\":\"🗺️\",\"title\":\"🤫 Geheimer Erfolg: Ich schwöre feierlich, ein Tunichtgut zu sein\",\"body\":\"Öffne die Liste der geheimen Erfolge · +100 🪙\",\"act\":\"ach:x_mischief:Geheim\",\"r\":1},{\"id\":1794889580993.8745,\"t\":1794889580993,\"ic\":\"📦\",\"title\":\"Erfolg: Kundendienst\",\"body\":\"1 Auftrag erfüllt · +50 🪙\",\"act\":\"ach:ord1:Allgemein\",\"r\":1},{\"id\":1794889576187.4124,\"t\":1794889576187,\"ic\":\"🐓\",\"title\":\"🤫 Geheimer Erfolg: Der frühe Vogel fängt die Grille\",\"body\":\"Lass zwischen 5 und 7 Uhr ein Ei schlüpfen · +200 🪙\",\"act\":\"ach:x_early:Geheim\",\"r\":1},{\"id\":1794889576186.0796,\"t\":1794889576186,\"ic\":\"🐣\",\"title\":\"Erfolg: Erster Schlupf\",\"body\":\"Lass ein Ei schlüpfen · +30 🪙\",\"act\":\"ach:hatch1:Allgemein\",\"r\":1}],\"namedInfo\":{},\"infoV2\":1,\"hpV\":1,\"bkRemind\":1794889592062,\"taught\":{\"selladv\":1,\"markt2\":1},\"lessonQ\":[],\"nextStray\":1794889891452,\"season\":{\"start\":1794889571062,\"end\":1795494371062,\"tasks\":[{\"k\":\"hatch\",\"n\":70,\"pts\":25,\"prog\":16},{\"k\":\"breed\",\"n\":25,\"pts\":20,\"prog\":6},{\"k\":\"new\",\"n\":8,\"pts\":30,\"prog\":0},{\"k\":\"orders\",\"n\":10,\"pts\":25,\"prog\":3},{\"k\":\"sell\",\"n\":35,\"pts\":15,\"prog\":8},{\"k\":\"super\",\"n\":4,\"pts\":25,\"prog\":0},{\"k\":\"combo3\",\"n\":5,\"pts\":30,\"prog\":0},{\"k\":\"quality\",\"n\":4,\"pts\":30,\"prog\":0,\"q\":3.5},{\"k\":\"gene\",\"n\":6,\"pts\":20,\"prog\":0,\"sp\":\"gecko\",\"gene\":\"tremper\"},{\"k\":\"hatchsp\",\"n\":20,\"pts\":20,\"prog\":16,\"sp\":\"gecko\"}],\"claimed\":[]},\"glvl\":0,\"tutAch\":[],\"stray\":null,\"featAtlas\":1,\"hints\":{\"x_supernova\":1,\"x_atemlos\":1,\"x_colors\":1},\"bigfont\":true}"],['7.6',"{\"v\":1,\"sv\":2,\"glvl\":0,\"featAtlas\":1,\"hints\":{},\"geneTo\":{},\"tutAch\":[],\"stray\":null,\"nextStray\":1794910424812,\"season\":{\"start\":1794910104494,\"end\":1795514904494,\"tasks\":[{\"k\":\"hatch\",\"n\":70,\"pts\":25,\"prog\":10},{\"k\":\"breed\",\"n\":25,\"pts\":20,\"prog\":6},{\"k\":\"new\",\"n\":8,\"pts\":30,\"prog\":0},{\"k\":\"orders\",\"n\":10,\"pts\":25,\"prog\":1},{\"k\":\"sell\",\"n\":35,\"pts\":15,\"prog\":0},{\"k\":\"super\",\"n\":4,\"pts\":25,\"prog\":0},{\"k\":\"combo3\",\"n\":5,\"pts\":30,\"prog\":0},{\"k\":\"quality\",\"n\":4,\"pts\":30,\"prog\":0,\"q\":3.5},{\"k\":\"gene\",\"n\":6,\"pts\":20,\"prog\":0,\"sp\":\"gecko\",\"gene\":\"tremper\"},{\"k\":\"hatchsp\",\"n\":20,\"pts\":20,\"prog\":10,\"sp\":\"gecko\"}],\"claimed\":[]},\"bigfont\":false,\"coins\":160,\"xp\":210,\"lvl\":5,\"animals\":[{\"id\":1,\"sp\":\"gecko\",\"sex\":\"m\",\"g\":{\"eclipse\":1},\"p\":{\"eclipse\":1},\"born\":1794910103903,\"adultAt\":1794910103902,\"restUntil\":0,\"name\":\"Rudi\",\"seed\":1019485494,\"gen\":1,\"wild\":true,\"mut\":null,\"fav\":true,\"parents\":null,\"q\":2.4,\"ped\":null,\"orig\":null,\"from\":\"mentor\",\"kids\":[{\"id\":15,\"n\":\"Thor\",\"x\":\"m\",\"s\":\"000000\",\"q\":3},{\"id\":16,\"n\":\"Hinnerk\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.9},{\"id\":17,\"n\":\"Nessie\",\"x\":\"f\",\"s\":\"000000\",\"q\":2.5},{\"id\":22,\"n\":\"Hodor\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.6},{\"id\":23,\"n\":\"Rakete\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.2},{\"id\":29,\"n\":\"Lupine\",\"x\":\"f\",\"s\":\"000000\",\"q\":2.5},{\"id\":36,\"n\":\"Sturm\",\"x\":\"f\",\"s\":\"000000\",\"q\":3.2},{\"id\":37,\"n\":\"Jupp\",\"x\":\"m\",\"s\":\"010000\",\"q\":2.6},{\"id\":38,\"n\":\"Drache\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.7},{\"id\":39,\"n\":\"Balduin\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.7}],\"kidsN\":10,\"ev\":{\"eclipse\":0.0625},\"tests\":{\"eclipse\":4},\"pk\":{\"eclipse\":1}},{\"id\":11,\"sp\":\"gecko\",\"sex\":\"f\",\"g\":{\"tremper\":2},\"p\":{},\"born\":1794910105162,\"adultAt\":1794910105161,\"restUntil\":0,\"name\":\"Amber\",\"seed\":42743642,\"gen\":1,\"wild\":false,\"mut\":null,\"fav\":true,\"parents\":null,\"q\":2.6,\"ped\":null,\"orig\":null,\"kids\":[{\"id\":15,\"n\":\"Thor\",\"x\":\"m\",\"s\":\"000000\",\"q\":3},{\"id\":16,\"n\":\"Hinnerk\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.9},{\"id\":17,\"n\":\"Nessie\",\"x\":\"f\",\"s\":\"000000\",\"q\":2.5}],\"kidsN\":3},{\"id\":15,\"sp\":\"gecko\",\"sex\":\"m\",\"g\":{\"tremper\":1},\"p\":{\"tremper\":1,\"eclipse\":0.5},\"born\":1794910107334,\"adultAt\":1794910107339,\"restUntil\":0,\"name\":\"Thor\",\"seed\":657094209,\"gen\":2,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":[1,11],\"q\":3,\"ped\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4,\"pd\":null},{\"id\":11,\"n\":\"Amber\",\"x\":\"f\",\"s\":\"100000\",\"q\":2.6,\"pd\":null}],\"orig\":{\"tremper\":\"f\"},\"pq\":{\"tremper\":[0,1],\"eclipse\":[0.5,0],\"ember\":[0,0]},\"pk\":{},\"hp\":{}},{\"id\":17,\"sp\":\"gecko\",\"sex\":\"f\",\"g\":{\"tremper\":1},\"p\":{\"tremper\":1,\"eclipse\":0.5},\"born\":1794910113910,\"adultAt\":1794910113911,\"restUntil\":0,\"name\":\"Nessie\",\"seed\":1246790855,\"gen\":2,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":[1,11],\"q\":2.5,\"ped\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4,\"pd\":null},{\"id\":11,\"n\":\"Amber\",\"x\":\"f\",\"s\":\"100000\",\"q\":2.6,\"pd\":null}],\"orig\":{\"tremper\":\"f\"},\"pq\":{\"tremper\":[0,1],\"eclipse\":[0.5,0],\"ember\":[0,0]},\"pk\":{},\"hp\":{}},{\"id\":19,\"sp\":\"gecko\",\"sex\":\"f\",\"g\":{\"eclipse\":2},\"p\":{},\"born\":1794910117286,\"adultAt\":1794910117285,\"restUntil\":0,\"name\":\"Mona\",\"seed\":1150072092,\"gen\":1,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":null,\"q\":2.5,\"ped\":null,\"orig\":null,\"kids\":[{\"id\":22,\"n\":\"Hodor\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.6},{\"id\":23,\"n\":\"Rakete\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.2},{\"id\":29,\"n\":\"Lupine\",\"x\":\"f\",\"s\":\"000000\",\"q\":2.5},{\"id\":36,\"n\":\"Sturm\",\"x\":\"f\",\"s\":\"000000\",\"q\":3.2},{\"id\":37,\"n\":\"Jupp\",\"x\":\"m\",\"s\":\"010000\",\"q\":2.6},{\"id\":38,\"n\":\"Drache\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.7},{\"id\":39,\"n\":\"Balduin\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.7}],\"kidsN\":7},{\"id\":22,\"sp\":\"gecko\",\"sex\":\"m\",\"g\":{\"eclipse\":1},\"p\":{\"eclipse\":1},\"born\":1794910118617,\"adultAt\":1794910118619,\"restUntil\":0,\"name\":\"Hodor\",\"seed\":875715561,\"gen\":2,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":[1,19],\"q\":2.6,\"ped\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4,\"pd\":null},{\"id\":19,\"n\":\"Mona\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.5,\"pd\":null}],\"orig\":{\"eclipse\":\"f\"},\"pq\":{\"tremper\":[0,0],\"eclipse\":[0.5,1],\"ember\":[0,0]},\"pk\":{},\"hp\":{}},{\"id\":23,\"sp\":\"gecko\",\"sex\":\"m\",\"g\":{\"eclipse\":1},\"p\":{\"eclipse\":1},\"born\":1794910121592,\"adultAt\":1794910121594,\"restUntil\":0,\"name\":\"Rakete\",\"seed\":1065467751,\"gen\":2,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":[1,19],\"q\":2.2,\"ped\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4,\"pd\":null},{\"id\":19,\"n\":\"Mona\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.5,\"pd\":null}],\"orig\":{\"eclipse\":\"f\"},\"pq\":{\"tremper\":[0,0],\"eclipse\":[0.5,1],\"ember\":[0,0]},\"pk\":{},\"hp\":{}},{\"id\":29,\"sp\":\"gecko\",\"sex\":\"f\",\"g\":{\"eclipse\":1},\"p\":{\"eclipse\":1},\"born\":1794910131552,\"adultAt\":1794910137520,\"restUntil\":0,\"name\":\"Lupine\",\"seed\":964121063,\"gen\":2,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":[1,19],\"q\":2.5,\"ped\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4,\"pd\":null},{\"id\":19,\"n\":\"Mona\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.5,\"pd\":null}],\"orig\":{\"eclipse\":\"f\"},\"pq\":{\"tremper\":[0,0],\"eclipse\":[0.5,1],\"ember\":[0,0]},\"pk\":{},\"hp\":{}},{\"id\":36,\"sp\":\"gecko\",\"sex\":\"f\",\"g\":{\"eclipse\":1},\"p\":{\"eclipse\":1},\"born\":1794910207317,\"adultAt\":1794910211782,\"restUntil\":0,\"name\":\"Sturm\",\"seed\":1816360393,\"gen\":2,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":[1,19],\"q\":3.2,\"ped\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4,\"pd\":null},{\"id\":19,\"n\":\"Mona\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.5,\"pd\":null}],\"orig\":{\"eclipse\":\"f\"},\"pq\":{\"tremper\":[0,0],\"eclipse\":[0.5,1],\"ember\":[0,0]},\"pk\":{},\"hp\":{}},{\"id\":37,\"sp\":\"gecko\",\"sex\":\"m\",\"g\":{\"eclipse\":2},\"p\":{},\"born\":1794910208642,\"adultAt\":1794910211782,\"restUntil\":0,\"name\":\"Jupp\",\"seed\":117633199,\"gen\":2,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":[1,19],\"q\":2.6,\"ped\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4,\"pd\":null},{\"id\":19,\"n\":\"Mona\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.5,\"pd\":null}],\"orig\":{\"eclipse\":\"mf\"},\"pq\":{\"tremper\":[0,0],\"ember\":[0,0]},\"pk\":{},\"hp\":{}},{\"id\":38,\"sp\":\"gecko\",\"sex\":\"m\",\"g\":{\"eclipse\":1},\"p\":{\"eclipse\":1},\"born\":1794910212075,\"adultAt\":1794910287075,\"restUntil\":0,\"name\":\"Drache\",\"seed\":1344299712,\"gen\":2,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":[1,19],\"q\":2.7,\"ped\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4,\"pd\":null},{\"id\":19,\"n\":\"Mona\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.5,\"pd\":null}],\"orig\":{\"eclipse\":\"f\"},\"pq\":{\"tremper\":[0,0],\"eclipse\":[0.05555555555555555,1],\"ember\":[0,0]},\"pk\":{},\"hp\":{}},{\"id\":39,\"sp\":\"gecko\",\"sex\":\"m\",\"g\":{\"eclipse\":1},\"p\":{\"eclipse\":1},\"born\":1794910212076,\"adultAt\":1794910287076,\"restUntil\":0,\"name\":\"Balduin\",\"seed\":1090704883,\"gen\":2,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":[1,19],\"q\":2.7,\"ped\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4,\"pd\":null},{\"id\":19,\"n\":\"Mona\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.5,\"pd\":null}],\"orig\":{\"eclipse\":\"f\"},\"pq\":{\"tremper\":[0,0],\"eclipse\":[0.05555555555555555,1],\"ember\":[0,0]},\"pk\":{},\"hp\":{}}],\"eggs\":[{\"id\":32,\"sp\":\"gecko\",\"laid\":1794910137962,\"ready\":1794910211782,\"g\":{\"eclipse\":2},\"p\":{},\"mut\":null,\"mutN\":null,\"pq\":{\"tremper\":[0,0],\"ember\":[0,0]},\"pk\":{},\"dq\":{\"enigma\":[0,0],\"galaxy\":[0,0]},\"parents\":[1,19],\"gen\":2,\"sex\":\"m\",\"seed\":311475533,\"q\":2.8,\"orig\":{\"eclipse\":\"mf\"},\"ped\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4,\"pd\":null},{\"id\":19,\"n\":\"Mona\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.5,\"pd\":null}]},{\"id\":33,\"sp\":\"gecko\",\"laid\":1794910137962,\"ready\":1794910211782,\"g\":{\"eclipse\":1},\"p\":{\"eclipse\":1},\"mut\":null,\"mutN\":null,\"pq\":{\"tremper\":[0,0],\"eclipse\":[0.05555555555555555,1],\"ember\":[0,0]},\"pk\":{},\"dq\":{\"enigma\":[0,0],\"galaxy\":[0,0]},\"parents\":[1,19],\"gen\":2,\"sex\":\"m\",\"seed\":1208895497,\"q\":2,\"orig\":{\"eclipse\":\"f\"},\"ped\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4,\"pd\":null},{\"id\":19,\"n\":\"Mona\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.5,\"pd\":null}]},{\"id\":34,\"sp\":\"gecko\",\"laid\":1794910147478,\"ready\":1794910211782,\"g\":{\"eclipse\":2},\"p\":{},\"mut\":null,\"mutN\":null,\"pq\":{\"tremper\":[0,0],\"ember\":[0,0]},\"pk\":{},\"dq\":{\"enigma\":[0,0],\"galaxy\":[0,0]},\"parents\":[1,19],\"gen\":2,\"sex\":\"m\",\"seed\":430442260,\"q\":1.7,\"orig\":{\"eclipse\":\"mf\"},\"ped\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4,\"pd\":null},{\"id\":19,\"n\":\"Mona\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.5,\"pd\":null}]},{\"id\":35,\"sp\":\"gecko\",\"laid\":1794910147478,\"ready\":1794910211782,\"g\":{\"eclipse\":2},\"p\":{},\"mut\":null,\"mutN\":null,\"pq\":{\"tremper\":[0,0],\"ember\":[0,0]},\"pk\":{},\"dq\":{\"enigma\":[0,0],\"galaxy\":[0,0]},\"parents\":[1,19],\"gen\":2,\"sex\":\"f\",\"seed\":794033265,\"q\":2.7,\"orig\":{\"eclipse\":\"mf\"},\"ped\":[{\"id\":1,\"n\":\"Rudi\",\"x\":\"m\",\"s\":\"000000\",\"q\":2.4,\"pd\":null},{\"id\":19,\"n\":\"Mona\",\"x\":\"f\",\"s\":\"010000\",\"q\":2.5,\"pd\":null}]}],\"atlas\":{\"gecko:000000\":{\"g\":{\"eclipse\":1},\"seed\":1019485494,\"t\":1794910103903,\"bq\":3.2,\"bqn\":\"Sturm\"},\"gecko:100000\":{\"g\":{\"tremper\":2},\"seed\":42743642,\"t\":1794910105162,\"bq\":2.6,\"bqn\":\"Amber\"},\"gecko:010000\":{\"g\":{\"eclipse\":2},\"seed\":1150072092,\"t\":1794910117286,\"bq\":2.6,\"bqn\":\"Jupp\"}},\"named\":{},\"ach\":{\"hatch1\":1794910109522,\"ord1\":1794910117302,\"x_dragon\":1794910212077},\"stats\":{\"hatched\":10,\"sold\":0,\"earned\":715,\"orders\":1,\"mut\":0,\"dna\":0,\"bred\":6,\"maxGen\":2,\"spent\":4265,\"trophies\":0,\"gold\":0,\"dayEarnD\":\"Tue Nov 17 2026\",\"dayEarn\":100,\"dayEarnMax\":100,\"tutDone\":1,\"wikiOpen\":1,\"pairDel\":1},\"upg\":{\"slots_gecko\":1,\"slots_snake\":0,\"slots_turtle\":0,\"slots_corn\":0,\"pairs\":0,\"incub\":4,\"speed\":0,\"grow\":0,\"clutch\":1,\"uv\":1},\"items\":{\"elixir\":2},\"shop\":{\"offers\":[{\"id\":5,\"sp\":\"gecko\",\"sex\":\"m\",\"g\":{\"eclipse\":1},\"p\":{\"eclipse\":1},\"born\":1794910103905,\"adultAt\":1794910103904,\"restUntil\":0,\"name\":\"Krokant\",\"seed\":1932246421,\"gen\":1,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":null,\"q\":2.2,\"ped\":null,\"orig\":null,\"price\":80},{\"id\":6,\"sp\":\"gecko\",\"sex\":\"m\",\"g\":{\"eclipse\":1},\"p\":{\"eclipse\":1},\"born\":1794910103905,\"adultAt\":1794910103904,\"restUntil\":0,\"name\":\"Dean\",\"seed\":556968725,\"gen\":1,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":null,\"q\":2,\"ped\":null,\"orig\":null,\"price\":80},{\"id\":7,\"sp\":\"gecko\",\"sex\":\"m\",\"g\":{\"enigma\":1,\"eclipse\":1},\"p\":{\"eclipse\":1},\"born\":1794910103905,\"adultAt\":1794910103904,\"restUntil\":0,\"name\":\"Baldur\",\"seed\":1521716038,\"gen\":1,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":null,\"q\":2.3,\"ped\":null,\"orig\":null,\"price\":155},{\"id\":8,\"sp\":\"gecko\",\"sex\":\"m\",\"g\":{\"snow\":1,\"tremper\":1},\"p\":{\"tremper\":1},\"born\":1794910103905,\"adultAt\":1794910103904,\"restUntil\":0,\"name\":\"Conrad\",\"seed\":96528840,\"gen\":1,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":null,\"q\":1.4,\"ped\":null,\"orig\":null,\"price\":120},{\"id\":9,\"sp\":\"gecko\",\"sex\":\"m\",\"g\":{\"eclipse\":1},\"p\":{\"eclipse\":1},\"born\":1794910103905,\"adultAt\":1794910103904,\"restUntil\":0,\"name\":\"Keks\",\"seed\":239323790,\"gen\":1,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":null,\"q\":2,\"ped\":null,\"orig\":null,\"price\":80},{\"id\":10,\"sp\":\"gecko\",\"sex\":\"m\",\"g\":{\"eclipse\":2},\"p\":{},\"born\":1794910103905,\"adultAt\":1794910103904,\"restUntil\":0,\"name\":\"Tupfen\",\"seed\":182347585,\"gen\":1,\"wild\":false,\"mut\":null,\"fav\":false,\"parents\":null,\"q\":2.6,\"ped\":null,\"orig\":null,\"price\":165}],\"next\":1794910403905},\"orders\":[{\"id\":2,\"sp\":\"gecko\",\"req\":{\"snow\":1},\"sex\":null,\"adult\":false,\"reward\":185,\"xp\":27,\"cust\":[\"👵\",\"Oma Gerda\"]},{\"id\":3,\"sp\":\"gecko\",\"req\":{\"eclipse\":1},\"sex\":\"m\",\"adult\":false,\"reward\":305,\"xp\":27,\"cust\":[\"🦁\",\"Tierpark Lindental\"]},{\"id\":4,\"sp\":\"gecko\",\"req\":{\"enigma\":1},\"sex\":null,\"adult\":false,\"reward\":205,\"xp\":27,\"cust\":[\"🦁\",\"Tierpark Lindental\"]}],\"trend\":{\"sp\":\"gecko\",\"gene\":\"tremper\",\"until\":1794910583905},\"unl\":[\"gecko\"],\"pair\":{\"sp\":\"gecko\",\"m\":null,\"f\":null},\"pairs\":[],\"goals\":[],\"kidsInit\":1,\"show\":{\"id\":27,\"sp\":\"gecko\",\"req\":{\"enigma\":1},\"title\":\"Schönster Enigma-Leopardgecko\",\"until\":1794910725016,\"tiers\":[34,210,840],\"entry\":null,\"v2\":1,\"v3\":1},\"atlasMs\":{\"gecko\":0,\"snake\":0,\"turtle\":0,\"corn\":0},\"daily\":{\"last\":\"Tue Nov 17 2026\",\"streak\":1},\"goal\":2,\"mutSeen\":{},\"nextId\":40,\"sound\":true,\"tab\":\"markt\",\"ui\":{\"filter\":\"gecko\",\"sort\":\"new\",\"msub\":\"show\",\"asub\":\"ach\",\"elixir\":true,\"gf\":{\"gecko\":{\"snow\":\"v\",\"enigma\":\"v\"}},\"fsex\":\"f\",\"fstat\":\"ready\",\"fopen\":false,\"amiss\":true,\"mf\":{},\"advsp\":\"gecko\",\"advt\":\"test\",\"callmore\":null,\"callv\":\"home\",\"sa\":{\"m\":\"dup\",\"sp\":\"gecko\",\"sel\":{\"17\":1,\"22\":1,\"23\":1,\"29\":1}},\"wsec\":\"arten\",\"wsp\":\"snake\",\"achcat\":\"Allgemein\"},\"intro\":true,\"tut\":null,\"crys\":{\"have\":1,\"on\":0,\"bonus\":\"Tue Nov 17 2026\",\"day\":\"Tue Nov 17 2026\",\"used\":1},\"geneSeen\":{\"gecko:eclipse\":1},\"starterGene\":\"tremper\",\"slotV\":2,\"seenVer\":\"7.6\",\"spIntro\":[],\"mail\":[{\"id\":1794910212077.5725,\"t\":1794910212077,\"ic\":\"🐉\",\"title\":\"🤫 Geheimer Erfolg: Drachenzähmen leicht gemacht\",\"body\":\"Besitze ein Tier namens Smaug oder Drache · +150 🪙\",\"act\":\"ach:x_dragon:Geheim\",\"r\":0},{\"id\":1794910135993.6057,\"t\":1794910135993,\"ic\":\"📞\",\"title\":\"Alfred: Oha, dein Terrarium ist voll\",\"body\":\"Tippen, um das Gespräch nochmal anzuhören\",\"act\":\"feat:selladv\",\"r\":1},{\"id\":1794910131503.0015,\"t\":1794910131503,\"ic\":\"📞\",\"title\":\"Alfred: Level 3 – jetzt wird’s strategisch\",\"body\":\"Tippen, um das Gespräch nochmal anzuhören\",\"act\":\"feat:zucht3\",\"r\":1},{\"id\":1794910129493.9478,\"t\":1794910129493,\"ic\":\"📞\",\"title\":\"Alfred: Glückwunsch zu Level 2\",\"body\":\"Tippen, um das Gespräch nochmal anzuhören\",\"act\":\"feat:markt2\",\"r\":1},{\"id\":1794910124994.2356,\"t\":1794910124994,\"ic\":\"✉️\",\"title\":\"Brief von Alfred: ein grün leuchtender Kristall\",\"body\":\"Tippen, um den Brief nochmal zu lesen\",\"act\":\"letter\",\"r\":1},{\"id\":1794910124958.5957,\"t\":1794910124958,\"ic\":\"⭐\",\"title\":\"Level 5 erreicht\",\"body\":\"+200 🪙 · 🧪 +1 Mutations-Elixier\",\"act\":null,\"r\":1},{\"id\":1794910124957.1245,\"t\":1794910124957,\"ic\":\"⭐\",\"title\":\"Level 4 erreicht\",\"body\":\"+160 🪙 · ☢️ UV-Speziallampe im Ausbau verfügbar\",\"act\":null,\"r\":1},{\"id\":1794910124957.5264,\"t\":1794910124957,\"ic\":\"⭐\",\"title\":\"Level 3 erreicht\",\"body\":\"+120 🪙\",\"act\":null,\"r\":1},{\"id\":1794910124957.9275,\"t\":1794910124957,\"ic\":\"⭐\",\"title\":\"Level 2 erreicht\",\"body\":\"+80 🪙 · 🧬 Zuchtfutter im Ausbau verfügbar\",\"act\":null,\"r\":1},{\"id\":1794910117302.8752,\"t\":1794910117302,\"ic\":\"📦\",\"title\":\"Erfolg: Kundendienst\",\"body\":\"1 Auftrag erfüllt · +50 🪙\",\"act\":\"ach:ord1:Allgemein\",\"r\":1},{\"id\":1794910109523.542,\"t\":1794910109523,\"ic\":\"🐣\",\"title\":\"Erfolg: Erster Schlupf\",\"body\":\"Lass ein Ei schlüpfen · +30 🪙\",\"act\":\"ach:hatch1:Allgemein\",\"r\":1}],\"namedInfo\":{},\"infoV2\":1,\"hpV\":1,\"bkRemind\":1794910137995,\"taught\":{\"markt2\":1,\"zucht3\":1,\"selladv\":1},\"lessonQ\":[]}"]];
+/* ================= 7.8 Zurück-Taste ================= */
+/* Einträge im Verlauf = offene Ebenen (Schlupf, Fenster-Stapel, Tutorial-Karte) + Wächter. Zurück schließt die oberste Ebene; auf der Hauptseite erst Hinweis, beim zweiten Mal verlassen. */
+let HN=0,HG=1,HIGN=false,HACT=false,HSYNC=0,EXITARM=0,TUTMIN='';
+const coachCardOn=()=>{const m=$('#coachm');return!!(m&&m.classList.contains('show'))};
+const histLayers=()=>(revealOn()?1:0)+(sheetOpen?SHSTACK.length+1:0)+(coachCardOn()?1:0);
+function histSync(){if(!BOOTED||SELFTEST||RESCUE)return;clearTimeout(HSYNC);HSYNC=setTimeout(histDo,0)}
+function histDo(){if(HIGN||(EXITARM&&Date.now()-EXITARM<4000))return;EXITARM=0;const D=histLayers()+HG;try{if(HN<D){while(HN<D){HN++;history.pushState({rp:HN},'')}}else if(HN>D){HIGN=true;const k=D-HN;HN=D;setTimeout(()=>{HIGN=false},1500);history.go(k)}}catch(e){}}
+function backReveal(){const R=$('#reveal');if(S.tut)return;if(!R.classList.contains('open'))R.click();const k=R.querySelector('[data-act=keep]');if(k)ACT.keep();else closeReveal()}
+function handleBack(){if(RESCUE)return;
+  if(revealOn()){backReveal();return}
+  if(sheetOpen){sheetBack();return}
+  if(coachCardOn()&&S.tut){TUTMIN=S.tut.s;tutPaint();return}
+  if(EXITARM&&Date.now()-EXITARM<4000){EXITARM=0;save();try{history.go(-(HN+1))}catch(e){}return}
+  EXITARM=Date.now();toast('↩️ Nochmal <b>Zurück</b> zum Verlassen','',3000)}
+addEventListener('popstate',e=>{const n=(e.state&&e.state.rp)||0;if(HIGN){HIGN=false;HN=n;return}if(!BOOTED||SELFTEST)return;HN=n;handleBack();histSync()});
 /* ================= Boot ================= */
 function boot(){
   if(SELFTEST){runSelftest();return}
@@ -2615,8 +2679,10 @@ function boot(){
     document.body.classList.toggle('bigfont',!!S.bigfont);if(S.tut||!S.intro)S.seenVer=VERSION;else if(S.seenVer!==VERSION){mail('🆕',`Update auf Version ${VERSION}`,'Tippen, um zu sehen, was neu ist','clog');}if(S.intro&&!S.tut&&S.seenVer!==VERSION)setTimeout(()=>toast(`🆕 <b>Version ${VERSION}</b> – tippe hier, um zu sehen, was neu ist`,'gold',9000,changelogSheet),1200);if(S.tut)tutPaint();else if(!S.intro)introSheet();else daily();
   }catch(err){logErr(err,'Start');rescueScreen(err);return}
   BOOTED=true;
-  setInterval(tick,500);setInterval(save,5000);
-  addEventListener('visibilitychange',()=>{if(document.hidden)save();else render()});
+  setInterval(tick,500);setInterval(()=>{if(DIRTY)save()},5000);
+  addEventListener('visibilitychange',()=>{if(document.hidden)save();else liveUpdate()});
+  addEventListener('pagehide',()=>save());
+  try{history.replaceState({rp:0},'')}catch(e){}HN=0;histSync();
   setInterval(tutPaint,400);
 }
 boot();
