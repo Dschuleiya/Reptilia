@@ -474,6 +474,12 @@ body.tutrun #toasts{top:auto;bottom:calc(80px + var(--safe-b));flex-direction:co
 .hint{font-size:13px}.sh-sub{font-size:13px}
 body.bigfont{zoom:1.13}
 main{padding-bottom:90px}
+/* 7.9.1 Layout */
+html{height:var(--apph,100%)}
+@supports (height:100dvh){html{height:var(--apph,100dvh)}}
+#coach{padding-top:24px}
+#coach .cb-x{top:-22px;height:44px;min-height:44px;display:inline-flex;align-items:center;padding:0 12px;font-size:12px;background:none;border:0;z-index:0}
+#coach .cb-x::before{content:'';position:absolute;left:0;right:0;top:6px;bottom:6px;z-index:-1;background:#0d1a14;border:1px solid var(--line);border-radius:99px}
 /* 7.6 Sicherheit */
 #rescue{position:fixed;inset:0;z-index:300;overflow-y:auto;background:#07130e;color:#eaf3ed;padding:calc(18px + var(--safe-t)) 16px calc(24px + var(--safe-b));font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;user-select:text;-webkit-user-select:text}
 #selftest{position:fixed;inset:0;z-index:300;overflow-y:auto;background:#07130e;color:#eaf3ed;padding:calc(18px + var(--safe-t)) 16px calc(24px + var(--safe-b));font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;user-select:text;-webkit-user-select:text}
@@ -1140,6 +1146,8 @@ function snd(k){if(!S||!S.sound)return;try{AC=AC||new(window.AudioContext||windo
 const fx=$('#fx'),fctx=fx.getContext('2d');let parts=[],fxOn=false;
 function sizeFx(){fx.width=innerWidth*Math.min(2,devicePixelRatio||1);fx.height=innerHeight*Math.min(2,devicePixelRatio||1)}
 addEventListener('resize',sizeFx);sizeFx();
+function fitH(){try{const h=Math.round(innerHeight);if(h>200)document.documentElement.style.setProperty('--apph',h+'px');if(scrollY||document.documentElement.scrollTop||document.body.scrollTop){scrollTo(0,0);document.documentElement.scrollTop=0;document.body.scrollTop=0}}catch(e){}}
+addEventListener('resize',fitH);addEventListener('orientationchange',()=>setTimeout(fitH,250));addEventListener('pageshow',fitH);if(window.visualViewport)visualViewport.addEventListener('resize',fitH);document.addEventListener('focusout',()=>setTimeout(fitH,300));fitH();
 function confetti(n,x,y,cols){const d=Math.min(2,devicePixelRatio||1);x=(x==null?innerWidth/2:x)*d;y=(y==null?innerHeight*.4:y)*d;cols=cols||['#ff6fb5','#f6b93b','#3ddc97','#4cc3ff','#c08bff','#ffffff'];for(let i=0;i<n;i++){const a=rand()*Math.PI*2,v=(4+rand()*9)*d;parts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-5*d,r:(3+rand()*4)*d,c:pick(cols),rot:rand()*6,vr:(rand()-.5)*.4,life:1,g:.32*d})}if(!fxOn){fxOn=true;requestAnimationFrame(fxLoop)}}
 function fxLoop(){fctx.clearRect(0,0,fx.width,fx.height);parts=parts.filter(p=>p.life>0&&p.y<fx.height+40);parts.forEach(p=>{p.vy+=p.g;p.vx*=.985;p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;p.life-=.008;fctx.save();fctx.globalAlpha=Math.min(1,p.life*2);fctx.translate(p.x,p.y);fctx.rotate(p.rot);fctx.fillStyle=p.c;fctx.fillRect(-p.r,-p.r*.5,p.r*2,p.r);fctx.restore()});if(parts.length)requestAnimationFrame(fxLoop);else{fxOn=false;fctx.clearRect(0,0,fx.width,fx.height)}}
 function floatAt(el,text){if(!el||!el.getBoundingClientRect)return;const r=el.getBoundingClientRect(),d=document.createElement('div');d.className='float';d.textContent=text;d.style.left=(r.left+r.width/2-30)+'px';d.style.top=(r.top-8)+'px';document.body.appendChild(d);setTimeout(()=>d.remove(),1000)}
@@ -2464,8 +2472,9 @@ const STRAT={
 const STRAT_ORDER=['keep','price','gold','qual','space','unlock','dna','mutq'];
 
 /* ================= Version & Änderungsprotokoll ================= */
-const VERSION='7.9';
+const VERSION='7.9.1';
 const CHANGELOG=[
+ ['7.9.1','17.11.2026',['Tutorial: Der Knopf „Tutorial beenden“ verdeckt Alfreds Text nicht mehr','Kein leerer Streifen mehr unter der unteren Leiste, wenn die Browserleiste verschwindet oder die Tastatur zugeht']],
  ['7.9','17.11.2026',['Alfred klingelt: Anrufe öffnen sich nicht mehr von selbst. Der Alfred-Knopf wackelt und zeigt, wie viele warten – ein Tipp nimmt ab. Auch im Postfach','Neue Tierarten: Königspython bei 12, Schmuckschildkröte bei 14, Kornnatter bei 16 von 24 Morphs (☄️-Mutationen zählen nicht)','Aufträge: Für Tiere vom Händler zahlen Kunden nur den Marktwert – der Aufschlag gibt es für eigene Nachzuchten','Messe: „Schönster …“ wertet jetzt die Qualität (20 Punkte je ★). Bei der Anmeldung siehst du, wie sich die Punkte zusammensetzen','Saison: Ist am Saisonende kein Platz, wartet das Belohnungs-Tier im Postfach, statt zu verfallen','Sind alle Ziele geschafft, zeigt das Banner Alfreds nächsten Vorschlag']],
  ['7.8.1','17.11.2026',['Tierbilder werden wieder überall angezeigt: Wo die neue sparsame Bildspeicherung gesperrt ist, nutzt das Spiel automatisch die bisherige']],
  ['7.8','17.11.2026',['Volle Terrarien laufen flüssig: Tiere erscheinen in Portionen zu 40 – darunter „Weitere 40 zeigen“','Tierbilder brauchen viel weniger Speicher (höchstens 300 im Zwischenspeicher)','Im Hintergrund wird nur noch das Nötige aktualisiert: Geöffnete Wiki-Abschnitte und „Sicher?“-Knöpfe bleiben, während Eier fertig werden','Gespeichert wird nur noch bei Änderungen – und sofort, wenn du die App verlässt','Zurück-Taste schließt Fenster, Schlupf-Bildschirm und Tutorial-Karte; auf der Hauptseite fragt sie erst nach','Fenster mit festem Kopf: ✕ ist immer sichtbar, ← führt zum vorigen Fenster','Größere Tippflächen (mind. 44 px), Schrift mind. 11 px, Zoomen mit zwei Fingern wieder möglich','Rückfrage bei „Auftrag neu würfeln“, beim Löschen eines Zuchtpaars und beim Verkauf eines Tiers aus einem gespeicherten Paar','Bessere Unterstützung für Bildschirmleser']],
