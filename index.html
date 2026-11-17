@@ -474,6 +474,18 @@ body.tutrun #toasts{top:auto;bottom:calc(80px + var(--safe-b));flex-direction:co
 .hint{font-size:13px}.sh-sub{font-size:13px}
 body.bigfont{zoom:1.13}
 main{padding-bottom:90px}
+/* 7.6 Sicherheit */
+#rescue{position:fixed;inset:0;z-index:300;overflow-y:auto;background:#07130e;color:#eaf3ed;padding:calc(18px + var(--safe-t)) 16px calc(24px + var(--safe-b));font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;user-select:text;-webkit-user-select:text}
+#rescue .rs{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+#rescue h1{font-size:21px;margin:4px 0 0}
+#rescue pre{white-space:pre-wrap;word-break:break-word;font-size:12px;background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.4);border-radius:12px;padding:10px;margin:0}
+#rescue textarea{width:100%;height:90px;font-size:11px;border-radius:10px;padding:8px;background:rgba(0,0,0,.3);color:inherit;border:1px solid rgba(255,255,255,.15)}
+#rescue .rst{font-size:13px;color:#ffd77a;min-height:18px}
+#passive{position:fixed;inset:0;z-index:250;display:none;background:rgba(3,10,7,.86);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:20px;align-items:center;justify-content:center}
+#passive.show{display:flex}
+#passive .pv-card{max-width:420px;width:100%;text-align:center;background:linear-gradient(180deg,#203d2e,#13261c);border:1.5px solid rgba(246,185,59,.5);border-radius:22px;padding:18px;display:flex;flex-direction:column;gap:10px;font-size:14.5px;line-height:1.45}
+#savewarn{position:fixed;left:8px;right:8px;top:calc(62px + var(--safe-t));z-index:85;max-width:560px;margin:0 auto;padding:10px 12px;border-radius:14px;background:rgba(70,14,14,.97);border:1.5px solid rgba(255,107,107,.75);font-size:13px;line-height:1.4;display:flex;gap:10px;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+#savewarn span{flex:1}
 </style>
 </head>
 <body>
@@ -503,6 +515,59 @@ main{padding-bottom:90px}
 
 <script>
 'use strict';
+/* ================= Absturz-Schutz (7.6) – läuft vor allem anderen, ohne Zugriff auf S ================= */
+var BOOTED=false,RESCUE=false;
+const ERR_KEY='reptilia_errlog';
+function logErr(e,where){try{let L=[];try{L=JSON.parse(localStorage.getItem(ERR_KEY))||[]}catch(x){}if(!Array.isArray(L))L=[];let ver='?';try{ver=VERSION}catch(x){}
+  const m=e&&e.message?e.message:String(e);L.push({t:Date.now(),v:ver,w:String(where||''),m:String(m).slice(0,400),s:e&&e.stack?String(e.stack).slice(0,900):''});while(L.length>10)L.shift();localStorage.setItem(ERR_KEY,JSON.stringify(L))}catch(x){}}
+window.onerror=function(msg,src,line,col,err){logErr(err||new Error(String(msg)),'Fehler '+(line||'?')+':'+(col||'?'));if(!BOOTED&&!RESCUE)setTimeout(function(){if(!BOOTED&&!RESCUE)rescueScreen(err||new Error(String(msg)))},0)};
+window.addEventListener('unhandledrejection',function(e){logErr(e&&e.reason||new Error('Promise abgelehnt'),'Promise')});
+function errReport(withState){let L=[];try{L=JSON.parse(localStorage.getItem(ERR_KEY))||[]}catch(e){}if(!Array.isArray(L))L=[];let ver='?',sch='?';try{ver=VERSION}catch(e){}try{sch=SCHEMA}catch(e){}
+  const out=['Reptilia – Fehlerbericht','Version: '+ver+' · Schema: '+sch,'Zeit: '+new Date().toLocaleString('de-DE'),'Gerät: '+navigator.userAgent,'Adresse: '+String(location.href).split('?')[0]];
+  if(withState){try{out.push('Stand: Level '+S.lvl+', '+S.animals.length+' Tiere, '+Math.floor(S.coins)+' Münzen, Tutorial: '+(S.tut?(S.tut.replay?'Erinnerung ':'')+S.tut.s:'fertig'))}catch(e){}}
+  out.push('',L.length?'Letzte Fehler ('+L.length+', neueste zuerst):':'Keine Fehler protokolliert.');
+  L.slice().reverse().forEach((x,i)=>{out.push('#'+(i+1)+' '+new Date(x.t).toLocaleString('de-DE')+' · v'+x.v+' · '+x.w,'  '+x.m);if(x.s)out.push('  '+String(x.s).split('\n').slice(0,5).join('\n  '))});
+  return out.join('\n')}
+function copyText(t){return new Promise(res=>{let ok=false;try{const ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.cssText='position:fixed;left:-9999px;top:0';document.body.appendChild(ta);ta.select();ta.setSelectionRange(0,t.length);ok=document.execCommand('copy');ta.remove()}catch(e){}
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(()=>res(true),()=>res(ok));else res(ok)})}
+/* Notfall-Bildschirm: reines DOM, liest nur localStorage, fasst S nicht an */
+function rescueScreen(err,test){RESCUE=true;
+  const E=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const K='reptilia_save_v2',KB=K+'_bak',KM=K+'_bak_meta',KX=K+'_broken';
+  let ver='?';try{ver=VERSION}catch(e){}
+  let raw=null,bak=null,bakT=null,bakOk=false;try{raw=localStorage.getItem(K)}catch(e){}
+  try{bak=localStorage.getItem(KB);const m=JSON.parse(localStorage.getItem(KM)||'null');if(m&&m.t)bakT=m.t}catch(e){}
+  if(bak!=null){try{const d=JSON.parse(bak);try{bakOk=!validateSave(d)}catch(e){bakOk=true}}catch(e){bakOk=false}}
+  const msg=(err&&err.message)||String(err||'Unbekannter Fehler');
+  ['sheetwrap','reveal','coach','coachm','passive','savewarn','alfab'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none'});
+  const old=document.getElementById('rescue');if(old)old.remove();
+  const home=String(location.href).split('?')[0].split('#')[0];
+  const box=document.createElement('div');box.id='rescue';
+  box.innerHTML=`<div class="rs"><div style="font-size:44px">🛟</div><h1>Reptilia – Notfall-Modus</h1>
+   <div>${test?'<b>Testansicht.</b> So sieht der Notfall-Bildschirm aus. Dein Spielstand ist in Ordnung.':'Beim Start ist ein Fehler aufgetreten. <b>Dein Spielstand wurde nicht verändert und nicht überschrieben.</b> Sichere ihn jetzt als Code, bevor du etwas anderes tust.'}</div>
+   <div style="font-size:13px;color:#b3c7bb">Version ${E(ver)} · Spielstand im Speicher: ${raw==null?'keiner':E(Math.round(raw.length/1024)+' KB')}</div>
+   <pre>${E(msg)}</pre>
+   <button class="btn wide" id="rs-copy" ${raw==null?'disabled':''}>📋 Rohdaten als Sicherungscode kopieren</button>
+   <textarea id="rs-code" readonly style="display:none"></textarea>
+   <button class="btn wide" id="rs-bak" ${bak!=null&&bakOk?'':'disabled'}>♻️ Letzte Sicherung laden${bakT?' (vom '+E(new Date(bakT).toLocaleString('de-DE'))+')':''}</button>
+   ${bak==null?'<div style="font-size:12px;color:#b3c7bb">Es gibt noch keine automatische Sicherung.</div>':bakOk?'':'<div style="font-size:12px;color:#ffb0b0">Die automatische Sicherung ist ebenfalls beschädigt.</div>'}
+   <button class="btn wide" id="rs-err">🐞 Fehlerbericht kopieren</button>
+   <button class="btn wide" id="rs-reload">🔄 Nochmal versuchen</button>
+   ${test?`<button class="btn pri wide" id="rs-home">↩️ Zurück zum Spiel</button>`:''}
+   <button class="btn red wide" id="rs-new">🗑️ Neu beginnen</button>
+   <div class="rst" id="rs-st"></div>
+   <div style="font-size:12px;color:#b3c7bb">Tipp: Schick den Sicherungscode und den Fehlerbericht an die Entwicklerin. Beim Laden der Sicherung und beim Neubeginn wird der jetzige Stand zusätzlich beiseitegelegt.</div></div>`;
+  document.body.appendChild(box);
+  const $r=id=>box.querySelector('#'+id),st=t=>{$r('rs-st').textContent=t};
+  const stash=()=>{if(raw==null)return;try{localStorage.setItem(KX,raw)}catch(e){}};
+  const arm=(el,steps,done)=>{let n=0;const lab=el.textContent;el.onclick=()=>{if(n<steps.length){el.textContent=steps[n++];el.classList.add('armed');clearTimeout(el._t);el._t=setTimeout(()=>{n=0;el.textContent=lab;el.classList.remove('armed')},4000);return}clearTimeout(el._t);done()}};
+  $r('rs-copy').onclick=()=>{let code='';try{code='REPTILIA1:'+btoa(unescape(encodeURIComponent(raw)))}catch(e){code=raw}const ta=$r('rs-code');ta.style.display='block';ta.value=code;ta.select();copyText(code).then(ok=>st(ok?'📋 Sicherungscode kopiert – bewahre ihn gut auf.':'Bitte den Code im Feld markieren und manuell kopieren.'))};
+  arm($r('rs-bak'),['Sicher? Nochmal tippen'],()=>{stash();try{localStorage.setItem(K,bak);location.replace(home)}catch(e){st('❌ Sicherung konnte nicht geschrieben werden: '+e.message)}});
+  $r('rs-err').onclick=()=>{const t=errReport(false)+'\n\nStartfehler: '+msg;copyText(t).then(ok=>{if(ok)st('🐞 Fehlerbericht kopiert.');else{const ta=$r('rs-code');ta.style.display='block';ta.value=t;ta.select();st('Bitte den Bericht im Feld markieren und kopieren.')}})};
+  $r('rs-reload').onclick=()=>location.replace(home);
+  if($r('rs-home'))$r('rs-home').onclick=()=>location.replace(home);
+  arm($r('rs-new'),['Wirklich neu beginnen? Nochmal tippen','Letzte Warnung: Spielstand verwerfen?'],()=>{stash();try{localStorage.removeItem(K)}catch(e){}location.replace(home)});
+}
 /* ================= Utilities ================= */
 const $=s=>document.querySelector(s);
 const rand=Math.random;
@@ -513,6 +578,7 @@ const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(rand()*(i+1))
 const pct=(x,d)=>(x*100).toFixed(d).replace('.',',')+' %';
 const fmt=n=>Math.floor(n).toLocaleString('de-DE');
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const defang=s=>String(s==null?'':s).replace(/</g,'&lt;').replace(/>/g,'&gt;');/* Texte aus dem Spielstand: keine Tags, vorhandene &-Zeichen bleiben lesbar */
 function fmtT(ms){const s=Math.max(0,Math.ceil(ms/1000));if(s>=86400)return Math.floor(s/86400)+' T '+Math.floor(s%86400/3600)+' h';if(s>=3600)return Math.floor(s/3600)+'h '+Math.floor(s%3600/60)+'m';if(s>=60)return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');return s+'s'}
 function mulberry(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 function hashStr(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
@@ -642,10 +708,104 @@ const UPG={
 /* ================= State ================= */
 const SAVE_KEY='reptilia_save_v2';
 try{localStorage.removeItem('reptilia_save_v1')}catch(e){}
+const BAK_KEY=SAVE_KEY+'_bak',BAKM_KEY=SAVE_KEY+'_bak_meta',BROKEN_KEY=SAVE_KEY+'_broken',LOCK_KEY='reptilia_lock';
+/* Schema: bestehende Stände ohne sv gelten als 1. Neue Migrationen nur hier anhängen. */
+const SCHEMA=2;
+const MIGRATIONS=[
+ {to:2,run(S){/* 7.6: Schema-Version eingeführt – keine Datenänderung nötig */}}
+];
+let NOSAVE=false,NOSAVE_SV=0,PASSIVE=false,SAVEFAIL=false;
+const SID=Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);
 let S;
-function defaults(){return{v:1,coins:150,xp:0,lvl:1,animals:[],eggs:[],atlas:{},named:{},ach:{},stats:{hatched:0,sold:0,earned:0,orders:0,mut:0,dna:0,bred:0,maxGen:1,spent:0,trophies:0,gold:0},upg:{slots_gecko:0,slots_snake:0,slots_turtle:0,slots_corn:0,pairs:0,incub:0,speed:0,grow:0,clutch:0,uv:0},items:{elixir:1},shop:{offers:[],next:0},orders:[],trend:null,unl:['gecko'],pair:{sp:'gecko',m:null,f:null},pairs:[],goals:[],kidsInit:1,show:null,atlasMs:{},daily:{last:'',streak:0},goal:0,mutSeen:{},nextId:1,sound:true,tab:'tiere',ui:{filter:'gecko',sort:'new',msub:'orders',asub:'gecko',elixir:false,gf:{},fsex:'all',fstat:'all',fopen:false,amiss:false},intro:false,tut:{s:'welcome'},crys:{have:0,on:0},geneSeen:{},starterGene:null,slotV:2,seenVer:null,spIntro:[],mail:[],namedInfo:{},infoV2:1,hpV:1,bkRemind:0,taught:{},lessonQ:[]}}
-function load(){let d=null;try{d=JSON.parse(localStorage.getItem(SAVE_KEY))}catch(e){}const base=defaults();if(d&&d.v===1){S=Object.assign(base,d);if(!('tut' in d))S.tut=null;if(!d.hpV){hpMigrate();S.hpV=1}if(!d.featV&&d.intro){S.taught=Object.assign(S.taught||{},{markt2:1,zucht3:1,selladv:1,atlas:1,elixir:1});S.featAtlas=1}S.featV=1;if(!S.bkRemind)S.bkRemind=Date.now();if(!d.infoV2){S.namedInfo={};S.geneSeen={};S.infoV2=1}if(!d.slotV){['gecko','snake','turtle','corn'].forEach(sp=>{const k='slots_'+sp;S.upg[k]=Math.ceil((S.upg[k]||0)/2)});S.slotV=2}if(false&&!d.geneSeen){S.geneSeen={};Object.keys(S.atlas||{}).forEach(k=>{const[sp,dg]=k.split(':');if(!SPECIES[sp]||!dg)return;dg.split('').forEach((c,i)=>{if(c!=='0'&&SPECIES[sp].genes[i])S.geneSeen[sp+':'+SPECIES[sp].genes[i].id]=1})})}S.stats=Object.assign(defaults().stats,d.stats);S.upg=Object.assign(defaults().upg,d.upg);S.ui=Object.assign(defaults().ui,d.ui);S.items=Object.assign({elixir:0},d.items);if(d.upg&&d.upg.slots){SP_ORDER.forEach(sp=>S.upg['slots_'+sp]=Math.max(S.upg['slots_'+sp]||0,d.upg.slots))}delete S.upg.slots;if(S.ui.filter==='all')S.ui.filter='gecko';if(!Array.isArray(S.pairs))S.pairs=[];S.atlasMs=S.atlasMs||{};S.ui.gf=S.ui.gf||{};if(S.show&&!S.show.v2){S.show.tiers=[Math.round(S.show.tiers[0]*1.6),Math.round(S.show.tiers[0]*4),Math.round(S.show.tiers[0]*12)];S.show.v2=1}if(S.show&&!S.show.v3){const b=S.show.tiers[0]/1.6;S.show.tiers=[S.show.tiers[0],Math.round(b*10),Math.round(b*40)];S.show.v3=1}if(!d.unl)S.unl=SP_ORDER.filter(sp=>(d.lvl||1)>=SPECIES[sp].unlock);if(S.season)S.season.tasks=S.season.tasks.filter(t=>t.k!=='candle'&&t.k!=='dna');if(!S.kidsInit){S.animals.slice().sort((x,y)=>x.id-y.id).forEach(linkKid);S.kidsInit=1}S.animals.forEach(a=>{const e=S.atlas[akey(a)];if(e&&(a.q||2)>(e.bq||0)){e.bq=a.q||2;e.bqn=a.name}});S.animals.forEach(a=>{if(!a.pq)initPq(a);if(a.q==null)a.q=2;if((a.sex==='m'&&NAMESET_F.has(a.name))||(a.sex==='f'&&NAMESET_M.has(a.name)))a.name=nameFor(a.sex)});S.eggs.forEach(e=>{if(e.q==null)e.q=2})}else{S=base;starter()}}
-function save(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(S))}catch(e){}}
+function defaults(){return{v:1,sv:SCHEMA,glvl:null,featAtlas:0,hints:{},geneTo:{},tutAch:[],stray:null,nextStray:0,season:null,bigfont:false,coins:150,xp:0,lvl:1,animals:[],eggs:[],atlas:{},named:{},ach:{},stats:{hatched:0,sold:0,earned:0,orders:0,mut:0,dna:0,bred:0,maxGen:1,spent:0,trophies:0,gold:0},upg:{slots_gecko:0,slots_snake:0,slots_turtle:0,slots_corn:0,pairs:0,incub:0,speed:0,grow:0,clutch:0,uv:0},items:{elixir:1},shop:{offers:[],next:0},orders:[],trend:null,unl:['gecko'],pair:{sp:'gecko',m:null,f:null},pairs:[],goals:[],kidsInit:1,show:null,atlasMs:{},daily:{last:'',streak:0},goal:0,mutSeen:{},nextId:1,sound:true,tab:'tiere',ui:{filter:'gecko',sort:'new',msub:'orders',asub:'gecko',elixir:false,gf:{},fsex:'all',fstat:'all',fopen:false,amiss:false},intro:false,tut:{s:'welcome'},crys:{have:0,on:0},geneSeen:{},starterGene:null,slotV:2,seenVer:null,spIntro:[],mail:[],namedInfo:{},infoV2:1,hpV:1,bkRemind:0,taught:{},lessonQ:[]}}
+/* ---- Prüfung eines Spielstands (Laden, Import, Kopie). Gibt '' zurück oder einen Fehlertext. ---- */
+function validateSave(d){
+  const isO=x=>x!==null&&typeof x==='object'&&!Array.isArray(x),isN=x=>typeof x==='number'&&isFinite(x),spOk=x=>typeof x==='string'&&Object.prototype.hasOwnProperty.call(SPECIES,x);
+  if(!isO(d))return'kein Spielstand-Objekt';
+  if(d.v!==1)return'unbekanntes Format (v='+String(d.v).slice(0,20)+')';
+  if(d.sv!=null&&!(Number.isInteger(d.sv)&&d.sv>=1))return'ungültige Schema-Version';
+  if(!isN(d.coins))return'Münzen fehlen oder ungültig';
+  if(!isN(d.lvl)||d.lvl<1)return'Level ungültig';
+  if(!isN(d.xp))return'Erfahrung ungültig';
+  if(d.nextId!=null&&!isN(d.nextId))return'Kennungszähler ungültig';
+  if(!Array.isArray(d.animals))return'Tierliste fehlt';
+  const anim=(a,w)=>{if(!isO(a))return w+' ist kein Tier';if(!spOk(a.sp))return w+': unbekannte Art „'+String(a.sp).slice(0,20)+'“';if(a.sex!=='m'&&a.sex!=='f')return w+': Geschlecht ungültig';if(!isN(a.id))return w+': Kennung ungültig';if(typeof a.name!=='string')return w+': Name ungültig';if(!isO(a.g))return w+': Gene fehlen';for(const k in a.g)if(!isN(a.g[k]))return w+': Gen-Wert ungültig';if(a.p!=null&&!isO(a.p))return w+': het-Angaben ungültig';if(a.parents!=null&&!Array.isArray(a.parents))return w+': Eltern ungültig';return''};
+  for(let i=0;i<d.animals.length;i++){const e=anim(d.animals[i],'Tier '+(i+1));if(e)return e}
+  for(const k of['stats','upg','ui','items','shop','daily','crys','atlas','named','ach','atlasMs','mutSeen','geneSeen','namedInfo','taught','hints','geneTo','pair'])if(d[k]!=null&&!isO(d[k]))return'Bereich „'+k+'“ beschädigt';
+  for(const k of['eggs','orders','pairs','goals','mail','unl','lessonQ','spIntro','tutAch'])if(d[k]!=null&&!Array.isArray(d[k]))return'Liste „'+k+'“ beschädigt';
+  for(const k in(d.atlas||{})){if(!spOk(k.split(':')[0]))return'Atlas: unbekannte Art';if(!isO(d.atlas[k]))return'Atlas-Eintrag beschädigt'}
+  for(const e of d.eggs||[])if(!isO(e)||!spOk(e.sp)||!isO(e.g)||!Array.isArray(e.parents)||!isN(e.ready))return'Ei beschädigt';
+  for(const o of d.orders||[])if(!isO(o)||!spOk(o.sp)||!isO(o.req)||(o.cust!=null&&!Array.isArray(o.cust)&&typeof o.cust!=='string'))return'Auftrag beschädigt';
+  if(d.shop){if(d.shop.offers!=null&&!Array.isArray(d.shop.offers))return'Händler beschädigt';for(const a of d.shop.offers||[]){const e=anim(a,'Händler-Tier');if(e)return e}}
+  for(const g of d.goals||[])if(!isO(g)||!spOk(g.sp))return'Zuchtziel beschädigt';
+  for(const m of d.mail||[])if(!isO(m))return'Post beschädigt';
+  if(d.pair&&d.pair.sp!=null&&!spOk(d.pair.sp))return'Zuchtplaner beschädigt';
+  if(d.trend!=null&&(!isO(d.trend)||!spOk(d.trend.sp)))return'Markttrend beschädigt';
+  if(d.show!=null&&(!isO(d.show)||!spOk(d.show.sp)||!Array.isArray(d.show.tiers)||(d.show.req!=null&&!isO(d.show.req))))return'Messe beschädigt';
+  if(d.season!=null){if(!isO(d.season)||!Array.isArray(d.season.tasks))return'Saison beschädigt';for(const t of d.season.tasks)if(!isO(t)||!isN(t.n)||!isN(t.pts))return'Saison-Aufgabe beschädigt'}
+  if(d.stray!=null){if(!isO(d.stray))return'Zuläufer beschädigt';const e=anim(d.stray.a,'Zuläufer');if(e)return e}
+  if(d.tut!=null&&!isO(d.tut))return'Tutorial-Daten beschädigt';
+  return''}
+const dayKey=t=>new Date(t).toDateString();
+function bakMeta(){try{const m=JSON.parse(localStorage.getItem(BAKM_KEY));return m&&typeof m.t==='number'?m:null}catch(e){return null}}
+function bakData(){try{const r=localStorage.getItem(BAK_KEY);if(r==null)return null;const d=JSON.parse(r);return validateSave(d)?null:d}catch(e){return null}}
+function writeBak(raw,why){if(raw==null)return false;try{localStorage.setItem(BAK_KEY,raw);localStorage.setItem(BAKM_KEY,JSON.stringify({t:Date.now(),why:why||''}));return true}catch(e){logErr(e,'Kopie anlegen');return false}}
+/* load(): wirft bei unlesbarem/ungültigem Stand einen Fehler (→ Notfall-Bildschirm), startet NIE ein neues Spiel über einem vorhandenen Text. */
+function load(noBak){NOSAVE=false;NOSAVE_SV=0;let raw=null;try{raw=localStorage.getItem(SAVE_KEY)}catch(e){logErr(e,'load: lesen')}const base=defaults();
+  if(raw==null){S=base;starter();saveBanner();return}
+  let d;try{d=JSON.parse(raw)}catch(e){throw new Error('Spielstand ist nicht lesbar (beschädigt): '+e.message)}
+  const bad=validateSave(d);if(bad)throw new Error('Spielstand ist ungültig: '+bad);
+  const sv0=d.sv==null?1:d.sv;if(sv0>SCHEMA){NOSAVE=true;NOSAVE_SV=sv0}
+  if(!noBak&&!NOSAVE&&!(d.tut&&d.tut.replay)){if(sv0<SCHEMA)writeBak(raw,'vor dem Update');else{const m=bakMeta();if(!m||dayKey(m.t)!==dayKey(Date.now()))writeBak(raw,'Tageskopie')}}
+  /* ---- Altblock: Migrationen bis 7.5 (unverändert, nur umbrochen; Namensprüfung entfernt in 7.6) ---- */
+  S=Object.assign(base,d);
+  if(!('tut' in d))S.tut=null;
+  if(!d.hpV){hpMigrate();S.hpV=1}
+  if(!d.featV&&d.intro){S.taught=Object.assign(S.taught||{},{markt2:1,zucht3:1,selladv:1,atlas:1,elixir:1});S.featAtlas=1}
+  S.featV=1;
+  if(!S.bkRemind)S.bkRemind=Date.now();
+  if(!d.infoV2){S.namedInfo={};S.geneSeen={};S.infoV2=1}
+  if(!d.slotV){['gecko','snake','turtle','corn'].forEach(sp=>{const k='slots_'+sp;S.upg[k]=Math.ceil((S.upg[k]||0)/2)});S.slotV=2}
+  if(false&&!d.geneSeen){S.geneSeen={};Object.keys(S.atlas||{}).forEach(k=>{const[sp,dg]=k.split(':');if(!SPECIES[sp]||!dg)return;dg.split('').forEach((c,i)=>{if(c!=='0'&&SPECIES[sp].genes[i])S.geneSeen[sp+':'+SPECIES[sp].genes[i].id]=1})})}
+  S.stats=Object.assign(defaults().stats,d.stats);
+  S.upg=Object.assign(defaults().upg,d.upg);
+  S.ui=Object.assign(defaults().ui,d.ui);
+  S.items=Object.assign({elixir:0},d.items);
+  if(d.upg&&d.upg.slots){SP_ORDER.forEach(sp=>S.upg['slots_'+sp]=Math.max(S.upg['slots_'+sp]||0,d.upg.slots))}
+  delete S.upg.slots;
+  if(S.ui.filter==='all')S.ui.filter='gecko';
+  if(!Array.isArray(S.pairs))S.pairs=[];
+  S.atlasMs=S.atlasMs||{};
+  S.ui.gf=S.ui.gf||{};
+  if(S.show&&!S.show.v2){S.show.tiers=[Math.round(S.show.tiers[0]*1.6),Math.round(S.show.tiers[0]*4),Math.round(S.show.tiers[0]*12)];S.show.v2=1}
+  if(S.show&&!S.show.v3){const b=S.show.tiers[0]/1.6;S.show.tiers=[S.show.tiers[0],Math.round(b*10),Math.round(b*40)];S.show.v3=1}
+  if(!d.unl)S.unl=SP_ORDER.filter(sp=>(d.lvl||1)>=SPECIES[sp].unlock);
+  if(S.season)S.season.tasks=S.season.tasks.filter(t=>t.k!=='candle'&&t.k!=='dna');
+  if(!S.kidsInit){S.animals.slice().sort((x,y)=>x.id-y.id).forEach(linkKid);S.kidsInit=1}
+  S.animals.forEach(a=>{const e=S.atlas[akey(a)];if(e&&(a.q||2)>(e.bq||0)){e.bq=a.q||2;e.bqn=a.name}});
+  S.animals.forEach(a=>{if(!a.pq)initPq(a);if(a.q==null)a.q=2});
+  S.eggs.forEach(e=>{if(e.q==null)e.q=2});
+  /* ---- Neue Migrationen (ab Schema 2) ---- */
+  S.sv=sv0;if(!NOSAVE){for(const m of MIGRATIONS)if(S.sv<m.to){m.run(S);S.sv=m.to}}
+  saveBanner()}
+function lockOk(){try{const v=localStorage.getItem(LOCK_KEY);if(v==null){localStorage.setItem(LOCK_KEY,SID);return true}return v===SID}catch(e){return true}}
+function save(){if(RESCUE||NOSAVE||PASSIVE||!S)return false;if(!lockOk()){goPassive();return false}
+  let js;try{js=JSON.stringify(S);localStorage.setItem(SAVE_KEY,js)}catch(e){let ok=false;
+    if(js&&e&&(e.name==='QuotaExceededError'||e.code===22||e.code===1014))for(const k of[BROKEN_KEY,BAK_KEY]){try{if(localStorage.getItem(k)==null)continue;localStorage.removeItem(k);if(k===BAK_KEY)localStorage.removeItem(BAKM_KEY);localStorage.setItem(SAVE_KEY,js);ok=true;logErr(new Error('Speicher voll – '+k+' entfernt, Spielstand gespeichert'),'save');break}catch(x){}}
+    if(!ok){if(!SAVEFAIL)logErr(e,'save');SAVEFAIL=true;saveBanner();return false}}
+  if(SAVEFAIL){SAVEFAIL=false;saveBanner()}return true}
+function saveBanner(){let b=document.getElementById('savewarn');const kind=NOSAVE?'new':SAVEFAIL?'fail':'';if(!kind||RESCUE){if(b)b.remove();return}
+  if(!b){b=document.createElement('div');b.id='savewarn';document.body.appendChild(b)}
+  const html=kind==='new'?`<span>⚠️ <b>Spielstand aus einer neueren Version</b> (Schema ${NOSAVE_SV}). Diese Version speichert nichts, damit er heil bleibt. Bitte die Seite neu laden, um das Update zu holen.</span>`
+    :`<span>⚠️ <b>Speichern fehlgeschlagen!</b> Dein Fortschritt geht beim Schließen verloren. Sichere ihn jetzt als Code.</span><button class="btn sm gold" data-act="backup">💾 Sichern</button>`;
+  if(b._h!==html){b.innerHTML=html;b._h=html}}
+/* ---- Zwei Tabs: nur der Tab mit der aktuellen Kennung speichert ---- */
+function claimLock(){try{localStorage.setItem(LOCK_KEY,SID)}catch(e){}}
+function goPassive(){if(PASSIVE||RESCUE)return;PASSIVE=true;let o=document.getElementById('passive');if(!o){o=document.createElement('div');o.id='passive';document.body.appendChild(o)}
+  o.innerHTML=`<div class="pv-card"><div style="font-size:40px">📱</div><b style="font-size:17px">Reptilia läuft gerade woanders</b><div>Das Spiel ist in einem anderen Tab oder Fenster geöffnet. Damit kein Fortschritt verloren geht, ist dieser Tab pausiert und speichert nichts.</div><button class="btn pri wide" data-act="takeover">▶️ Hier weiterspielen</button><div class="hint">Dann übernimmt dieser Tab den neuesten Spielstand, und der andere pausiert.</div></div>`;o.className='show'}
+function takeOver(){claimLock();PASSIVE=false;const o=document.getElementById('passive');if(o)o.className='';
+  try{for(const k in IMG)delete IMG[k];RQ=[];BATCH=null;LASTBATCH=[];closeReveal();closeSheet();load(true);checkUnlock();fillOrders();if(!S.shop.offers.length)refreshShop();if(!trendActive())newTrend();document.body.classList.toggle('bigfont',!!S.bigfont);lastSig=sig();render();tutPaint();toast('▶️ Weiter geht’s – neuester Spielstand geladen.')}
+  catch(e){logErr(e,'Tab übernehmen');rescueScreen(e)}}
 function starter(){
   const r=newAnimal('gecko',{sex:'m',g:{eclipse:1},p:{eclipse:.5},adult:true,name:'Rudi',wild:true,q:2.4});r.from='mentor';r.fav=true;S.animals.push(r);registerAtlas(r,true);
   if(S.tut)S.tut.rudi=r.id;S.pair={sp:'gecko',m:null,f:null};
@@ -1206,7 +1366,7 @@ const nOrders=()=>Math.min(6,3+Math.floor(S.lvl/3));
 function fillOrders(){while(S.orders.length<nOrders())S.orders.push(genOrder())}
 function payout(o,a){return Math.max(o.reward,Math.round(value(a)*1.3/5)*5)}
 function orderMatch(a,o){if(a.sp!==o.sp)return false;for(const k in o.req)if(st(a,geneOf(a.sp,k))!==o.req[k])return false;if(o.sex&&a.sex!==o.sex)return false;if(o.adult&&!isAdult(a))return false;return true}
-function orderText(o){if(o.label)return o.label;const def=SPECIES[o.sp];return Object.keys(o.req).map(k=>traitLabel(geneOf(o.sp,k),o.req[k])).join(' + ')+' '+def.name}
+function orderText(o){if(o.label)return defang(o.label);const def=SPECIES[o.sp];return Object.keys(o.req).map(k=>traitLabel(geneOf(o.sp,k),o.req[k])).join(' + ')+' '+def.name}
 function newTrend(){const sp=pick(unlocked()),g=pick(SPECIES[sp].genes.filter(x=>!x.mut));S.trend={sp,gene:g.id,until:Date.now()+8*60000}}
 
 /* ================= Actions ================= */
@@ -1224,7 +1384,7 @@ const ACT={
   detail:d=>{snd('tap');showDetail(+d.id)},
   fav:d=>{const a=byId(+d.id);a.fav=!a.fav;save();showDetail(a.id);render()},
   rename:d=>{const a=byId(+d.id);openSheet(`<div class="sh-title">Umbenennen</div><input id="nm" maxlength="18" value="${esc(a.name)}" style="width:100%;margin:14px 0;padding:14px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.3);color:#fff;font:inherit;font-size:17px;user-select:text;-webkit-user-select:text"><button class="btn pri wide" data-act="dorename" data-id="${a.id}">Speichern</button>`,'rename');setTimeout(()=>{const i=$('#nm');if(i){i.focus();i.select()}},50)},
-  dorename:d=>{const a=byId(+d.id),n=($('#nm').value||'').trim();if(a&&n&&n!==a.name){a.name=n.slice(0,18);S.stats.renamed=(S.stats.renamed||0)+1}save();showDetail(+d.id);render()},
+  dorename:d=>{const a=byId(+d.id),n=($('#nm').value||'').trim();if(a&&n&&n!==a.name){a.name=n.slice(0,18);a.un=1;S.stats.renamed=(S.stats.renamed||0)+1}save();showDetail(+d.id);render()},
   feed:(d,el)=>{const a=byId(+d.id),cost=Math.ceil(SPECIES[a.sp].basePrice*.12);if(isAdult(a)||!spend(cost))return;a.adultAt-=growMs(a.sp)*.35;S.stats.fed=(S.stats.fed||0)+1;snd('tap');floatAt(el,'🦗 −'+cost+' 🪙');if(isAdult(a)){S.stats.feedAdult=1;toast(`🎉 ${esc(a.name)} ist jetzt ausgewachsen!`)}after();showDetail(a.id);render()},
   dna:(d,el)=>{const a=byId(+d.id);if(!armed(el))return;if(!spend(dnaCost(a)))return;const def=SPECIES[a.sp],found=[];def.genes.forEach(g=>{if(g.type!=='rec'||st(a,g))return;const was=a.p[g.id]||0;const truth=(a.g[g.id]||0)===1?1:0;if(truth)proveHet(a,g.id);else proveNone(a,g.id);if(truth&&(g.mut?S.mutSeen[g.id]:true))found.push((was<.99?'🎉 ':'')+'het '+g.name);if(truth&&g.mut&&!S.mutSeen[g.id]){S.mutSeen[g.id]=true;found.push('☄️ verdeckte Mutation '+g.name+'!')}});domGenes(a.sp).forEach(g=>{if(!st(a,g))return;const was=hpOf(a,g),homo=(a.g[g.id]||0)>=2;a.hp=a.hp||{};a.hp[g.id]=homo?1:0;if(homo)found.push((was<.99?'🎉 ':'')+'reinerbig '+g.name)});a.wild=false;a.tested=true;S.stats.dna++;track('dna');snd('rare');toast(`🔬 DNA-Ergebnis ${esc(a.name)}: ${found.length?'<b>'+found.join(', ')+'</b>':'keine verdeckten Gene'}`,found.length?'gold':'',4000);after();showDetail(a.id);render()},
   sell:(d,el)=>{const a=byId(+d.id);if(!a)return;if(a.fav){toast('❤️ Favoriten können nicht verkauft werden','warn');return}if(rarIdx(rarity(a.sp,states(a)))>=2&&!armed(el))return;sellAnimal(a,el);after();closeSheet();render()},
@@ -1258,8 +1418,13 @@ const ACT={
   sound:()=>{S.sound=!S.sound;save();menuSheet()},
   help:()=>helpSheet(),
   stats:()=>statsSheet(),
-  reset:(d,el)=>{if(!armed(el))return;hardReset()},
+  reset:(d,el)=>{if(S.tut&&S.tut.replay){toast('📼 In der Erinnerung ist Löschen gesperrt – dein echter Spielstand ist sicher aufbewahrt.','warn',4000);return}if(!armed(el))return;hardReset()},
   backup:()=>backupSheet(),
+  bakload:(d,el)=>{if(S.tut&&S.tut.replay)return;const b=bakData();if(!b){toast('❌ Keine gültige automatische Kopie gefunden','bad');return}if(!armed(el))return;importSave(b)},
+  errlog:()=>errLogSheet(),
+  errcopy:()=>{const t=$('#errout');if(!t)return;copyText(t.value).then(ok=>toast(ok?'🐞 Fehlerbericht kopiert':'Bitte den Bericht markieren und manuell kopieren'))},
+  errclear:(d,el)=>{if(!armed(el))return;try{localStorage.removeItem(ERR_KEY)}catch(e){}errLogSheet()},
+  takeover:()=>takeOver(),
   clog:()=>changelogSheet(),
   mail:()=>{if(S.tut){toast('👴 Erst das Tutorial – die Post läuft nicht weg!');return}mailSheet()},
   mailf:d=>{S.ui.mailf=d.v;mailSheet()},
@@ -1295,7 +1460,7 @@ const ACT={
     if(dl){try{await dl.save({filename:fn,data});toast('💾 Sicherungsdatei gespeichert')}catch(e){toast('Speichern abgebrochen – du kannst den Code auch kopieren')}return}
     try{const b=new Blob([data],{type:'text/plain'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=fn;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);toast('💾 Datei wird gespeichert')}catch(e){toast('Download nicht möglich – bitte Code kopieren')}},
   bkpick:()=>$('#bkfilein').click(),
-  bkload:(d,el)=>{const d2=parseCode($('#bkin').value);if(!d2){toast('❌ Ungültiger Sicherungscode','bad');return}if(!armed(el))return;importSave(d2)},
+  bkload:(d,el)=>{if(S.tut&&S.tut.replay)return;const d2=parseCode($('#bkin').value);if(!d2){toast('❌ Ungültiger Sicherungscode','bad');return}const bad=validateSave(d2);if(bad){toast('❌ Sicherungscode beschädigt: '+esc(bad),'bad',5000);return}if(!armed(el))return;importSave(d2)},
   introok:()=>{S.intro=true;save();closeSheet();daily()},
   dailyok:(d,el)=>{closeSheet()},
   fopen:()=>{S.ui.fopen=!S.ui.fopen;render()},
@@ -1369,14 +1534,32 @@ function breedAll(){let eggs=0,cnt=0,stop=false;for(const p of S.pairs){const m=
 /* ================= Hatching / reveal ================= */
 let RQ=[],BATCH=null,SKIPFULL={};
 function startHatch(ids){RQ=ids.slice();BATCH=ids.length>1?[]:null;SKIPFULL={};nextReveal()}
-function hardReset(){try{localStorage.removeItem(SAVE_KEY+'_mem')}catch(e){}try{localStorage.removeItem(SAVE_KEY)}catch(e){}for(const k in IMG)delete IMG[k];RQ=[];BATCH=null;LASTBATCH=[];closeReveal();closeSheet();
+function hardReset(){if(S.tut&&S.tut.replay){toast('📼 In der Erinnerung ist Löschen gesperrt.','warn');return}if(NOSAVE){toast('⚠️ Dieser Spielstand stammt aus einer neueren Version und wird hier nicht verändert.','warn',4000);return}
+  try{writeBak(localStorage.getItem(SAVE_KEY),'vor dem Löschen')}catch(e){}
+  try{localStorage.removeItem(SAVE_KEY+'_mem')}catch(e){}try{localStorage.removeItem(SAVE_KEY)}catch(e){}for(const k in IMG)delete IMG[k];RQ=[];BATCH=null;LASTBATCH=[];closeReveal();closeSheet();
   S=defaults();starter();fillOrders();refreshShop();newTrend();genSeason();S.nextStray=Date.now()+6*60000;save();lastSig=sig();$('#view').scrollTop=0;render();toast('🗑️ Spielstand gelöscht – viel Spaß beim Neustart!');tutPaint()}
 function saveCode(){save();return 'REPTILIA1:'+btoa(unescape(encodeURIComponent(JSON.stringify(S))))}
 function parseCode(t){t=(t||'').trim();if(!t)return null;try{let j;if(t.startsWith('REPTILIA1:'))j=decodeURIComponent(escape(atob(t.slice(10).replace(/\s+/g,''))));else j=t;const d=JSON.parse(j);return d&&d.v===1&&Array.isArray(d.animals)?d:null}catch(e){return null}}
-function importSave(d,quiet){try{localStorage.setItem(SAVE_KEY,JSON.stringify(d))}catch(e){toast('❌ Speichern auf diesem Gerät nicht möglich','bad');return}
+/* importSave: prüft, legt den alten Rohtext in die Kopie (außer noBak), lädt geschützt und stellt bei Fehler den alten Stand wieder her. */
+function importSave(d,quiet,noBak){const bad=validateSave(d);if(bad){toast('❌ Ungültiger Spielstand: '+esc(bad),'bad',5000);return false}
+  if((d.sv||1)>SCHEMA){toast('❌ Dieser Spielstand stammt aus einer neueren Version – bitte erst die Seite neu laden.','bad',5000);return false}
+  if(PASSIVE){toast('Dieser Tab ist pausiert – tippe erst „Hier weiterspielen“.','bad');return false}
+  let oldRaw=null;try{oldRaw=localStorage.getItem(SAVE_KEY)}catch(e){}const oldS=S,oldNS=NOSAVE,oldNSV=NOSAVE_SV;
+  if(!noBak&&oldRaw!=null)writeBak(oldRaw,'vor dem Laden eines Codes');
+  try{localStorage.setItem(SAVE_KEY,JSON.stringify(d))}catch(e){toast('❌ Speichern auf diesem Gerät nicht möglich','bad');return false}
   for(const k in IMG)delete IMG[k];RQ=[];BATCH=null;LASTBATCH=[];closeReveal();closeSheet();
-  load();checkUnlock();fillOrders();if(!S.shop.offers.length)refreshShop();if(!trendActive())newTrend();save();lastSig=sig();$('#view').scrollTop=0;render();if(!quiet)toast(`✅ Spielstand geladen: ${S.animals.length} Tiere, ${fmt(S.coins)} 🪙`)}
-function backupSheet(){const code=saveCode();openSheet(`<div class="sh-title">💾 Spielstand sichern / laden</div>
+  try{load(true);checkUnlock();fillOrders();if(!S.shop.offers.length)refreshShop();if(!trendActive())newTrend();save();lastSig=sig();$('#view').scrollTop=0;render()}
+  catch(e){logErr(e,'Laden eines Spielstands');try{if(oldRaw==null)localStorage.removeItem(SAVE_KEY);else localStorage.setItem(SAVE_KEY,oldRaw)}catch(x){}
+    S=oldS;NOSAVE=oldNS;NOSAVE_SV=oldNSV;saveBanner();try{lastSig=sig();render();tutPaint()}catch(x){}toast('❌ Laden fehlgeschlagen – dein bisheriger Spielstand läuft weiter.','bad',5000);return false}
+  document.body.classList.toggle('bigfont',!!S.bigfont);
+  if(!quiet)toast(`✅ Spielstand geladen: ${S.animals.length} Tiere, ${fmt(S.coins)} 🪙`);return true}
+function errLogSheet(){openSheet(`<div class="sh-title">🐞 Fehlerbericht</div><div class="hint">Schick diesen Text mit, wenn etwas schiefgeht. Er enthält die letzten 10 Fehler, Version und Gerät – keine Spielstand-Daten.</div>
+<textarea id="errout" readonly style="width:100%;height:220px;font-size:11px;border-radius:10px;padding:8px;margin-top:10px;background:rgba(0,0,0,.25);color:inherit;border:1px solid rgba(255,255,255,.15)">${esc(errReport(true))}</textarea>
+<div class="list" style="margin-top:8px"><button class="btn pri wide" data-act="errcopy">📋 Bericht kopieren</button><button class="btn wide" data-act="errclear">🗑️ Protokoll leeren</button></div>`,'errlog')}
+function backupSheet(){if(S.tut&&S.tut.replay){toast('📼 In der Erinnerung sind Sichern und Laden gesperrt – dein echter Spielstand ist sicher aufbewahrt.','warn',4000);return}
+  const bm=bakMeta(),bd=bakData();
+  const bakHTML=`<div style="font-weight:700;margin:16px 0 6px">🛟 Automatische Kopie</div>${bd?`<div class="hint">Angelegt am <b>${bm?new Date(bm.t).toLocaleString('de-DE'):'(Datum unbekannt)'}</b>${bm&&bm.why?' · '+esc(bm.why):''}<br>${bd.animals.length} Tiere · ${fmt(bd.coins)} 🪙 · Level ${fmt(bd.lvl)}</div><div class="hint" style="margin-top:4px">Das Spiel legt sie einmal am Tag beim ersten Start an, vor Updates und bevor ein Code geladen wird. Beim Laden tauschen Kopie und aktueller Stand die Plätze.</div><button class="btn wide" style="margin-top:8px" data-act="bakload">🛟 Kopie laden</button>`:'<div class="hint">Noch keine automatische Kopie vorhanden. Sie entsteht beim ersten Start an einem neuen Tag.</div>'}`;
+  const code=saveCode();openSheet(`<div class="sh-title">💾 Spielstand sichern / laden</div>
 <div class="hint">Dein Spielstand liegt nur in diesem Browser. Browserdaten löschen, privater Modus oder ein anderes Gerät = Fortschritt weg. Sichere ihn deshalb ab und zu – z. B. den Code in eine Notiz oder Nachricht an dich selbst kopieren.</div>
 <div style="font-weight:700;margin:12px 0 6px">Sicherungscode (${(code.length/1024).toFixed(0)} KB)</div>
 <textarea id="bkout" readonly style="width:100%;height:80px;font-size:11px;border-radius:10px;padding:8px;background:rgba(0,0,0,.25);color:inherit;border:1px solid rgba(255,255,255,.15)">${code}</textarea>
@@ -1385,7 +1568,7 @@ function backupSheet(){const code=saveCode();openSheet(`<div class="sh-title">�
 <div class="hint">Code einfügen oder Sicherungsdatei wählen. Achtung: Der aktuelle Spielstand wird ersetzt.</div>
 <textarea id="bkin" placeholder="REPTILIA1:…" style="width:100%;height:70px;font-size:11px;border-radius:10px;padding:8px;margin-top:6px;background:rgba(0,0,0,.25);color:inherit;border:1px solid rgba(255,255,255,.15)"></textarea>
 <input type="file" id="bkfilein" accept=".txt,.json,text/plain" style="display:none">
-<div class="list" style="margin-top:8px"><button class="btn wide" data-act="bkpick">📂 Datei wählen</button><button class="btn red wide" data-act="bkload">♻️ Spielstand laden</button></div>`);
+<div class="list" style="margin-top:8px"><button class="btn wide" data-act="bkpick">📂 Datei wählen</button><button class="btn red wide" data-act="bkload">♻️ Spielstand laden</button></div>${bakHTML}`);
   const fi=$('#bkfilein');if(fi)fi.onchange=()=>{const f=fi.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{$('#bkin').value=String(r.result).trim();toast('📂 Datei eingelesen – jetzt „Spielstand laden“ tippen')};r.readAsText(f)}}
 function closeReveal(){const r=$('#reveal');r.className='';r.innerHTML='';r.onclick=null}
 function nextReveal(){
@@ -1635,7 +1818,7 @@ function vMarkt(){
   const sub=S.ui.msub,can=S.orders.filter(o=>S.animals.some(a=>orderMatch(a,o))).length;
   let h=`<div class="sub"><button class="${sub==='orders'?'on':''}" data-act="msub" data-v="orders">📦 Aufträge${can?`<span class="badge">${can}</span>`:''}</button>${m2?`<button class="${sub==='shop'?'on':''}" data-act="msub" data-v="shop">🛒 Händler</button><button class="${sub==='show'?'on':''}" data-act="msub" data-v="show">🏆 Messe${S.show&&!S.show.entry&&showCands().length?'<span class="badge">!</span>':''}</button><button class="${sub==='upg'?'on':''}" data-act="msub" data-v="upg">🔧 Ausbau</button>`:''}</div>`;
   if(trendActive()){const g=geneOf(S.trend.sp,S.trend.gene);h+=`<div class="trend">📈<div style="flex:1">Markttrend: <b>${g.name} ${SPECIES[S.trend.sp].plural}</b> bringen ×1,8 beim Verkauf</div><span class="hint" data-until="${S.trend.until}"></span></div>`}
-  if(sub==='orders'){h+=`<h2>Kundenaufträge</h2><div class="list">`+S.orders.map(o=>{const ok=S.animals.some(a=>orderMatch(a,o));return`<div class="order ${ok?'can':''}"><div class="oi">${o.cust[0]}</div><div class="ot"><small>${o.cust[1]}</small><b>${SPECIES[o.sp].icon} ${orderText(o)}</b><small>${o.sex?(o.sex==='m'?'♂ Männchen':'♀ Weibchen'):'beliebiges Geschlecht'}${o.adult?' · ausgewachsen':''}</small><div class="rw">ab ${fmt(o.reward)} 🪙 · +${o.xp} XP</div></div><div style="display:flex;flex-direction:column;gap:6px"><button class="btn sm ${ok?'pri':''}" data-act="deliver" data-id="${o.id}" ${ok?'':'disabled'}>Liefern</button><button class="btn sm" data-act="reroll" data-id="${o.id}">↻ 15</button></div></div>`}).join('')+`</div><div class="hint" style="margin-top:10px">Aufträge verlangen ein <b>sichtbares</b> Merkmal. Hets zählen nicht – das Tier muss den Morph zeigen. Du bekommst immer mindestens <b>Marktwert + 30 %</b> des gelieferten Tiers. Mehr Auftragsplätze gibt es mit steigendem Level (${S.orders.length}/6).</div>`}
+  if(sub==='orders'){h+=`<h2>Kundenaufträge</h2><div class="list">`+S.orders.map(o=>{const ok=S.animals.some(a=>orderMatch(a,o));return`<div class="order ${ok?'can':''}"><div class="oi">${defang(o.cust[0])}</div><div class="ot"><small>${defang(o.cust[1])}</small><b>${SPECIES[o.sp].icon} ${orderText(o)}</b><small>${o.sex?(o.sex==='m'?'♂ Männchen':'♀ Weibchen'):'beliebiges Geschlecht'}${o.adult?' · ausgewachsen':''}</small><div class="rw">ab ${fmt(o.reward)} 🪙 · +${o.xp} XP</div></div><div style="display:flex;flex-direction:column;gap:6px"><button class="btn sm ${ok?'pri':''}" data-act="deliver" data-id="${o.id}" ${ok?'':'disabled'}>Liefern</button><button class="btn sm" data-act="reroll" data-id="${o.id}">↻ 15</button></div></div>`}).join('')+`</div><div class="hint" style="margin-top:10px">Aufträge verlangen ein <b>sichtbares</b> Merkmal. Hets zählen nicht – das Tier muss den Morph zeigen. Du bekommst immer mindestens <b>Marktwert + 30 %</b> des gelieferten Tiers. Mehr Auftragsplätze gibt es mit steigendem Level (${S.orders.length}/6).</div>`}
   else if(sub==='show')h+=showHTML();
   else if(sub==='shop'){h+=`<h2><span class="sp">Händler</span><span class="hint" style="letter-spacing:0">neue Ware in <span data-until="${S.shop.next}"></span></span></h2><div class="list">`+S.shop.offers.map(a=>{const sts=states(a),r=rarity(a.sp,sts);return`<div class="li offer"><img src="${aImg(a,200,150)}" style="box-shadow:inset 0 0 0 1.5px ${r.c}"><div class="lt"><b>${SPECIES[a.sp].icon} ${morphName(a.sp,sts)} <span class="sex ${a.sex}">${a.sex==='m'?'♂':'♀'}</span></b><span style="color:${r.c}">${r.n}</span><span>${hetText(a)||'keine Hets'}</span></div><button class="btn sm gold" data-act="buy" data-id="${a.id}">${fmt(a.price)} 🪙</button></div>`}).join('')+`</div><button class="btn wide" style="margin-top:10px" data-act="reshop">↻ Sofort neue Ware · 25 🪙</button>`;
     if(S.lvl>=6)h+=`<h2>Spezialwaren</h2><div class="upg"><div class="ui">🧪</div><div class="ut"><b>Mutations-Elixier</b><span>${crysOn()?'+5 % besondere ☄️ und +5 % normale Mutation':'+5 % Mutationschance'} für ein Gelege · Vorrat: ${S.items.elixir}</span></div><button class="btn sm gold" data-act="buyelixir">${fmt(ELIXIR_PRICE)} 🪙</button></div>`}
@@ -1651,18 +1834,18 @@ const showCands=()=>S.show?S.animals.filter(showOk).sort((a,b)=>showScore(b)-sho
 const MEDAL=['🥉 Bronze','🥈 Silber','🥇 Gold'];
 const tierOf=sc=>S.show?S.show.tiers.reduce((t,v,i)=>sc>=v?i:t,-1):-1;
 function showPrize(i){const bp=SPECIES[S.show.sp].basePrice;return{c:Math.round(bp*[2,9,35][i]/5)*5,xp:[25,100,300][i]}}
-function resolveShow(){const sh=S.show,a=sh&&byId(sh.entry);if(a&&showOk(a)){const t=tierOf(showScore(a));if(t>=0){const pr=showPrize(t);S.coins+=pr.c;S.stats.earned+=pr.c;addXP(pr.xp);S.stats.trophies++;track('medal');if(t===2){S.stats.gold++;S.items.elixir++;if(sh.sp==='turtle')S.stats.goldTurtle=1;a.golds=(a.golds||0)+1;S.stats.goldSame=Math.max(S.stats.goldSame||0,a.golds);if(a.sex==='f')S.stats.goldFemale=1}toast(`🏆 Messe „${sh.title}“: <b>${MEDAL[t]}</b> für ${esc(a.name)}! +${fmt(pr.c)} 🪙${t===2?' + 🧪':''}`,'gold',5000);mail('🏆',`Messe „${sh.title}“: ${MEDAL[t]}`,`${esc(a.name)} hat ${showScore(a)} Punkte geholt · +${fmt(pr.c)} 🪙${t===2?' + 🧪':''}`,'markt:show');snd('rare');confetti(80)}else{toast(`🏆 Messe vorbei – ${esc(a.name)} ging leider leer aus.`);mail('🏆',`Messe „${sh.title}“ vorbei`,`${esc(a.name)} ging leider leer aus.`,'markt:show')}}newShow()}
+function resolveShow(){const sh=S.show,a=sh&&byId(sh.entry);if(a&&showOk(a)){const t=tierOf(showScore(a));if(t>=0){const pr=showPrize(t);S.coins+=pr.c;S.stats.earned+=pr.c;addXP(pr.xp);S.stats.trophies++;track('medal');if(t===2){S.stats.gold++;S.items.elixir++;if(sh.sp==='turtle')S.stats.goldTurtle=1;a.golds=(a.golds||0)+1;S.stats.goldSame=Math.max(S.stats.goldSame||0,a.golds);if(a.sex==='f')S.stats.goldFemale=1}toast(`🏆 Messe „${defang(sh.title)}“: <b>${MEDAL[t]}</b> für ${esc(a.name)}! +${fmt(pr.c)} 🪙${t===2?' + 🧪':''}`,'gold',5000);mail('🏆',`Messe „${sh.title}“: ${MEDAL[t]}`,`${esc(a.name)} hat ${showScore(a)} Punkte geholt · +${fmt(pr.c)} 🪙${t===2?' + 🧪':''}`,'markt:show');snd('rare');confetti(80)}else{toast(`🏆 Messe vorbei – ${esc(a.name)} ging leider leer aus.`);mail('🏆',`Messe „${sh.title}“ vorbei`,`${esc(a.name)} ging leider leer aus.`,'markt:show')}}newShow()}
 function showHTML(){if(S.lvl<2)return'<div class="empty"><span class="big">🏆</span>Die Reptilienmesse öffnet ab Level 2.</div>';if(!S.show)newShow();const sh=S.show,def=SPECIES[sh.sp],a=byId(sh.entry),c=showCands(),best=c[0];
   const sc=a&&showOk(a)?showScore(a):0,t=a?tierOf(sc):-1;
-  return`<div class="panel showp"><div class="row"><div style="font-size:34px">🏆</div><div style="flex:1"><div class="hint">Reptilienmesse · endet in <span data-until="${sh.until}"></span></div><div style="font-size:17px;font-weight:900">${def.icon} ${sh.title}</div></div></div>
+  return`<div class="panel showp"><div class="row"><div style="font-size:34px">🏆</div><div style="flex:1"><div class="hint">Reptilienmesse · endet in <span data-until="${sh.until}"></span></div><div style="font-size:17px;font-weight:900">${def.icon} ${defang(sh.title)}</div></div></div>
   <div class="medals">${sh.tiers.map((v,i)=>{const pr=showPrize(i);return`<div class="${t>=i?'on':''}"><b>${MEDAL[i]}</b><span>ab ${v} Pkt.</span><span class="rw">+${fmt(pr.c)} 🪙${i===2?' +🧪':''}</span></div>`}).join('')}</div>
   ${a?`<div class="li" style="margin-top:10px"><img src="${aImg(a,200,150)}"><div class="lt"><b>${esc(a.name)} · ${sc} Punkte</b><span>${morphName(a.sp,states(a))}</span><span>${t>=0?'Aktuell: '+MEDAL[t]:'Noch keine Medaille'}</span></div></div>`:'<div class="hint" style="margin:10px 0">Noch kein Tier angemeldet.</div>'}
   <button class="btn ${a?'':'gold'} wide" style="margin-top:10px" data-act="showpick" ${c.length?'':'disabled'}>${a?'Anderes Tier anmelden':'Tier anmelden'}${best&&!a?' · bestes: '+showScore(best)+' Pkt.':''}</button>
   ${c.length?'':`<div class="hint" style="margin-top:8px;text-align:center">Du hast kein passendes Tier – züchte eins bis zum Messeende!</div>`}</div>
   <div class="hint" style="margin-top:10px">Das Tier bleibt bei dir, es wird nur ausgestellt. Punkte gibt es für seltene Merkmale, benannte Morphs, sichere Hets und ausgewachsene Tiere. Am Ende zählt die Wertung des angemeldeten Tiers, danach startet sofort die nächste Messe.</div>`}
-function showPickSheet(){const c=showCands();openSheet(`<div class="sh-title">🏆 Tier anmelden</div><div class="sh-sub">${S.show.title}</div><div class="list">${c.map(a=>{const sc=showScore(a),t=tierOf(sc);return`<button class="li" data-act="showenter" data-id="${a.id}" style="width:100%;text-align:left"><img src="${aImg(a,200,150)}"><div class="lt"><b>${esc(a.name)} <span class="sex ${a.sex}">${a.sex==='m'?'♂':'♀'}</span></b><span>${morphName(a.sp,states(a))}</span><span>${t>=0?MEDAL[t]:'keine Medaille'}</span></div><b>${sc}</b></button>`}).join('')}</div>`,'showpick')}
+function showPickSheet(){const c=showCands();openSheet(`<div class="sh-title">🏆 Tier anmelden</div><div class="sh-sub">${defang(S.show.title)}</div><div class="list">${c.map(a=>{const sc=showScore(a),t=tierOf(sc);return`<button class="li" data-act="showenter" data-id="${a.id}" style="width:100%;text-align:left"><img src="${aImg(a,200,150)}"><div class="lt"><b>${esc(a.name)} <span class="sex ${a.sex}">${a.sex==='m'?'♂':'♀'}</span></b><span>${morphName(a.sp,states(a))}</span><span>${t>=0?MEDAL[t]:'keine Medaille'}</span></div><b>${sc}</b></button>`}).join('')}</div>`,'showpick')}
 function deliverSheet(oid){const o=S.orders.find(x=>x.id===oid);if(!o)return;const list=S.animals.filter(a=>orderMatch(a,o)).sort((a,b)=>value(a)-value(b));
-  openSheet(`<div class="sh-title">Tier liefern</div><div class="sh-sub">${o.cust[1]} sucht: ${orderText(o)}</div><div class="list">${list.map(a=>`<button class="li" data-act="dodeliver" data-o="${o.id}" data-id="${a.id}" style="width:100%;text-align:left"><img src="${aImg(a,200,150)}"><div class="lt"><b>${esc(a.name)} <span class="sex ${a.sex}">${a.sex==='m'?'♂':'♀'}</span>${a.fav?' ❤️':''}</b><span>${morphName(a.sp,states(a))}</span><span>Marktwert ${fmt(value(a))} 🪙 → <b style="color:#ffd77a;display:inline">Auszahlung ${fmt(payout(o,a))} 🪙</b></span></div></button>`).join('')}</div>`,'deliver')}
+  openSheet(`<div class="sh-title">Tier liefern</div><div class="sh-sub">${defang(o.cust[1])} sucht: ${orderText(o)}</div><div class="list">${list.map(a=>`<button class="li" data-act="dodeliver" data-o="${o.id}" data-id="${a.id}" style="width:100%;text-align:left"><img src="${aImg(a,200,150)}"><div class="lt"><b>${esc(a.name)} <span class="sex ${a.sex}">${a.sex==='m'?'♂':'♀'}</span>${a.fav?' ❤️':''}</b><span>${morphName(a.sp,states(a))}</span><span>Marktwert ${fmt(value(a))} 🪙 → <b style="color:#ffd77a;display:inline">Auszahlung ${fmt(payout(o,a))} 🪙</b></span></div></button>`).join('')}</div>`,'deliver')}
 function vAtlas(){
   const sub=S.ui.asub,tabs=SP_ORDER.map(sp=>`<button class="${sub===sp?'on':''}" data-act="asub" data-v="${sp}">${SPECIES[sp].icon} ${atlasCount(sp)}</button>`).join('')+`<button class="${sub==='ach'?'on':''}" data-act="asub" data-v="ach">🏆</button><button class="${sub==='wiki'?'on':''}" data-act="asub" data-v="wiki">📚</button>`;
   let h=`<div class="sub atl">${tabs}</div>`;
@@ -1855,7 +2038,7 @@ function wikiGen(W){
   ${W('⭐','Linienzucht & Qualität (polygene Merkmale)',`<p>Manche Eigenschaften hängen von <b>vielen Genen mit kleinem Effekt</b> ab – etwa die Farbintensität. Sie sind nicht „an/aus“, sondern stufenlos. Im Spiel ist das die <b>Qualität</b> (★ 1–5).</p><p>Jungtiere liegen im Schnitt beim <b>Mittelwert der Eltern</b>, mit zufälliger Streuung (meist ±0,4). Verpaarst du immer die besten Tiere, steigt die Qualität über Generationen – das ist <b>Selektion</b>. Ein Spitzentier mit schwachem Partner zieht den Nachwuchs dagegen zurück zur Mitte.</p><p>Höhere Qualität = kräftigere Farben, höherer Marktwert und mehr Messepunkte.</p>`)}
   ${W('🌳','Stammbaum & Rückkreuzung',`<p>Im Stammbaum jedes Tiers siehst du Eltern und Großeltern und von wem welches Gen stammt.</p><p><b>Rückkreuzung</b> beschleunigt rezessive Projekte: Ein sichtbarer Albino × seine het-Tochter bringt <b>50 % sichtbare</b> Jungtiere statt 25 %.</p><p class="hint">In der echten Zucht vermeiden Züchter enge Verwandtenpaarungen über viele Generationen, weil sich dabei schädliche Erbanlagen anreichern können. Im Spiel hat Inzucht keine Nachteile.</p>`)}
   ${W('📋','Alle Gene im Überblick',SP_ORDER.map(sp=>`<p><b>${SPECIES[sp].icon} ${SPECIES[sp].name}</b>${!isUnl(sp)?` <span class="hint">(${unlockText(sp)})</span>`:''}</p><table class="gtab">${SPECIES[sp].genes.map(g=>{const seen=!g.mut||S.mutSeen[g.id];return`<tr><td><b>${seen?g.name:'???'}</b>${g.mut?' ☄️':''}</td><td>${TYPE_LBL[g.type]}</td><td>${seen?g.info:'Noch nicht entdeckt.'}</td></tr>`}).join('')}</table>`).join(''))}`}
-function menuSheet(){openSheet(`<div class="sh-title">Menü</div><div class="list" style="margin-top:10px"><button class="btn wide" data-act="wiki">📚 Genetik-Wiki</button><button class="btn wide" data-act="help">❓ Spielanleitung</button><button class="btn wide" data-act="stats">📊 Statistik</button><button class="btn wide" data-act="sound">${S.sound?'🔊 Sound: an':'🔇 Sound: aus'}</button><button class="btn wide" data-act="bigfont">${S.bigfont?'🔠 Große Schrift: an':'🔡 Große Schrift: aus'}</button><button class="btn wide" data-act="backup">💾 Spielstand sichern / laden</button><button class="btn wide" data-act="clog">📜 Was ist neu? (Version ${VERSION})</button><button class="btn red wide" data-act="reset">🗑️ Spielstand löschen</button></div><div class="hint" style="margin-top:12px;text-align:center">Dein Fortschritt wird automatisch auf diesem Gerät gespeichert – sichere ihn ab und zu über „Spielstand sichern“. Brut- und Wachstumszeiten laufen auch weiter, wenn das Spiel geschlossen ist.</div><div class="hint" style="margin-top:8px;text-align:center">Reptilia · Version <b>${VERSION}</b></div>`,'menu')}
+function menuSheet(){const rp=!!(S.tut&&S.tut.replay);openSheet(`<div class="sh-title">Menü</div><div class="list" style="margin-top:10px"><button class="btn wide" data-act="wiki">📚 Genetik-Wiki</button><button class="btn wide" data-act="help">❓ Spielanleitung</button><button class="btn wide" data-act="stats">📊 Statistik</button><button class="btn wide" data-act="sound">${S.sound?'🔊 Sound: an':'🔇 Sound: aus'}</button><button class="btn wide" data-act="bigfont">${S.bigfont?'🔠 Große Schrift: an':'🔡 Große Schrift: aus'}</button><button class="btn wide" data-act="backup" ${rp?'disabled':''}>💾 Spielstand sichern / laden</button><button class="btn wide" data-act="clog">📜 Was ist neu? (Version ${VERSION})</button><button class="btn wide" data-act="errlog">🐞 Fehlerbericht kopieren</button><button class="btn red wide" data-act="reset" ${rp?'disabled':''}>🗑️ Spielstand löschen</button></div>${rp?'<div class="note" style="margin-top:10px">📼 Erinnerungs-Modus: Sichern/Laden und Löschen sind gesperrt. Dein echter Spielstand ist sicher aufbewahrt und kommt am Ende zurück.</div>':''}<div class="hint" style="margin-top:12px;text-align:center">Dein Fortschritt wird automatisch auf diesem Gerät gespeichert – sichere ihn ab und zu über „Spielstand sichern“. Brut- und Wachstumszeiten laufen auch weiter, wenn das Spiel geschlossen ist.</div><div class="hint" style="margin-top:8px;text-align:center">Reptilia · Version <b>${VERSION}</b></div>`,'menu')}
 function helpSheet(){openSheet(`<div class="sh-title">📚 Genetik-Lexikon</div><div class="txt" style="margin-top:10px">
 <p>Jedes Tier trägt pro Gen <b>zwei Kopien</b> – eine von jedem Elternteil. Bei jeder Paarung gibt jedes Elternteil zufällig eine seiner Kopien weiter.</p>
 <p><b>Rezessiv</b> (z. B. Albino, Piebald, Eclipse): sichtbar nur mit <b>zwei</b> Kopien. Ein Tier mit einer Kopie heißt <b>het</b> („heterozygot“) – es sieht normal aus, vererbt das Gen aber. het × het → 25 % sichtbar, 50 % het, 25 % ohne.</p>
@@ -1875,6 +2058,7 @@ let lastSig='';
 function tickUI(){const now=Date.now();mailBadge();document.querySelectorAll('[data-until]').forEach(el=>{const r=+el.dataset.until-now;el.textContent=r>0?fmtT(r):'✓'});document.querySelectorAll('[data-ps]').forEach(el=>{const ps=+el.dataset.ps,pe=+el.dataset.pe,p=clamp((now-ps)/Math.max(1,pe-ps),0,1);if(el.tagName==='I')el.style.width=(p*100)+'%';else el.style.setProperty('--p',p*100)})}
 function sig(){const now=Date.now();return[S.eggs.filter(e=>now>=e.ready).length,S.animals.filter(isAdult).length,S.animals.filter(a=>now<a.restUntil).length,trendActive()?1:0].join(',')}
 function tick(){
+  if(PASSIVE||RESCUE)return;
   const now=Date.now();let changed=false;
   if(!S.shop.next||now>=S.shop.next){refreshShop();changed=true}
   if(!S.nextStray)S.nextStray=now+6*60000;
@@ -2073,7 +2257,7 @@ function tutPaint(){const c=$('#coach'),m=$('#coachm');if(!c)return;document.bod
 function alfredTips(){const T=[],now=Date.now();
   const ready=S.eggs.filter(e=>now>=e.ready).length;if(ready)T.push({t:`🐣 <b>${ready} ${ready>1?'Eier sind':'Ei ist'}</b> schlupfbereit – ab in den Inkubator!`,go:'brut'});
   const ok=S.orders.filter(o=>S.animals.some(a=>!a.fav&&orderMatch(a,o)));if(ok.length)T.push({t:`📦 Du kannst <b>${ok.length} ${ok.length>1?'Aufträge':'Auftrag'}</b> sofort erfüllen. Aufträge zahlen besser als der Händler.`,go:'markt:orders'});
-  if(feat('markt2')&&S.lvl>=2&&S.show&&!S.show.entry){const c=showCands();if(c.length)T.push({t:`🏆 Für die Messe „${S.show.title}“ ist noch nichts angemeldet. Dein bester Kandidat: <b>${esc(c[0].name)}</b>.`,go:'markt:show'})}
+  if(feat('markt2')&&S.lvl>=2&&S.show&&!S.show.entry){const c=showCands();if(c.length)T.push({t:`🏆 Für die Messe „${defang(S.show.title)}“ ist noch nichts angemeldet. Dein bester Kandidat: <b>${esc(c[0].name)}</b>.`,go:'markt:show'})}
   const free=eggSlots()-S.eggs.length,rp=S.pairs.filter(q=>!canBreed(byId(q.m),byId(q.f)));
   if(free>0&&rp.length)T.push({t:`💞 ${rp.length>1?rp.length+' gespeicherte Paare sind':'Ein gespeichertes Paar ist'} bereit, und im Inkubator ist Platz.`,go:'brut'});
   else if(free>0&&S.eggs.length<2)T.push({t:'🥚 Im Inkubator ist viel Platz. Frag den <b>🎯 Zuchtberater</b>, welche Paare dir neue Morphs bringen.',go:'adv'});
@@ -2134,10 +2318,14 @@ function geneBlock(sp,L){return L.map(({g,sup,only})=>`<div class="rv-new"><b>�
 function geneToast(a){S.geneTo=S.geneTo||{};noteGenes(a,true).forEach(({g})=>{const k=a.sp+':'+g.id;if(S.geneTo[k])return;S.geneTo[k]=1;toast(`🆕 Neues Merkmal: <b>${g.name}</b> – ${g.info.replace(/^Mutation: /,'')}`,'gold',7000)})}
 /* ================= Tutorial-Erinnerung ================= */
 const MEM_KEY=SAVE_KEY+'_mem';
-function tutReplay(){try{localStorage.setItem(MEM_KEY,JSON.stringify(S))}catch(e){toast('❌ Erinnerung konnte nicht gespeichert werden','bad');return}
+function tutReplay(){if(NOSAVE){toast('⚠️ Mit einem Spielstand aus einer neueren Version geht das hier nicht.','warn');return}save();try{writeBak(localStorage.getItem(SAVE_KEY),'vor der Erinnerung')}catch(e){}
+  try{localStorage.setItem(MEM_KEY,JSON.stringify(S))}catch(e){toast('❌ Erinnerung konnte nicht gespeichert werden','bad');return}
   const g=S.starterGene||null,lv=GL();closeSheet();S=defaults();S.tut.replay=1;S.tut.fixed=g;S.glvl=lv;starter();for(const k in IMG)delete IMG[k];S.tab='tiere';save();render();tutPaint()}
-function tutRestore(){let d=null;try{d=JSON.parse(localStorage.getItem(MEM_KEY))}catch(e){}if(!d){S.tut=null;S.intro=true;render();tutPaint();return}
-  try{localStorage.removeItem(MEM_KEY)}catch(e){}importSave(d,true);document.body.classList.remove('replay');toast('📼 Zurück im Hier und Jetzt – deine Station ist genau so, wie du sie verlassen hast.','gold',4200)}
+function tutRestore(){let d=null,src='mem';try{d=JSON.parse(localStorage.getItem(MEM_KEY))}catch(e){}
+  if(!d||validateSave(d)){d=null;const b=bakData();if(b&&!(b.tut&&b.tut.replay)){d=b;src='bak'}}
+  if(!d){S.tut=null;S.intro=true;render();tutPaint();toast('⚠️ Keine Kopie deines Spielstands gefunden – du spielst mit dem Erinnerungs-Stand weiter.','warn',6000);return}
+  if(!importSave(d,true,true))return;if(src==='mem')try{localStorage.removeItem(MEM_KEY)}catch(e){}
+  document.body.classList.remove('replay');toast(src==='mem'?'📼 Zurück im Hier und Jetzt – deine Station ist genau so, wie du sie verlassen hast.':'📼 Zurück im Hier und Jetzt – wiederhergestellt aus der automatischen Kopie.','gold',4200)}
 /* ================= Strategie-Fragen ================= */
 const STRAT={
  keep:{t:'🎯 Welche Tiere soll ich für mein Zuchtziel behalten?',f:()=>{const G=S.goals||[];if(!G.length)return'<p>Du hast noch kein Zuchtziel. Leg eins an (ganz unten in der Zucht) – dann sag ich dir genau, wen du behalten solltest.</p><p><b>Allgemein gilt:</b> Behalte Tiere, die seltene Gene tragen – auch <b>unsichtbar als het</b>. Behalte von jedem wichtigen Gen beide Geschlechter. Und verkaufe nie das einzige Tier mit einem bestimmten Gen.</p>';
@@ -2156,8 +2344,9 @@ const STRAT={
 const STRAT_ORDER=['keep','price','gold','qual','space','unlock','dna','mutq'];
 
 /* ================= Version & Änderungsprotokoll ================= */
-const VERSION='7.5';
+const VERSION='7.6';
 const CHANGELOG=[
+ ['7.6','17.11.2026',['Sicherheits-Update: Dein Spielstand geht nicht mehr durch Fehler, Import, zweiten Tab oder Update verloren','Startet das Spiel wegen eines Fehlers nicht, erscheint ein Notfall-Bildschirm: Spielstand als Code kopieren, letzte Sicherung laden oder neu beginnen – nichts wird überschrieben','Automatische Kopie des Spielstands: einmal am Tag, vor Updates und vor dem Laden eines Codes – im Fenster „Spielstand sichern“ mit Datum und Knopf zum Laden','Warnung, wenn das Speichern fehlschlägt','Zweiter Tab: Der alte Tab pausiert und speichert nicht mehr, „Hier weiterspielen“ holt den neuesten Stand','Sicherungscodes werden gründlich geprüft, kaputte Codes abgelehnt – der alte Stand läuft weiter','In der Erinnerung (Tutorial nochmal) sind Sichern/Laden und Löschen gesperrt','Namen bleiben: Ein Männchen namens Luna heißt jetzt auch nach dem Neuladen noch Luna','Menü: „Fehlerbericht kopieren“ für Rückmeldungen']],
  ['7.5','15.11.2026',['Zuchtberater ⭐ Qualität: Erklärung, was „Rekord-Chance“ und „Höchster Schnitt“ unterscheidet','Zuchtberater ⭐ Qualität: Morphs, von denen du schon ein ★-5,0-Tier hast, lassen sich ausblenden','Verkaufsberater übersichtlicher: adult/Jungtier steht neben den Sternen, jede (mögliche) het-Angabe in einer eigenen Zeile']],
  ['7.4','15.11.2026',['Zuchtberater: neuer Reiter ⭐ Qualität – Morph wählen und sehen, welche Paare ihn mit den meisten Sternen bringen, inkl. Chance auf ein neues Rekordtier','Großes Wiki-Update mit Quellen: Steckbriefe und Wissenswertes zu allen vier Arten, echte Morphs vs. Spiel, Gesundheit & Tierwohl, „Spiel vs. Realität“, Glossar und Quellenliste (Fotos von Wikimedia Commons, brauchen Internet)','Terrarium: Bei Sortierung „Morph“ stehen die Tiere jetzt unter Überschriften je Morph – die Überschrift bleibt beim Scrollen oben sichtbar']],
  ['7.3','14.11.2026',['Erfahrungspunkte gibt es erst nach dem Tutorial – danach startest du ganz entspannt auf Level 1','Das erste zugelaufene Tier oder Tierheim-Tier kommt 5 Minuten nach dem Tutorial']],
@@ -2263,7 +2452,7 @@ const MAILF=[['all','Alle'],['ach','🏆 Erfolge'],['alf','👴 Alfred'],['evt',
 const mailCat=m=>m.act&&m.act.startsWith('ach:')?'ach':(m.ic==='✉️'||m.ic==='📞'||m.ic==='👴')?'alf':'evt';
 function mailSheet(){S.mail=S.mail||[];const f=S.ui.mailf||'all',L=S.mail.filter(m=>f==='all'||mailCat(m)===f),unread=new Set(S.mail.filter(m=>!m.r).map(m=>m.id));
   openSheet(`<div class="sh-title">📬 Postfach</div><div class="chips" style="margin:6px 0 10px">${MAILF.map(([v,l])=>`<button class="chip sm ${f===v?'on':''}" data-act="mailf" data-v="${v}">${l}</button>`).join('')}</div>
-   ${L.length?`<div class="list">${L.map(m=>`<div class="mrow ${unread.has(m.id)?'new':''}" ${m.act?`data-act="mailgo" data-v="${m.act}"`:''}><div class="mic">${m.ic}</div><div style="flex:1;min-width:0"><b>${m.title}</b>${m.body?`<span>${m.body}</span>`:''}<small>${ago(m.t)}</small></div>${m.act?'<i class="tgo">›</i>':''}</div>`).join('')}</div>`:'<div class="empty" style="padding:30px 10px">📭 Noch keine Post.</div>'}
+   ${L.length?`<div class="list">${L.map(m=>`<div class="mrow ${unread.has(m.id)?'new':''}" ${m.act?`data-act="mailgo" data-v="${esc(m.act)}"`:''}><div class="mic">${defang(m.ic)}</div><div style="flex:1;min-width:0"><b>${defang(m.title)}</b>${m.body?`<span>${defang(m.body)}</span>`:''}<small>${ago(m.t)}</small></div>${m.act?'<i class="tgo">›</i>':''}</div>`).join('')}</div>`:'<div class="empty" style="padding:30px 10px">📭 Noch keine Post.</div>'}
    ${S.mail.length?`<button class="btn sm wide" style="margin-top:14px" data-act="mailclear">🗑️ Alles älter als 3 Tage löschen</button><div class="hint" style="text-align:center;margin-top:6px">👴 Post von Alfred bleibt immer erhalten.</div>`:''}`,'mail');
   S.mail.forEach(m=>m.r=1);mailBadge();save()}
 
@@ -2299,10 +2488,21 @@ function featCheck(){if(S.tut||!S.intro)return;S.taught=S.taught||{};const q=S.l
   if(S.lvl>=2)add('markt2');if(S.lvl>=3)add('zucht3');if(S.lvl>=6)add('elixir');if(unlocked().some(sp=>full(sp)))add('selladv')}
 
 /* ================= Boot ================= */
-load();checkUnlock();fillOrders();if(!S.shop.offers.length)refreshShop();if(!trendActive())newTrend();
-render();lastSig=sig();setInterval(tick,500);setInterval(save,5000);
-addEventListener('visibilitychange',()=>{if(document.hidden)save();else render()});
-setInterval(tutPaint,400);document.body.classList.toggle('bigfont',!!S.bigfont);if(S.tut||!S.intro)S.seenVer=VERSION;else if(S.seenVer!==VERSION){mail('🆕',`Update auf Version ${VERSION}`,'Tippen, um zu sehen, was neu ist','clog');}if(S.intro&&!S.tut&&S.seenVer!==VERSION)setTimeout(()=>toast(`🆕 <b>Version ${VERSION}</b> – tippe hier, um zu sehen, was neu ist`,'gold',9000,changelogSheet),1200);if(S.tut)tutPaint();else if(!S.intro)introSheet();else daily();
+function boot(){
+  if(/[?&]rescue=1(&|$)/.test(location.search)){rescueScreen(new Error('Testansicht über ?rescue=1 – hier ist nichts kaputt.'),true);return}
+  addEventListener('storage',e=>{if(e.key===LOCK_KEY&&e.newValue&&e.newValue!==SID)goPassive()});
+  try{
+    claimLock();
+    load();checkUnlock();fillOrders();if(!S.shop.offers.length)refreshShop();if(!trendActive())newTrend();
+    render();lastSig=sig();
+    document.body.classList.toggle('bigfont',!!S.bigfont);if(S.tut||!S.intro)S.seenVer=VERSION;else if(S.seenVer!==VERSION){mail('🆕',`Update auf Version ${VERSION}`,'Tippen, um zu sehen, was neu ist','clog');}if(S.intro&&!S.tut&&S.seenVer!==VERSION)setTimeout(()=>toast(`🆕 <b>Version ${VERSION}</b> – tippe hier, um zu sehen, was neu ist`,'gold',9000,changelogSheet),1200);if(S.tut)tutPaint();else if(!S.intro)introSheet();else daily();
+  }catch(err){logErr(err,'Start');rescueScreen(err);return}
+  BOOTED=true;
+  setInterval(tick,500);setInterval(save,5000);
+  addEventListener('visibilitychange',()=>{if(document.hidden)save();else render()});
+  setInterval(tutPaint,400);
+}
+boot();
 </script>
 </body>
 </html>
